@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "526136099120",
+    "project_id": "apportseguros-c6dea",
+    "storage_bucket": "apportseguros-c6dea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526136099120:android:a47401df538f596f1b08f5",
+        "android_client_info": {
+          "package_name": "com.example.ortseguros"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBC7VCbHEArtkhf8Wcu3adMpd7lcsjxzkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

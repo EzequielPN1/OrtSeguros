@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OrtSeguros</string>
+    <string name="stringCrear_Cuenta"><u>Crear Cuenta</u></string>
+    <string name="stringOlvidar"><u>Olvido su Contraseña?</u></string>
+
+    <string name="title_home">Home</string>
+    <string name="title_MiPerfil">Mi perfil</string>
+</resources>

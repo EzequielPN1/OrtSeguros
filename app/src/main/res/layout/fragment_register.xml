@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Login.RegisterFragment"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="31dp">
+
+    <EditText
+        android:id="@+id/inputNombre"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="5dp"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputApellido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+
+        android:drawableStart="@drawable/icon_cuenta"
+
+        />
+
+    <EditText
+        android:id="@+id/inputApellido"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Apellido"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputFechaNac"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputNombre"
+
+        android:drawableStart="@drawable/icon_cuenta"/>
+
+    <EditText
+        android:id="@+id/inputFechaNac"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:clickable="false"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="Fecha de nacimiento"
+        android:inputType="date"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputDni"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputApellido"
+
+        android:drawableStart="@drawable/icon_calendar"/>
+
+    <EditText
+        android:id="@+id/inputDni"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Dni"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputDomicilio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputFechaNac"
+
+        android:drawableStart="@drawable/icon_cuenta"/>
+
+    <EditText
+        android:id="@+id/inputDomicilio"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Domicilio"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputEmailRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputDni"
+
+        android:drawableStart="@drawable/icon_place"/>
+
+    <EditText
+        android:id="@+id/inputEmailRegister"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputTelefono"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputDomicilio"
+
+        android:drawableStart="@drawable/icon_email"/>
+
+    <EditText
+        android:id="@+id/inputTelefono"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="32dp"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Telefono"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputContrasenia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmailRegister"
+
+        android:drawableStart="@drawable/icon_phone"/>
+
+    <EditText
+        android:id="@+id/inputContrasenia"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="5dp"
+        android:drawableStart="@drawable/icon_lock"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Contraseña "
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputConfirmarContrasenia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.549"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/inputTelefono" />
+
+    <EditText
+        android:id="@+id/inputConfirmarContrasenia"
+        android:layout_width="327dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="24dp"
+        android:drawableStart="@drawable/icon_lock"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Confirmar contraseña"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.595"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/inputContrasenia" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
+        android:text="Crear cuenta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputConfirmarContrasenia" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
