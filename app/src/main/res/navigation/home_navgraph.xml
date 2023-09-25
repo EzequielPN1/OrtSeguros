@@ -23,4 +23,9 @@
         android:name="com.example.ortseguros.activities.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/siniestrosFragment"
+        android:name="com.example.ortseguros.fragments.home.SiniestrosFragment"
+        android:label="fragment_siniestros"
+        tools:layout="@layout/fragment_siniestros" />
 </navigation>

@@ -9,6 +9,13 @@
         android:icon="@drawable/icon_home"
         android:title="@string/title_home" />
 
+
+    <item
+        android:id="@+id/siniestrosFragment"
+        android:icon="@drawable/icon_siniestros"
+        android:title="@string/Siniestros" />
+
+
     <item
         android:id="@+id/cuentaFragment"
         android:icon="@drawable/icon_cuenta"
