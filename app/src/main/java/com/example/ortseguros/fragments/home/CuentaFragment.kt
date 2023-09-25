@@ -51,7 +51,7 @@ class CuentaFragment : Fragment() {
             val sharedPrefs = requireActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
             sharedPrefs.edit().putBoolean("isLoggedIn", false).apply()
 
-            val action = CuentaFragmentDirections.actionCuentaFragmentToLoginFragment()
+            val action = CuentaFragmentDirections.actionCuentaFragmentToLoginActivity()
             findNavController().navigate(action)
 
 

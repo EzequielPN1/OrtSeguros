@@ -39,7 +39,7 @@
     </fragment>
     <activity
         android:id="@+id/misPolizasActivity"
-        android:name="com.example.ortseguros.activities.MisPolizasActivity"
+        android:name="com.example.ortseguros.activities.HomeActivity"
         android:label="activity_mis_polizas"
         tools:layout="@layout/activity_mis_polizas" />
 </navigation>

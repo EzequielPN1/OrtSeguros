@@ -7,7 +7,7 @@ import androidx.navigation.ui.NavigationUI
 import com.example.ortseguros.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MisPolizasActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private lateinit var bottomNavView : BottomNavigationView
     private lateinit var navHostFragment : NavHostFragment

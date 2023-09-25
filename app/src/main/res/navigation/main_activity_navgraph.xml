@@ -12,7 +12,7 @@
         tools:layout="@layout/activity_login" />
     <activity
         android:id="@+id/homeActivity"
-        android:name="com.example.ortseguros.activities.MisPolizasActivity"
+        android:name="com.example.ortseguros.activities.HomeActivity"
         android:label="activity_home"
         tools:layout="@layout/activity_mis_polizas" />
     <fragment
