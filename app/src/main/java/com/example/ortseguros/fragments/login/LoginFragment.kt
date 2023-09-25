@@ -108,7 +108,7 @@ class LoginFragment : Fragment() {
                         val sharedPrefs = requireActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                         sharedPrefs.edit().putBoolean("isLoggedIn", true).apply()
 
-                        val action = LoginFragmentDirections.actionLoginFragmentToHomeActivity()
+                        val action = LoginFragmentDirections.actionLoginFragmentToMisPolizasActivity()
                         findNavController().navigate(action)
 
 

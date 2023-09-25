@@ -11,10 +11,10 @@
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
     <activity
-        android:id="@+id/homeActivity2"
-        android:name="com.example.ortseguros.activities.HomeActivity"
+        android:id="@+id/homeActivity"
+        android:name="com.example.ortseguros.activities.MisPolizasActivity"
         android:label="activity_home"
-        tools:layout="@layout/activity_home" />
+        tools:layout="@layout/activity_mis_polizas" />
     <fragment
         android:id="@+id/mainActivityFragment"
         android:name="com.example.ortseguros.fragments.main.MainActivityFragment"
@@ -25,6 +25,6 @@
             app:destination="@id/loginActivity" />
         <action
             android:id="@+id/action_mainActivityFragment_to_homeActivity2"
-            app:destination="@id/homeActivity2" />
+            app:destination="@id/homeActivity" />
     </fragment>
 </navigation>

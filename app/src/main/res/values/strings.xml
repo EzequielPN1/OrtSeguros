@@ -7,8 +7,8 @@
     <string name="stringOlvidar"><u>Olvido su Contraseña?</u></string>
 
     <string name="title_home">Home</string>
-    <string name="title_MiPerfil">Mi perfil</string>
-
+    <string name="Cuenta">Cuenta</string>
+    <string name="MisPolizas">Mis polizas</string>
 
     <string name="Login">Login</string>
     <string name="Entrar">Entrar</string>
@@ -19,7 +19,7 @@
     <string name="EnvioMailNuevaPass">Envio de email para nueva contraseña</string>
     <string name="Enviar">Enviar</string>
 
-    <string name="MiPerfil">Mi Perfil</string>
+
 
     <string name="Nombre">Nombre</string>
     <string name="Apellido">Apellido</string>

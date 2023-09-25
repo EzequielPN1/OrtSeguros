@@ -2,6 +2,6 @@ package com.example.ortseguros.fragments.home
 
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class MisPolizasViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

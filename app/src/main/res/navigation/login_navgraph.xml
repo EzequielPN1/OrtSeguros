@@ -10,14 +10,14 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_homeActivity"
-            app:destination="@id/homeActivity" />
-        <action
             android:id="@+id/action_loginFragment_to_olvidePassFragment"
             app:destination="@id/olvidePassFragment" />
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_misPolizasActivity"
+            app:destination="@id/misPolizasActivity" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -28,11 +28,6 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-    <activity
-        android:id="@+id/homeActivity"
-        android:name="com.example.ortseguros.activities.HomeActivity"
-        android:label="activity_home"
-        tools:layout="@layout/activity_home" />
     <fragment
         android:id="@+id/olvidePassFragment"
         android:name="com.example.ortseguros.fragments.login.OlvidePassFragment"
@@ -42,4 +37,9 @@
             android:id="@+id/action_olvidePassFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <activity
+        android:id="@+id/misPolizasActivity"
+        android:name="com.example.ortseguros.activities.MisPolizasActivity"
+        android:label="activity_mis_polizas"
+        tools:layout="@layout/activity_mis_polizas" />
 </navigation>

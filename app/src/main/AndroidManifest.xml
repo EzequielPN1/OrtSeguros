@@ -16,7 +16,7 @@
             android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".activities.MisPolizasActivity"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
