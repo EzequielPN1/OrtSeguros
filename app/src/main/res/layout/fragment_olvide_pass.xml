@@ -5,13 +5,13 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Login.OlvidePassFragment">
+    tools:context=".fragments.login.OlvidePassFragment">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Envio de email para nueva contraseña"
+        android:text="@string/EnvioMailNuevaPass"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
         android:id="@+id/btnOlvidePass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enviar"
+        android:text="@string/Enviar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,10 +47,11 @@
         android:paddingEnd="12dp"
 
         android:ems="10"
-        android:hint="Email"
-        android:inputType="text"
+        android:hint="@string/Email"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/btnOlvidePass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:autofillHints="emailAddress"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.ortseguros.fragments.Login
+package com.example.ortseguros.fragments.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -18,15 +18,12 @@ import com.google.firebase.ktx.Firebase
 
 class OlvidePassFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = OlvidePassFragment()
-    }
 
     private lateinit var viewModel: OlvidePassViewModel
-    lateinit var v: View
+    private lateinit var v: View
     private lateinit var firebaseAuth: FirebaseAuth
-    lateinit var inputEmail: EditText
-    lateinit var buttonEnviar: Button
+    private lateinit var inputEmail: EditText
+    private lateinit var buttonEnviar: Button
 
 
     override fun onCreateView(
@@ -38,15 +35,11 @@ class OlvidePassFragment : Fragment() {
         buttonEnviar= v.findViewById(R.id.btnOlvidePass)
 
         firebaseAuth = Firebase.auth
-
+        viewModel = ViewModelProvider(this)[OlvidePassViewModel::class.java]
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(OlvidePassViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
     override fun onStart() {
         super.onStart()

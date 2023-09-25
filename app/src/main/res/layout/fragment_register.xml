@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Login.RegisterFragment"
+    tools:context=".fragments.login.RegisterFragment"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="31dp">
 
@@ -17,7 +17,8 @@
         android:layout_marginBottom="5dp"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="@string/Nombre"
+        android:autofillHints="name"
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -40,7 +41,8 @@
         android:layout_marginBottom="5dp"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Apellido"
+        android:hint="@string/Apellido"
+
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -49,7 +51,7 @@
         app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputNombre"
-
+        android:autofillHints="familyName"
         android:drawableStart="@drawable/icon_cuenta"
         android:background="@drawable/custom_input"/>
 
@@ -63,7 +65,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:focusable="false"
-        android:hint="Fecha de nacimiento"
+        android:hint="@string/FechaNac"
         android:inputType="date"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -74,7 +76,8 @@
         app:layout_constraintTop_toBottomOf="@+id/inputApellido"
 
         android:drawableStart="@drawable/icon_calendar"
-        android:background="@drawable/custom_input"/>
+        android:background="@drawable/custom_input"
+        android:autofillHints="date"/>
 
     <EditText
         android:id="@+id/inputDni"
@@ -84,7 +87,7 @@
         android:layout_marginBottom="5dp"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Dni"
+        android:hint="@string/Dni"
         android:inputType="number"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -95,7 +98,8 @@
         app:layout_constraintTop_toBottomOf="@+id/inputFechaNac"
 
         android:drawableStart="@drawable/icon_cuenta"
-        android:background="@drawable/custom_input"/>
+        android:background="@drawable/custom_input"
+        android:autofillHints="identification"/>
 
     <EditText
         android:id="@+id/inputDomicilio"
@@ -105,7 +109,7 @@
         android:layout_marginBottom="5dp"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Domicilio"
+        android:hint="@string/Domicilio"
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -116,7 +120,8 @@
         app:layout_constraintTop_toBottomOf="@+id/inputDni"
 
         android:drawableStart="@drawable/icon_place"
-        android:background="@drawable/custom_input"/>
+        android:background="@drawable/custom_input"
+        android:autofillHints="streetAddress"/>
 
     <EditText
         android:id="@+id/inputEmailRegister"
@@ -126,8 +131,8 @@
         android:layout_marginBottom="5dp"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Email"
-        android:inputType="text"
+        android:hint="@string/Email"
+        android:inputType="textEmailAddress"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/inputTelefono"
@@ -137,7 +142,8 @@
         app:layout_constraintTop_toBottomOf="@+id/inputDomicilio"
 
         android:drawableStart="@drawable/icon_email"
-        android:background="@drawable/custom_input"/>
+        android:background="@drawable/custom_input"
+        android:autofillHints="emailAddress"/>
 
     <EditText
         android:id="@+id/inputTelefono"
@@ -147,8 +153,8 @@
         android:layout_marginBottom="32dp"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Telefono"
-        android:inputType="text"
+        android:hint="@string/Telefono"
+        android:inputType="number"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/inputContrasenia"
@@ -158,7 +164,8 @@
         app:layout_constraintTop_toBottomOf="@+id/inputEmailRegister"
 
         android:drawableStart="@drawable/icon_phone"
-        android:background="@drawable/custom_input"/>
+        android:background="@drawable/custom_input"
+        android:autofillHints="phoneNumber"/>
 
     <EditText
         android:id="@+id/inputContrasenia"
@@ -169,8 +176,8 @@
         android:drawableStart="@drawable/icon_lock"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Contraseña "
-        android:inputType="text"
+        android:hint="@string/Contraseña"
+        android:inputType="textPassword"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/inputConfirmarContrasenia"
@@ -179,28 +186,30 @@
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toBottomOf="@+id/inputTelefono"
-        android:background="@drawable/custom_input"/>
+        android:background="@drawable/custom_input"
+        android:autofillHints="newPassword"/>
 
     <EditText
         android:id="@+id/inputConfirmarContrasenia"
-        android:layout_width="327dp"
-        android:layout_height="52dp"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="24dp"
+        android:background="@drawable/custom_input"
         android:drawableStart="@drawable/icon_lock"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="Confirmar contraseña"
-        android:inputType="text"
+        android:hint="@string/ConfirmarContraseña"
+        android:inputType="textPassword"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.595"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.568"
 
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputContrasenia"
-        android:background="@drawable/custom_input"/>
+        android:autofillHints="newPassword"/>
 
     <Button
         android:id="@+id/btnRegister"
@@ -208,7 +217,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="24dp"
-        android:text="Crear cuenta"
+        android:text="@string/CrearCuenta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

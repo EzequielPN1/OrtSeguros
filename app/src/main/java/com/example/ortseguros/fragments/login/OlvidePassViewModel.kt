@@ -1,4 +1,4 @@
-package com.example.ortseguros.fragments.Login
+package com.example.ortseguros.fragments.login
 
 import android.widget.TextView
 import androidx.lifecycle.ViewModel

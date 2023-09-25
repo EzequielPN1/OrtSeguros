@@ -1,4 +1,4 @@
-package com.example.ortseguros.fragments.Login
+package com.example.ortseguros.fragments.login
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -22,24 +22,22 @@ import com.google.firebase.ktx.Firebase
 
 class RegisterFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RegisterFragment()
-    }
+
 
     private lateinit var viewModelRegister: RegisterViewModel
-    lateinit var v: View
-    lateinit var inputNombre : EditText
-    lateinit var inputApellido : EditText
-    lateinit var inputFechaNac : EditText
-    lateinit var inputDni : EditText
-    lateinit var inputDomicilio : EditText
-    lateinit var inputEmail: EditText
-    lateinit var inputTelefono: EditText
-    lateinit var inputContrasenia: EditText
-    lateinit var inputConfirmarContrasenia: EditText
-    lateinit var btnRegister: Button
+    private lateinit var v: View
+    private lateinit var inputNombre : EditText
+    private lateinit var inputApellido : EditText
+    private lateinit var inputFechaNac : EditText
+    private lateinit var inputDni : EditText
+    private lateinit var inputDomicilio : EditText
+    private lateinit var inputEmail: EditText
+    private lateinit var inputTelefono: EditText
+    private lateinit var inputContrasenia: EditText
+    private lateinit var inputConfirmarContrasenia: EditText
+    private lateinit var btnRegister: Button
     private lateinit var firebaseAuth: FirebaseAuth
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,19 +57,16 @@ class RegisterFragment : Fragment() {
         btnRegister = v.findViewById(R.id.btnRegister)
 
         firebaseAuth = Firebase.auth
-
+        viewModelRegister = ViewModelProvider(this)[RegisterViewModel::class.java]
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModelRegister = ViewModelProvider(this).get(RegisterViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 
     override fun onStart() {
         super.onStart()
+
 
         btnRegister.setOnClickListener {
 
@@ -98,13 +93,14 @@ class RegisterFragment : Fragment() {
         val datePicker = DatePickerFragment {day,month,year -> onDateSelected(day,month,year)}
         datePicker.show(childFragmentManager ,"datePicker")
     }
-    private fun onDateSelected(day:Int,month:Int,year:Int){
-        val month = month + 1
+    private fun onDateSelected(day: Int, monthArg: Int, year: Int) {
+        val month = monthArg + 1
         val fechaNacString = "$day/$month/$year"
         val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaNacString)
         inputFechaNac.text = editableFechaNac
-    //    Toast.makeText(context, "La fecha es  "+inputFechaNac.text.toString(), Toast.LENGTH_SHORT).show()
+        // Toast.makeText(context, "La fecha es  " + inputFechaNac.text.toString(), Toast.LENGTH_SHORT).show()
     }
+
 //-----------------------------------------------------------------------------------------------------------
 
 
@@ -141,7 +137,7 @@ class RegisterFragment : Fragment() {
             }
     }
 
-
+    //-------------------------------------------------------------------------------------
     private fun sendEmailVerification() {
         val user = firebaseAuth.currentUser!!
         user.sendEmailVerification().addOnCompleteListener(requireActivity()) { task ->
@@ -152,13 +148,10 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(context, "Error no se envio email de confirmacion", Toast.LENGTH_SHORT)
                     .show()
             }
-
         }
-
-
     }
 
-
+//-------------------------------------------------------------------------------------
 
 
 }
