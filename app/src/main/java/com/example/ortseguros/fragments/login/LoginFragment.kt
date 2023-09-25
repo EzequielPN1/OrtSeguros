@@ -1,4 +1,4 @@
-package com.example.ortseguros.fragments.Login
+package com.example.ortseguros.fragments.login
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
@@ -21,20 +21,14 @@ import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
-
     private lateinit var viewModel: LoginViewModel
-
-    lateinit var v: View
-    lateinit var buttonLogin: Button
-    lateinit var inputUsuario: EditText
-    lateinit var inputContrasenia: EditText
-    lateinit var btnTextCrearCuenta: TextView
-    lateinit var btnTextOlvideContrasenia: TextView
+    private lateinit var v: View
+    private lateinit var buttonLogin: Button
+    private lateinit var inputUsuario: EditText
+    private lateinit var inputContrasenia: EditText
+    private lateinit var btnTextCrearCuenta: TextView
+    private lateinit var btnTextOlvideContrasenia: TextView
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var authStateListener: FirebaseAuth.AuthStateListener
 
 
     override fun onCreateView(
@@ -51,26 +45,25 @@ class LoginFragment : Fragment() {
 
         firebaseAuth = Firebase.auth
 
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
     override fun onStart() {
         super.onStart()
 
-
+//-------------------------------------------------------------------------------------
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 // Aquí puedes realiza una accion
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+//-------------------------------------------------------------------------------------
 
 
         buttonLogin.setOnClickListener {
@@ -84,11 +77,13 @@ class LoginFragment : Fragment() {
             }
 
         }
+//-------------------------------------------------------------------------------------
 
         btnTextCrearCuenta.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
             findNavController().navigate(action)
         }
+//-------------------------------------------------------------------------------------
 
         btnTextOlvideContrasenia.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToOlvidePassFragment()

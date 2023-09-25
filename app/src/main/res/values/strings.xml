@@ -1,8 +1,35 @@
 <resources>
+
+
+
     <string name="app_name">OrtSeguros</string>
     <string name="stringCrear_Cuenta"><u>Crear Cuenta</u></string>
     <string name="stringOlvidar"><u>Olvido su Contraseña?</u></string>
 
     <string name="title_home">Home</string>
     <string name="title_MiPerfil">Mi perfil</string>
+
+
+    <string name="Login">Login</string>
+    <string name="Entrar">Entrar</string>
+    <string name="EresUsuarioNuevo">¿Eres Usuario Nuevo?</string>
+
+    <string name="CerrarSession">Cerrar Sesion</string>
+
+    <string name="EnvioMailNuevaPass">Envio de email para nueva contraseña</string>
+    <string name="Enviar">Enviar</string>
+
+    <string name="MiPerfil">Mi Perfil</string>
+
+    <string name="Nombre">Nombre</string>
+    <string name="Apellido">Apellido</string>
+    <string name="FechaNac">Fecha de nacimiento</string>
+    <string name="Dni">Dni</string>
+    <string name="Domicilio">Domicilio</string>
+    <string name="Email">Email</string>
+    <string name="Telefono">Telefono</string>
+    <string name="Contraseña">Contraseña</string>
+    <string name="ConfirmarContraseña">Confirmar contraseña</string>
+
+    <string name="CrearCuenta">Crear cuenta</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SplashActivity">
+    tools:context=".activities.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView2"
@@ -16,5 +16,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/splash_navgraph" />
+        app:navGraph="@navigation/main_activity_navgraph" />
 </androidx.constraintlayout.widget.ConstraintLayout>

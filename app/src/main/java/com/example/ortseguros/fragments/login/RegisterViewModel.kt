@@ -1,9 +1,10 @@
-package com.example.ortseguros.fragments.Login
+package com.example.ortseguros.fragments.login
 
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
-import java.text.SimpleDateFormat
+import java.text.DateFormat
 import java.util.Calendar
+import java.util.Date
 
 class RegisterViewModel : ViewModel() {
 
@@ -40,12 +41,13 @@ class RegisterViewModel : ViewModel() {
     }
 
     private fun validarEdad(inputFechaNac: TextView): Boolean {
-            val fechaNacimientoStr = inputFechaNac.text.toString()
+        val fechaNacimientoStr = inputFechaNac.text.toString()
 
-            // Formatea la fecha de nacimiento ingresada
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy")
-            val fechaNacimiento = dateFormat.parse(fechaNacimientoStr)
+        // Formatea la fecha de nacimiento ingresada
+        val dateFormat = DateFormat.getDateInstance()
+        val fechaNacimiento: Date? = dateFormat.parse(fechaNacimientoStr)
 
+        if (fechaNacimiento != null) {
             // Calcula la fecha actual
             val fechaActual = Calendar.getInstance().time
 
@@ -53,9 +55,13 @@ class RegisterViewModel : ViewModel() {
             val diferenciaEnMillis = fechaActual.time - fechaNacimiento.time
             val edad = diferenciaEnMillis / (1000L * 60 * 60 * 24 * 365)
 
-            return edad <  18
-
+            return edad < 18
+        } else {
+            // Tratar el caso de fechaNacimiento nula o inválida
+            return false
+        }
     }
+
 
 
     private fun validarIngresoVacio(editText: TextView): Boolean {
