@@ -29,7 +29,7 @@
 
 
         android:drawableStart="@drawable/icon_cuenta"
-
+        android:background="@drawable/custom_input"
         />
 
     <EditText
@@ -50,7 +50,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputNombre"
 
-        android:drawableStart="@drawable/icon_cuenta"/>
+        android:drawableStart="@drawable/icon_cuenta"
+        android:background="@drawable/custom_input"/>
 
     <EditText
         android:id="@+id/inputFechaNac"
@@ -72,7 +73,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputApellido"
 
-        android:drawableStart="@drawable/icon_calendar"/>
+        android:drawableStart="@drawable/icon_calendar"
+        android:background="@drawable/custom_input"/>
 
     <EditText
         android:id="@+id/inputDni"
@@ -83,7 +85,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="Dni"
-        android:inputType="text"
+        android:inputType="number"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/inputDomicilio"
@@ -92,7 +94,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputFechaNac"
 
-        android:drawableStart="@drawable/icon_cuenta"/>
+        android:drawableStart="@drawable/icon_cuenta"
+        android:background="@drawable/custom_input"/>
 
     <EditText
         android:id="@+id/inputDomicilio"
@@ -112,7 +115,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputDni"
 
-        android:drawableStart="@drawable/icon_place"/>
+        android:drawableStart="@drawable/icon_place"
+        android:background="@drawable/custom_input"/>
 
     <EditText
         android:id="@+id/inputEmailRegister"
@@ -132,7 +136,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputDomicilio"
 
-        android:drawableStart="@drawable/icon_email"/>
+        android:drawableStart="@drawable/icon_email"
+        android:background="@drawable/custom_input"/>
 
     <EditText
         android:id="@+id/inputTelefono"
@@ -152,7 +157,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputEmailRegister"
 
-        android:drawableStart="@drawable/icon_phone"/>
+        android:drawableStart="@drawable/icon_phone"
+        android:background="@drawable/custom_input"/>
 
     <EditText
         android:id="@+id/inputContrasenia"
@@ -172,7 +178,8 @@
         app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/inputTelefono" />
+        app:layout_constraintTop_toBottomOf="@+id/inputTelefono"
+        android:background="@drawable/custom_input"/>
 
     <EditText
         android:id="@+id/inputConfirmarContrasenia"
@@ -192,7 +199,8 @@
         app:layout_constraintHorizontal_bias="0.595"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/inputContrasenia" />
+        app:layout_constraintTop_toBottomOf="@+id/inputContrasenia"
+        android:background="@drawable/custom_input"/>
 
     <Button
         android:id="@+id/btnRegister"
