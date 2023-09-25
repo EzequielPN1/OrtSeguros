@@ -112,9 +112,6 @@ class LoginFragment : Fragment() {
                         findNavController().navigate(action)
 
 
-
-                        requireActivity().finish()
-
                     } else {
                         Toast.makeText(context, "Usuario no verificado", Toast.LENGTH_SHORT).show()
                     }
