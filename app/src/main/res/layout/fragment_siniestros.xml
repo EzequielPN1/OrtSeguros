@@ -5,4 +5,4 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.SiniestrosFragment"/>
+    tools:context=".fragments.home.siniestros.SiniestrosFragment"/>
