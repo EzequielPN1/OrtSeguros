@@ -94,12 +94,10 @@ class RegisterFragment : Fragment() {
         val datePicker = DatePickerFragment {day,month,year -> onDateSelected(day,month,year)}
         datePicker.show(childFragmentManager ,"datePicker")
     }
-    private fun onDateSelected(day: Int, monthArg: Int, year: Int) {
-        val month = monthArg + 1
-        val fechaNacString = "$day/$month/$year"
+    private fun onDateSelected(day: Int, month: Int, year: Int) {
+        val fechaNacString = "$day/${month+1}/$year"
         val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaNacString)
         inputFechaNac.text = editableFechaNac
-        // Toast.makeText(context, "La fecha es  " + inputFechaNac.text.toString(), Toast.LENGTH_SHORT).show()
     }
 
 //-----------------------------------------------------------------------------------------------------------
