@@ -58,7 +58,7 @@ class LoginFragment : Fragment() {
 //-------------------------------------------------------------------------------------
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                // Aquí puedes realiza una accion
+                //  realiza una accion
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
@@ -86,13 +86,19 @@ class LoginFragment : Fragment() {
 //-------------------------------------------------------------------------------------
 
         btnTextOlvideContrasenia.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginFragmentToOlvidePassFragment()
-            findNavController().navigate(action)
+
+            val mensajeError = viewModel.validarOlvideEmail(inputUsuario)
+
+            if (mensajeError != null) {
+                ToastUtils.mostrarToast(context, mensajeError)
+            } else {
+                sendPasswordReset(inputUsuario.text.toString())
+            }
+
         }
 
-
     }
-
+//-------------------------------------------------------------------------------------
 
     private fun signIn(email: String, contrasenia: String) {
 
@@ -124,6 +130,27 @@ class LoginFragment : Fragment() {
             }
 
 
+    }
+
+
+    private fun sendPasswordReset(email:String){
+        val activity = requireActivity()
+        val context = requireContext()
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnCompleteListener(activity) { task ->
+                if (task.isSuccessful) {
+
+                    Toast.makeText(context, "Correo para cambio de contraseña enviado", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Error, no se pudo realizar el proceso",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+            }
     }
 
 

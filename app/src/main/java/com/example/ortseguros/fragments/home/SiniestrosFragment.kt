@@ -16,7 +16,7 @@ class SiniestrosFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_siniestros, container, false)
         viewModel = ViewModelProvider(this)[SiniestrosViewModel::class.java]
 

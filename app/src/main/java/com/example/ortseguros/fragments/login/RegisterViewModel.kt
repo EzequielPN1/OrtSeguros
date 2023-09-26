@@ -2,7 +2,7 @@ package com.example.ortseguros.fragments.login
 
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
-import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
@@ -11,56 +11,51 @@ class RegisterViewModel : ViewModel() {
     fun validarCampos(inputNombre: TextView,inputApellido: TextView,inputFechaNac: TextView,inputDni: TextView,inputDomicilio: TextView,
                       inputEmail: TextView, inputTelefono: TextView,inputContrasenia: TextView, inputConfirmarContrasenia: TextView): String? {
 
-         if(validarIngresoVacio(inputNombre)){
-             return "Por favor, ingrese su nombre."
-         }else if(validarIngresoVacio(inputApellido)){
-             return "Por favor, ingrese su apellido."
-         }else  if(validarIngresoVacio(inputFechaNac)) {
-             return "Por favor, ingrese su fecha de nacimiento."
-         }else  if(validarEdad(inputFechaNac)) {
-             return "Debe ser mayor de edad."
-         }else if(validarIngresoVacio(inputDni)){
-             return "Por favor, ingrese su dni."
-         }else if(validarIngresoVacio(inputDomicilio)){
-             return "Por favor, ingrese su domicilio."
-         } else if (validarIngresoVacio(inputEmail)) {
-            return "Por favor, ingrese su email."
+        var mensajeError: String? = null
+
+        if(validarIngresoVacio(inputNombre)){
+            mensajeError = "Por favor, ingrese su nombre."
+        }else if(validarIngresoVacio(inputApellido)){
+            mensajeError = "Por favor, ingrese su apellido."
+        }else  if(validarIngresoVacio(inputFechaNac)) {
+            mensajeError = "Por favor, ingrese su fecha de nacimiento."
+        }else  if(validarEdad(inputFechaNac)) {
+            mensajeError = "Debe ser mayor de edad."
+        }else if(validarIngresoVacio(inputDni)){
+            mensajeError = "Por favor, ingrese su dni."
+        }else if(validarIngresoVacio(inputDomicilio)){
+            mensajeError = "Por favor, ingrese su domicilio."
+        } else if (validarIngresoVacio(inputEmail)) {
+            mensajeError = "Por favor, ingrese su email."
         } else if(validarIngresoVacio(inputTelefono)){
-            return "Por favor, ingrese su itelefono."
+            mensajeError = "Por favor, ingrese su itelefono."
         }else if (!validarEmail(inputEmail)) {
-            return "Por favor, ingrese un email correcto."
+            mensajeError = "Por favor, ingrese un email correcto."
         } else if (validarIngresoVacio(inputContrasenia)) {
-            return "Por favor, ingrese su contraseña."
+            mensajeError = "Por favor, ingrese su contraseña."
         } else if (!validarContrasenia(inputContrasenia)) {
-            return "Mínimo 6 caracteres, contenga al menos una letra y al menos un número."
+            mensajeError = "Mínimo 6 caracteres, contenga al menos una letra y al menos un número."
         } else if (!confirmarContrasenias(inputContrasenia, inputConfirmarContrasenia)) {
-            return "Error al validar, sus contraseñas deben coincidir."
+            mensajeError = "Error al validar, sus contraseñas deben coincidir."
         }
 
-        return null
+        return mensajeError
     }
 
     private fun validarEdad(inputFechaNac: TextView): Boolean {
         val fechaNacimientoStr = inputFechaNac.text.toString()
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
 
-        // Formatea la fecha de nacimiento ingresada
-        val dateFormat = DateFormat.getDateInstance()
-        val fechaNacimiento: Date? = dateFormat.parse(fechaNacimientoStr)
-
-        if (fechaNacimiento != null) {
-            // Calcula la fecha actual
+            val fechaNacimiento: Date = dateFormat.parse(fechaNacimientoStr) ?: return false
             val fechaActual = Calendar.getInstance().time
 
-            // Calcula la diferencia en años entre la fecha de nacimiento y la fecha actual
             val diferenciaEnMillis = fechaActual.time - fechaNacimiento.time
             val edad = diferenciaEnMillis / (1000L * 60 * 60 * 24 * 365)
 
             return edad < 18
-        } else {
-            // Tratar el caso de fechaNacimiento nula o inválida
-            return false
-        }
+
     }
+
 
 
 

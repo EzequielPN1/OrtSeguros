@@ -70,6 +70,8 @@ class RegisterFragment : Fragment() {
 
         btnRegister.setOnClickListener {
 
+
+
             val mensajeError = viewModelRegister.validarCampos(inputNombre,inputApellido,inputFechaNac,inputDni,
                 inputDomicilio,inputEmail,inputTelefono,inputContrasenia, inputConfirmarContrasenia)
 
@@ -77,7 +79,9 @@ class RegisterFragment : Fragment() {
                 ToastUtils.mostrarToast(context, mensajeError)
             } else {
                 createAccount(inputEmail.text.toString(), inputContrasenia.text.toString())
+
             }
+
 
         }
 
@@ -93,12 +97,10 @@ class RegisterFragment : Fragment() {
         val datePicker = DatePickerFragment {day,month,year -> onDateSelected(day,month,year)}
         datePicker.show(childFragmentManager ,"datePicker")
     }
-    private fun onDateSelected(day: Int, monthArg: Int, year: Int) {
-        val month = monthArg + 1
-        val fechaNacString = "$day/$month/$year"
+    private fun onDateSelected(day: Int, month: Int, year: Int) {
+        val fechaNacString = "$day/${month + 1}/$year"
         val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaNacString)
         inputFechaNac.text = editableFechaNac
-        // Toast.makeText(context, "La fecha es  " + inputFechaNac.text.toString(), Toast.LENGTH_SHORT).show()
     }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -124,10 +126,12 @@ class RegisterFragment : Fragment() {
                     val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
                     findNavController().navigate(action)
 
+                 //   findNavController().navigateUp()
+
                 } else {
                     Toast.makeText(
                         context,
-                        "Algo salio mal, no se creo la cuenta" + task.exception,
+                        "Error no se puedo crear la cuenta",
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -135,6 +139,9 @@ class RegisterFragment : Fragment() {
                 }
 
             }
+
+
+
     }
 
     //-------------------------------------------------------------------------------------
