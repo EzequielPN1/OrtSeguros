@@ -147,7 +147,7 @@ class RegisterFragment : Fragment() {
                     // Maneja errores de creación de usuario
                     Toast.makeText(
                         context,
-                        "Error, no se creó la cuenta: ${task.exception}",
+                        "Error, no se creó la cuenta",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
