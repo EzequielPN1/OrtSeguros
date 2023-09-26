@@ -10,9 +10,6 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_olvidePassFragment"
-            app:destination="@id/olvidePassFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
         <action
@@ -26,15 +23,6 @@
         tools:layout="@layout/fragment_register" >
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/olvidePassFragment"
-        android:name="com.example.ortseguros.fragments.login.OlvidePassFragment"
-        android:label="fragment_olvide_pass"
-        tools:layout="@layout/fragment_olvide_pass" >
-        <action
-            android:id="@+id/action_olvidePassFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
     <activity

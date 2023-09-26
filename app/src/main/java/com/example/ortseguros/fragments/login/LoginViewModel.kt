@@ -9,23 +9,40 @@ class LoginViewModel : ViewModel() {
         val ingresoUsuario = inputUsuario.text.toString()
         val ingresoContrasenia = inputContrasenia.text.toString()
 
+        var mensajeError: String? = null
+
         if (ingresoUsuario.isEmpty() && ingresoContrasenia.isEmpty()) {
-            return "Por favor, ingrese sus datos."
+            mensajeError = "Por favor, ingrese sus datos."
         } else if (ingresoUsuario.isEmpty()) {
-            return "Por favor, ingrese su email."
+            mensajeError = "Por favor, ingrese su email."
         } else if (ingresoContrasenia.isEmpty()) {
-            return "Por favor, ingrese su contraseña."
+            mensajeError = "Por favor, ingrese su contraseña."
         } else if (!validarEmail(inputUsuario)) {
-            return "Por favor, ingrese un email correcto."
+            mensajeError = "Por favor, ingrese un email correcto."
         }
 
-        return null
+        return mensajeError
     }
+
 
     private fun validarEmail(inputUsuario: TextView): Boolean {
         val ingresoUsuario = inputUsuario.text.toString()
         val usuarioValido = ingresoUsuario.matches(Regex("^[a-zA-Z0-9._%+-]+@(hotmail\\.com|gmail\\.com)$"))
         return usuarioValido
     }
+
+    fun validarOlvideEmail(inputUsuario: TextView): String? {
+        val ingresoUsuario = inputUsuario.text.toString()
+        var mensajeError: String? = null
+
+        if (ingresoUsuario.isEmpty()) {
+            mensajeError = "Por favor, ingrese un email."
+        }
+        if(validarEmail(inputUsuario)){
+            mensajeError = "Por favor, ingrese un email correcto."
+        }
+        return mensajeError
+    }
+
 
 }
