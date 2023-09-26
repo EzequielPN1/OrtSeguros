@@ -14,13 +14,11 @@ class Poliza (
     var vigenciaDesde : Date,
     var vigenciaHasta : Date,
     var respCivil : Boolean,
-    var dañoTotal : Boolean,
+    var danioTotal : Boolean,
     var granizo : Boolean,
     var roboHurtoTotal : Boolean,
     var valorDelVehiculo : Int,
     var sumaAsegurada : Int,
     var valorCuota : Int,
 
-){
-
- }
+)
