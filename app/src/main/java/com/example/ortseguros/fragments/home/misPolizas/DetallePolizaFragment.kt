@@ -10,15 +10,17 @@ import com.example.ortseguros.R
 
 class DetallePolizaFragment : Fragment() {
 
+    companion object {
+        fun newInstance() = DetallePolizaFragment()
+    }
 
     private lateinit var viewModel: DetallePolizaViewModel
-    lateinit var v: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.fragment_poliza, container, false)
-        return v
+        return inflater.inflate(R.layout.fragment_detalle_poliza, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
