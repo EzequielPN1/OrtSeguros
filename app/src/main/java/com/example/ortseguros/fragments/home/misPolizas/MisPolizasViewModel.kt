@@ -1,4 +1,4 @@
-package com.example.ortseguros.fragments.home
+package com.example.ortseguros.fragments.home.misPolizas
 
 import androidx.lifecycle.ViewModel
 

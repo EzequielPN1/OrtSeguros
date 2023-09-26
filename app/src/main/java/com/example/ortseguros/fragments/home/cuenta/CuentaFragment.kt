@@ -1,4 +1,4 @@
-package com.example.ortseguros.fragments.home
+package com.example.ortseguros.fragments.home.cuenta
 
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider

@@ -6,12 +6,16 @@
     app:startDestination="@id/misPolizasFragment">
     <fragment
         android:id="@+id/misPolizasFragment"
-        android:name="com.example.ortseguros.fragments.home.MisPolizasFragment"
+        android:name="com.example.ortseguros.fragments.home.misPolizas.MisPolizasFragment"
         android:label="fragment_mis_polizas"
-        tools:layout="@layout/fragment_mis_polizas" />
+        tools:layout="@layout/fragment_mis_polizas" >
+        <action
+            android:id="@+id/action_misPolizasFragment_to_nuevaPolizaFragment"
+            app:destination="@id/nuevaPolizaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cuentaFragment"
-        android:name="com.example.ortseguros.fragments.home.CuentaFragment"
+        android:name="com.example.ortseguros.fragments.home.cuenta.CuentaFragment"
         android:label="fragment_cuenta"
         tools:layout="@layout/fragment_cuenta" >
         <action
@@ -25,7 +29,12 @@
         tools:layout="@layout/activity_login" />
     <fragment
         android:id="@+id/siniestrosFragment"
-        android:name="com.example.ortseguros.fragments.home.SiniestrosFragment"
+        android:name="com.example.ortseguros.fragments.home.siniestros.SiniestrosFragment"
         android:label="fragment_siniestros"
         tools:layout="@layout/fragment_siniestros" />
+    <fragment
+        android:id="@+id/nuevaPolizaFragment"
+        android:name="com.example.ortseguros.fragments.home.misPolizas.NuevaPolizaFragment"
+        android:label="fragment_nueva_poliza"
+        tools:layout="@layout/fragment_nueva_poliza" />
 </navigation>
