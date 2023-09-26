@@ -15,6 +15,7 @@ import com.example.ortseguros.R
 import com.example.ortseguros.entities.Usuario
 import com.example.ortseguros.utils.DatePickerFragment
 import com.example.ortseguros.utils.ToastUtils
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -112,46 +113,58 @@ class RegisterFragment : Fragment() {
                 if (task.isSuccessful) {
 
                     val user = firebaseAuth.currentUser
-
-                    val usuario = Usuario(user?.uid.toString(),inputNombre.text.toString(),inputApellido.text.toString(),inputFechaNac.text .toString(),
-                        inputDni.text.toString(),inputDomicilio.text.toString(),user?.email.toString(),inputTelefono.text.toString())
+                    val usuario = Usuario(user?.uid.toString(), inputNombre.text.toString(), inputApellido.text.toString(), inputFechaNac.text.toString(),
+                        inputDni.text.toString(), inputDomicilio.text.toString(), user?.email.toString(), inputTelefono.text.toString())
 
                     db.collection("usuarios").document(user?.uid.toString()).set(usuario)
 
-                    sendEmailVerification()
+                        .addOnCompleteListener { databaseTask ->
+                            if (databaseTask.isSuccessful) {
 
+                                sendEmailVerification { emailVerificationTask ->
 
-                    val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-                    findNavController().navigate(action)
-
+                                    if (emailVerificationTask.isSuccessful) {
+                                        Toast.makeText(context, "Cuenta creada correctamente ,email de confirmacion enviado", Toast.LENGTH_SHORT)
+                                            .show()
+                                        findNavController().navigateUp()
+                                    } else {
+                                        // Maneja errores de verificación por correo electrónico
+                                        Toast.makeText(
+                                            context,
+                                            "Error al enviar la verificación por correo electrónico: ${emailVerificationTask.exception}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            } else {
+                                // Maneja errores de escritura en la base de datos
+                                Toast.makeText(
+                                    context,
+                                    "Error al escribir en la base de datos: ${databaseTask.exception}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
                 } else {
+                    // Maneja errores de creación de usuario
                     Toast.makeText(
                         context,
-                        "Algo salio mal, no se creo la cuenta" + task.exception,
+                        "Error, no se creó la cuenta: ${task.exception}",
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
-
+                    ).show()
                 }
-
             }
     }
 
-    //-------------------------------------------------------------------------------------
-    private fun sendEmailVerification() {
-        val user = firebaseAuth.currentUser!!
-        user.sendEmailVerification().addOnCompleteListener(requireActivity()) { task ->
-            if (task.isSuccessful) {
-                Toast.makeText(context, "Cuenta creada correctamente ,email de confirmacion enviado", Toast.LENGTH_SHORT)
-                    .show()
-            }else{
-                Toast.makeText(context, "Error no se envio email de confirmacion", Toast.LENGTH_SHORT)
-                    .show()
+    private fun sendEmailVerification(completion: (Task<Void>) -> Unit) {
+        val user = firebaseAuth.currentUser
+        user?.sendEmailVerification()
+            ?.addOnCompleteListener { task ->
+                completion(task)
             }
-        }
     }
 
-//-------------------------------------------------------------------------------------
+
 
 
 }
