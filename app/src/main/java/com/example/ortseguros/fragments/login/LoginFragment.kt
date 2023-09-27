@@ -13,7 +13,6 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 
-
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
@@ -29,53 +28,41 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         v = inflater.inflate(R.layout.fragment_login, container, false)
-
         buttonLogin = v.findViewById(R.id.buttonLogin)
         inputUsuario = v.findViewById(R.id.inputEmailLogin)
         inputContrasenia = v.findViewById(R.id.textPassword)
         btnTextCrearCuenta = v.findViewById(R.id.btnTxtCrearCuenta)
         btnTextOlvideContrasenia = v.findViewById(R.id.btnTxtOlvidar)
-
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-
         return v
     }
 
 
     override fun onStart() {
         super.onStart()
-
         loginViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
 
-
         buttonLogin.setOnClickListener {
-
             if (loginViewModel.validarCamposLogin(inputUsuario, inputContrasenia)) {
                 loginViewModel.signIn(inputUsuario.text.toString(), inputContrasenia.text.toString(), requireActivity())
                 loginViewModel.signInSuccess.observe(viewLifecycleOwner) { success ->
                     if (success) {
                         val action = LoginFragmentDirections.actionLoginFragmentToMisPolizasActivity()
                         findNavController().navigate(action)
-
                         requireActivity().finish()
                     }
                 }
             }
         }
 
-
         btnTextCrearCuenta.setOnClickListener {
-
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
             findNavController().navigate(action)
-
         }
 
-
         btnTextOlvideContrasenia.setOnClickListener {
-
             if (loginViewModel.validarOlvideEmail(inputUsuario)) {
                 loginViewModel.sendPasswordReset(inputUsuario.text.toString(), requireActivity())
             }

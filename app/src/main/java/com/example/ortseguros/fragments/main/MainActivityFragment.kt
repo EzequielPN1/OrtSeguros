@@ -9,10 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 
-
 class MainActivityFragment : Fragment() {
-
-
 
     private lateinit var viewModel: MainActivityViewModel
     lateinit var v: View
@@ -22,11 +19,8 @@ class MainActivityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         v = inflater.inflate(R.layout.fragment_main, container, false)
-
         viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
-
         val isLoggedIn = viewModel.isLoggedIn(requireContext())
-
 
         if (isLoggedIn) {
             val action = MainActivityFragmentDirections.actionMainActivityFragmentToHomeActivity2()
@@ -36,9 +30,7 @@ class MainActivityFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-
         requireActivity().finish()
-
         return v
     }
 

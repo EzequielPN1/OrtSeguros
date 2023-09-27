@@ -49,14 +49,11 @@ class LoginViewModel : ViewModel() {
 
 
     fun sendPasswordReset(email:String,activity: Activity){
-
         firebaseAuth = Firebase.auth
         firebaseAuth.sendPasswordResetEmail(email)
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
-
                     _toastMessage.value = "Correo para cambio de contraseña enviado"
-
                 } else {
                     _toastMessage.value = "Error, no se pudo realizar el proceso"
                 }

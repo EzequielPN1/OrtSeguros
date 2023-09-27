@@ -81,7 +81,6 @@ class RegisterViewModel : ViewModel() {
                                         _toastMessage.value = "Cuenta creada correctamente ,email de confirmacion enviado"
                                         _createAccountSuccess.value = true
                                     } else {
-
                                         _toastMessage.value = "Error al enviar la verificación por correo electrónico: ${emailVerificationTask.exception}"
                                         _createAccountSuccess.value = false
                                     }
