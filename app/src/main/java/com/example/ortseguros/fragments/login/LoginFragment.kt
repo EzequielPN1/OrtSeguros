@@ -38,9 +38,9 @@ class LoginFragment : Fragment() {
 
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
-        loginViewModel.toastMessage.observe(viewLifecycleOwner, Observer { message ->
+        loginViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-        })
+        }
 
         return v
     }

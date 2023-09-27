@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 
@@ -28,9 +27,9 @@ class CuentaFragment : Fragment() {
         btnTextCerrarSesion = v.findViewById(R.id.btnTxtCerrarSesion)
         viewModelCuenta = ViewModelProvider(this)[CuentaViewModel::class.java]
 
-        viewModelCuenta.toastMessage.observe(viewLifecycleOwner, Observer { message ->
+        viewModelCuenta.toastMessage.observe(viewLifecycleOwner) { message ->
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-        })
+        }
 
 
         return v

@@ -52,16 +52,14 @@ class RegisterFragment : Fragment() {
 
         viewModelRegister = ViewModelProvider(this)[RegisterViewModel::class.java]
 
-        viewModelRegister.selectedDateLiveData.observe(
-            viewLifecycleOwner,
-            Observer { fechaNacString ->
-                val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaNacString)
-                inputFechaNac.text = editableFechaNac
-            })
+        viewModelRegister.selectedDateLiveData.observe(viewLifecycleOwner) {
+                fechaNacString -> val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaNacString)
+            inputFechaNac.text = editableFechaNac
+        }
 
-        viewModelRegister.toastMessage.observe(viewLifecycleOwner, Observer { message ->
+        viewModelRegister.toastMessage.observe(viewLifecycleOwner) { message ->
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-        })
+        }
 
         return v
     }
@@ -71,9 +69,7 @@ class RegisterFragment : Fragment() {
         super.onStart()
 
         inputFechaNac.setOnClickListener {
-            val datePicker = DatePickerFragment { day, month, year ->
-                viewModelRegister.onDateSelected(day, month, year)
-            }
+            val datePicker = DatePickerFragment { day, month, year -> viewModelRegister.onDateSelected(day, month, year) }
             datePicker.show(childFragmentManager, "datePicker")
         }
 
