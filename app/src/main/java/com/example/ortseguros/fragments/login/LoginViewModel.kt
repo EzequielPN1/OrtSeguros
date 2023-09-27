@@ -24,8 +24,6 @@ class LoginViewModel : ViewModel() {
     private lateinit var firebaseAuth: FirebaseAuth
 
 
-//---------------------------------------------------------------------------
-
     fun signIn(email: String, contrasenia: String, activity: Activity) {
         firebaseAuth = Firebase.auth
         firebaseAuth.signInWithEmailAndPassword(email, contrasenia)
@@ -47,8 +45,6 @@ class LoginViewModel : ViewModel() {
                     _signInSuccess.value = false
                 }
             }
-
-
     }
 
 
@@ -65,11 +61,10 @@ class LoginViewModel : ViewModel() {
                     _toastMessage.value = "Error, no se pudo realizar el proceso"
                 }
             }
+
     }
 
 
-
-//--------------------------------------------------------------------------------------
 
     fun validarCamposLogin(inputUsuario: TextView, inputContrasenia: TextView): Boolean {
         val ingresoUsuario = inputUsuario.text.toString()
@@ -93,7 +88,6 @@ class LoginViewModel : ViewModel() {
 
         return camposValidos
     }
-
 
 
     private fun validarEmail(inputUsuario: TextView): Boolean {

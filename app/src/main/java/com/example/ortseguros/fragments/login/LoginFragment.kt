@@ -38,21 +38,19 @@ class LoginFragment : Fragment() {
 
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
-
-
         return v
     }
-
 
 
     override fun onStart() {
         super.onStart()
 
-        buttonLogin.setOnClickListener {
+        loginViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
 
-            loginViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            }
+
+        buttonLogin.setOnClickListener {
 
             if (loginViewModel.validarCamposLogin(inputUsuario, inputContrasenia)) {
                 loginViewModel.signIn(inputUsuario.text.toString(), inputContrasenia.text.toString(), requireActivity())
@@ -67,6 +65,7 @@ class LoginFragment : Fragment() {
             }
         }
 
+
         btnTextCrearCuenta.setOnClickListener {
 
             val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
@@ -77,17 +76,11 @@ class LoginFragment : Fragment() {
 
         btnTextOlvideContrasenia.setOnClickListener {
 
-            loginViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            }
             if (loginViewModel.validarOlvideEmail(inputUsuario)) {
                 loginViewModel.sendPasswordReset(inputUsuario.text.toString(), requireActivity())
             }
         }
-
-
     }
-
 
 
 

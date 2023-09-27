@@ -23,6 +23,8 @@ class CuentaViewModel : ViewModel() {
     val signOutSuccess: LiveData<Boolean>
         get() = _signOutSuccess
 
+
+
     fun cerrarSesion(activity: Activity) {
 
         firebaseAuth = Firebase.auth
@@ -32,7 +34,6 @@ class CuentaViewModel : ViewModel() {
         sharedPrefs.edit().putBoolean("isLoggedIn", false).apply()
 
         _toastMessage.value ="Sesion Cerrada Correctamente"
-
         _signOutSuccess.value = true
     }
 

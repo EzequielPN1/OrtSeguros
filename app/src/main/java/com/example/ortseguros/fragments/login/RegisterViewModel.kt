@@ -38,7 +38,6 @@ class RegisterViewModel : ViewModel() {
         selectedDateLiveData.value = fechaNacString
     }
 
-//------------------------------------------------------------------------------------------
 
 
     fun createAccount(
@@ -111,7 +110,6 @@ class RegisterViewModel : ViewModel() {
     }
 
 
-//----------------------------------------------------------------------------------------------------
 
 
     fun validarCampos(
@@ -156,7 +154,7 @@ class RegisterViewModel : ViewModel() {
                 "Mínimo 6 caracteres, contenga al menos una letra y al menos un número."
             camposValidos = false
         } else if (!confirmarContrasenias(inputContrasenia, inputConfirmarContrasenia)) {
-            _toastMessage.value = "Error al validar, sus contraseñas deben coincidir."
+            _toastMessage.value = "Sus contraseñas deben coincidir."
             camposValidos = false
         }
 

@@ -25,6 +25,7 @@ class CuentaFragment : Fragment() {
     ): View {
         v = inflater.inflate(R.layout.fragment_cuenta, container, false)
         btnTextCerrarSesion = v.findViewById(R.id.btnTxtCerrarSesion)
+
         viewModelCuenta = ViewModelProvider(this)[CuentaViewModel::class.java]
 
         viewModelCuenta.toastMessage.observe(viewLifecycleOwner) { message ->

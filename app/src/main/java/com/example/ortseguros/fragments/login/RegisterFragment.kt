@@ -58,14 +58,17 @@ class RegisterFragment : Fragment() {
             inputFechaNac.text = editableFechaNac
         }
 
-
-
         return v
     }
 
 
     override fun onStart() {
         super.onStart()
+
+        viewModelRegister.toastMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+
 
         inputFechaNac.setOnClickListener {
             val datePicker = DatePickerFragment { day, month, year ->
@@ -75,12 +78,7 @@ class RegisterFragment : Fragment() {
         }
 
 
-
         btnRegister.setOnClickListener {
-
-            viewModelRegister.toastMessage.observe(viewLifecycleOwner) { message ->
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            }
 
             if (viewModelRegister.validarCampos(
                     inputNombre,
@@ -113,6 +111,7 @@ class RegisterFragment : Fragment() {
                     }
                 }
             }
+
         }
     }
 
