@@ -23,6 +23,7 @@ class LoginFragment : Fragment() {
     private lateinit var btnTextCrearCuenta: TextView
     private lateinit var btnTextOlvideContrasenia: TextView
 
+    private var currentMessage: String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,17 +35,23 @@ class LoginFragment : Fragment() {
         btnTextCrearCuenta = v.findViewById(R.id.btnTxtCrearCuenta)
         btnTextOlvideContrasenia = v.findViewById(R.id.btnTxtOlvidar)
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        loginViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
+            currentMessage = message
+        }
+
         return v
     }
 
 
     override fun onStart() {
         super.onStart()
-        loginViewModel.toastMessage.observe(viewLifecycleOwner) { message ->
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-        }
 
         buttonLogin.setOnClickListener {
+
+            currentMessage?.let { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+
             if (loginViewModel.validarCamposLogin(inputUsuario, inputContrasenia)) {
                 loginViewModel.signIn(inputUsuario.text.toString(), inputContrasenia.text.toString(), requireActivity())
                 loginViewModel.signInSuccess.observe(viewLifecycleOwner) { success ->
@@ -63,11 +70,18 @@ class LoginFragment : Fragment() {
         }
 
         btnTextOlvideContrasenia.setOnClickListener {
+
+            currentMessage?.let { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+
             if (loginViewModel.validarOlvideEmail(inputUsuario)) {
                 loginViewModel.sendPasswordReset(inputUsuario.text.toString(), requireActivity())
             }
         }
     }
+
+
 
 
 
