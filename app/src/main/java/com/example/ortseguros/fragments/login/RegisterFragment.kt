@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 import com.example.ortseguros.utils.DatePickerFragment
@@ -52,14 +51,14 @@ class RegisterFragment : Fragment() {
 
         viewModelRegister = ViewModelProvider(this)[RegisterViewModel::class.java]
 
-        viewModelRegister.selectedDateLiveData.observe(viewLifecycleOwner) {
-                fechaNacString -> val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaNacString)
+        viewModelRegister.selectedDateLiveData.observe(
+            viewLifecycleOwner
+        ) { fechaNacString ->
+            val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaNacString)
             inputFechaNac.text = editableFechaNac
         }
 
-        viewModelRegister.toastMessage.observe(viewLifecycleOwner) { message ->
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-        }
+
 
         return v
     }
@@ -69,13 +68,19 @@ class RegisterFragment : Fragment() {
         super.onStart()
 
         inputFechaNac.setOnClickListener {
-            val datePicker = DatePickerFragment { day, month, year -> viewModelRegister.onDateSelected(day, month, year) }
+            val datePicker = DatePickerFragment { day, month, year ->
+                viewModelRegister.onDateSelected(day, month, year)
+            }
             datePicker.show(childFragmentManager, "datePicker")
         }
 
 
 
         btnRegister.setOnClickListener {
+
+            viewModelRegister.toastMessage.observe(viewLifecycleOwner) { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
 
             if (viewModelRegister.validarCampos(
                     inputNombre,

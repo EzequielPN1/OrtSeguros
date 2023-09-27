@@ -16,6 +16,7 @@ class LoginViewModel : ViewModel() {
     val toastMessage: LiveData<String>
         get() = _toastMessage
 
+
     private val _signInSuccess = MutableLiveData<Boolean>()
     val signInSuccess: LiveData<Boolean>
         get() = _signInSuccess
@@ -46,6 +47,8 @@ class LoginViewModel : ViewModel() {
                     _signInSuccess.value = false
                 }
             }
+
+
     }
 
 
@@ -63,6 +66,9 @@ class LoginViewModel : ViewModel() {
                 }
             }
     }
+
+
+
 //--------------------------------------------------------------------------------------
 
     fun validarCamposLogin(inputUsuario: TextView, inputContrasenia: TextView): Boolean {
