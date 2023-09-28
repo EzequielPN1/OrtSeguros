@@ -16,12 +16,14 @@ class ConfiguracionFragment : Fragment() {
     private lateinit var viewModel: ConfiguracionViewModel
     lateinit var v: View
     lateinit var btnEditarCuenta : Button
+    lateinit var btnPreguntasFrecuentes : Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_configuracion, container, false)
         btnEditarCuenta = v.findViewById(R.id.btnEditarCuenta)
+        btnPreguntasFrecuentes = v.findViewById(R.id.btnPreguntasFrecuentes)
         return v
 
     }
@@ -32,6 +34,10 @@ class ConfiguracionFragment : Fragment() {
 
         btnEditarCuenta.setOnClickListener{
             val action = ConfiguracionFragmentDirections.actionConfiguracionFragmentToEditarCuentaFragment()
+            findNavController().navigate(action)
+        }
+        btnPreguntasFrecuentes.setOnClickListener{
+            val action = ConfiguracionFragmentDirections.actionConfiguracionFragmentToPreguntasFrecuentesFragment()
             findNavController().navigate(action)
         }
     }
