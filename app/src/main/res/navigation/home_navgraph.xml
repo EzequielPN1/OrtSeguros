@@ -31,10 +31,19 @@
         android:id="@+id/siniestrosFragment"
         android:name="com.example.ortseguros.fragments.home.siniestros.SiniestrosFragment"
         android:label="fragment_siniestros"
-        tools:layout="@layout/fragment_siniestros" />
+        tools:layout="@layout/fragment_siniestros" >
+        <action
+            android:id="@+id/action_siniestrosFragment_to_nuevoSiniestroFragment"
+            app:destination="@id/nuevoSiniestroFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nuevaPolizaFragment"
         android:name="com.example.ortseguros.fragments.home.misPolizas.NuevaPolizaFragment"
         android:label="fragment_nueva_poliza"
         tools:layout="@layout/fragment_nueva_poliza" />
+    <fragment
+        android:id="@+id/nuevoSiniestroFragment"
+        android:name="com.example.ortseguros.fragments.home.siniestros.NuevoSiniestroFragment"
+        android:label="fragment_nuevo_siniestro"
+        tools:layout="@layout/fragment_nuevo_siniestro" />
 </navigation>

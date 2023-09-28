@@ -6,12 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ortseguros.R
 import com.example.ortseguros.adapters.PolizaAdapter
-import com.example.ortseguros.entities.Poliza
 import com.example.ortseguros.entities.PolizaRepository
 
 class MisPolizasFragment : Fragment() {
@@ -44,12 +42,22 @@ class MisPolizasFragment : Fragment() {
         adapter = PolizaAdapter(repository.polizas)
         recyclerPoliza.adapter = adapter
 
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Aquí puedes realiza una accion
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 }

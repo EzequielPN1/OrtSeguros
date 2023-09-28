@@ -17,7 +17,7 @@ class NuevaPolizaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.fragment_poliza, container, false)
+        v = inflater.inflate(R.layout.fragment_nueva_poliza, container, false)
         return v
     }
 
