@@ -35,4 +35,9 @@
     <string name="CrearCuenta">Crear cuenta</string>
 
     <string name="btnConfig">Configuración</string>
+
+    <string name="txtEditarCuenta">Editar cuenta</string>
+    <string name="txtPreguntasFrecuentes">Preguntas Frecuentes</string>
+    <string name="txtAsisMecanica">Asistencia mecánica </string>
+    <string name="txtContacto">Contacto</string>
 </resources>

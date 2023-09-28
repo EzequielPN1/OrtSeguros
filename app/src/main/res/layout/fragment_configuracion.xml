@@ -16,48 +16,49 @@
         android:text="@string/btnConfig"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/txtEditarCuenta"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/txtEditarCuenta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtConfigTitle" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/txtPreguntasFrecuentes"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:text="Button"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/txtConfigTitle"
+        android:layout_marginTop="32dp"
+        android:text="@string/txtPreguntasFrecuentes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEditarCuenta" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/txtAsisMecanica"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:text="Button"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
+        android:layout_marginTop="44dp"
+        android:text="@string/txtAsisMecanica"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPreguntasFrecuentes" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/txtContacto"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:text="Button"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/button6"
+        android:layout_marginTop="40dp"
+        android:text="@string/txtContacto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:text="Button"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/button7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtAsisMecanica" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
