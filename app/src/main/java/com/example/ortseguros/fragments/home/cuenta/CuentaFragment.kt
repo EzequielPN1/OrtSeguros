@@ -1,7 +1,9 @@
 package com.example.ortseguros.fragments.home.cuenta
 
+import android.content.ContentValues.TAG
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import org.w3c.dom.Text
 
 
 class CuentaFragment : Fragment() {
@@ -19,6 +26,8 @@ class CuentaFragment : Fragment() {
     lateinit var v: View
     lateinit var btnTextCerrarSesion: TextView
     lateinit var btnConfig : Button
+    lateinit var db : FirebaseFirestore
+    lateinit var txtNombre : TextView
 
 
     override fun onCreateView(
@@ -28,6 +37,8 @@ class CuentaFragment : Fragment() {
         v = inflater.inflate(R.layout.fragment_cuenta, container, false)
         btnTextCerrarSesion = v.findViewById(R.id.btnTxtCerrarSesion)
         btnConfig = v.findViewById(R.id.btnConfig)
+        db = Firebase.firestore
+        txtNombre = v.findViewById(R.id.txtNombre)
 
         viewModelCuenta = ViewModelProvider(this)[CuentaViewModel::class.java]
 
@@ -61,9 +72,24 @@ class CuentaFragment : Fragment() {
                     requireActivity().finish()
                 }
             }
-
-
         }
+
+
+
+        val docRef = db.collection("usuarios").document("${Firebase.auth.currentUser?.uid}")
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+                    txtNombre.text = document.getString("nombre")
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
+
     }
 
 
