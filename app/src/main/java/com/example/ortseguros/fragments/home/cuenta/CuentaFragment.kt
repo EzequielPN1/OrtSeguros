@@ -1,6 +1,5 @@
 package com.example.ortseguros.fragments.home.cuenta
 
-import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,21 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+
 
 class CuentaFragment : Fragment() {
 
-
-
-    private lateinit var viewModel: CuentaViewModel
+    private lateinit var viewModelCuenta: CuentaViewModel
     lateinit var v: View
     lateinit var btnTextCerrarSesion: TextView
-    private lateinit var firebaseAuth: FirebaseAuth
 
 
     override fun onCreateView(
@@ -32,8 +25,14 @@ class CuentaFragment : Fragment() {
     ): View {
         v = inflater.inflate(R.layout.fragment_cuenta, container, false)
         btnTextCerrarSesion = v.findViewById(R.id.btnTxtCerrarSesion)
-        firebaseAuth = Firebase.auth
-        viewModel = ViewModelProvider(this)[CuentaViewModel::class.java]
+
+        viewModelCuenta = ViewModelProvider(this)[CuentaViewModel::class.java]
+
+        viewModelCuenta.toastMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+
+
         return v
     }
 
@@ -45,24 +44,17 @@ class CuentaFragment : Fragment() {
 
         btnTextCerrarSesion.setOnClickListener {
 
-            firebaseAuth.signOut()
+            viewModelCuenta.cerrarSesion(requireActivity())
+            viewModelCuenta.signOutSuccess.observe(viewLifecycleOwner) { success ->
+                if (success) {
+                    val action = CuentaFragmentDirections.actionCuentaFragmentToLoginActivity()
+                    findNavController().navigate(action)
 
-            Toast.makeText(context, "Sesion Cerrada Correctamente", Toast.LENGTH_SHORT).show()
-            val sharedPrefs = requireActivity().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-            sharedPrefs.edit().putBoolean("isLoggedIn", false).apply()
-
-            val action = CuentaFragmentDirections.actionCuentaFragmentToLoginActivity()
-            findNavController().navigate(action)
-
-
-            val callback = object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    // Aquí puedes realiza una accion
+                    requireActivity().finish()
                 }
             }
-            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
-            requireActivity().finish()
+
         }
     }
 

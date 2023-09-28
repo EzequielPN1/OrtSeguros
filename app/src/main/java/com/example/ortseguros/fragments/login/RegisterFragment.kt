@@ -12,33 +12,24 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
-import com.example.ortseguros.entities.Usuario
 import com.example.ortseguros.utils.DatePickerFragment
-import com.example.ortseguros.utils.ToastUtils
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+
 
 class RegisterFragment : Fragment() {
 
-
-
     private lateinit var viewModelRegister: RegisterViewModel
     private lateinit var v: View
-    private lateinit var inputNombre : EditText
-    private lateinit var inputApellido : EditText
-    private lateinit var inputFechaNac : EditText
-    private lateinit var inputDni : EditText
-    private lateinit var inputDomicilio : EditText
+    private lateinit var inputNombre: EditText
+    private lateinit var inputApellido: EditText
+    private lateinit var inputFechaNac: EditText
+    private lateinit var inputDni: EditText
+    private lateinit var inputDomicilio: EditText
     private lateinit var inputEmail: EditText
     private lateinit var inputTelefono: EditText
     private lateinit var inputContrasenia: EditText
     private lateinit var inputConfirmarContrasenia: EditText
     private lateinit var btnRegister: Button
-    private lateinit var firebaseAuth: FirebaseAuth
-    private val db = Firebase.firestore
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,110 +48,81 @@ class RegisterFragment : Fragment() {
         inputConfirmarContrasenia = v.findViewById(R.id.inputConfirmarContrasenia)
         btnRegister = v.findViewById(R.id.btnRegister)
 
-        firebaseAuth = Firebase.auth
+
         viewModelRegister = ViewModelProvider(this)[RegisterViewModel::class.java]
+
+        viewModelRegister.selectedDateLiveData.observe(
+            viewLifecycleOwner
+        ) { fechaNacString ->
+            val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaNacString)
+            inputFechaNac.text = editableFechaNac
+        }
+
+        viewModelRegister.toastMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+
         return v
     }
-
-
 
 
     override fun onStart() {
         super.onStart()
 
 
+        inputFechaNac.setOnClickListener {
+            val datePicker = DatePickerFragment { day, month, year ->
+                viewModelRegister.onDateSelected(day, month, year)
+            }
+            datePicker.show(childFragmentManager, "datePicker")
+        }
+
+
+
         btnRegister.setOnClickListener {
 
-            val mensajeError = viewModelRegister.validarCampos(inputNombre,inputApellido,inputFechaNac,inputDni,
-                inputDomicilio,inputEmail,inputTelefono,inputContrasenia, inputConfirmarContrasenia)
-
-            if (mensajeError != null) {
-                ToastUtils.mostrarToast(context, mensajeError)
-            } else {
-                createAccount(inputEmail.text.toString(), inputContrasenia.text.toString())
-            }
-
-        }
-
-        inputFechaNac.setOnClickListener {
-            showDatePickerDialog()
-        }
-
-    }
 
 
-//---------------------------------------------------fechaNac---------------------------
-    private fun showDatePickerDialog() {
-        val datePicker = DatePickerFragment {day,month,year -> onDateSelected(day,month,year)}
-        datePicker.show(childFragmentManager ,"datePicker")
-    }
-    private fun onDateSelected(day: Int, month: Int, year: Int) {
-        val fechaNacString = "$day/${month+1}/$year"
-        val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaNacString)
-        inputFechaNac.text = editableFechaNac
-    }
+            if (viewModelRegister.validarCampos(
+                    inputNombre,
+                    inputApellido,
+                    inputFechaNac,
+                    inputDni,
+                    inputDomicilio,
+                    inputEmail,
+                    inputTelefono,
+                    inputContrasenia,
+                    inputConfirmarContrasenia
+                )
+            ) {
 
-//-----------------------------------------------------------------------------------------------------------
+                viewModelRegister.createAccount(
+                    inputEmail.text.toString(),
+                    inputContrasenia.text.toString(),
+                    requireActivity(),
+                    inputNombre,
+                    inputApellido,
+                    inputFechaNac,
+                    inputDni,
+                    inputDomicilio,
+                    inputContrasenia
+                )
 
-
-
-    private fun createAccount(email: String, contrasenia: String) {
-
-        firebaseAuth.createUserWithEmailAndPassword(email, contrasenia)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-
-                    val user = firebaseAuth.currentUser
-                    val usuario = Usuario(user?.uid.toString(), inputNombre.text.toString(), inputApellido.text.toString(), inputFechaNac.text.toString(),
-                        inputDni.text.toString(), inputDomicilio.text.toString(), user?.email.toString(), inputTelefono.text.toString())
-
-                    db.collection("usuarios").document(user?.uid.toString()).set(usuario)
-
-                        .addOnCompleteListener { databaseTask ->
-                            if (databaseTask.isSuccessful) {
-
-                                sendEmailVerification { emailVerificationTask ->
-
-                                    if (emailVerificationTask.isSuccessful) {
-                                        Toast.makeText(context, "Cuenta creada correctamente ,email de confirmacion enviado", Toast.LENGTH_SHORT)
-                                            .show()
-                                        findNavController().navigateUp()
-                                    } else {
-                                        // Maneja errores de verificación por correo electrónico
-                                        Toast.makeText(
-                                            context,
-                                            "Error al enviar la verificación por correo electrónico: ${emailVerificationTask.exception}",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                }
-                            } else {
-                                // Maneja errores de escritura en la base de datos
-                                Toast.makeText(
-                                    context,
-                                    "Error al escribir en la base de datos: ${databaseTask.exception}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                } else {
-                    // Maneja errores de creación de usuario
-                    Toast.makeText(
-                        context,
-                        "Error, no se creó la cuenta",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                viewModelRegister.createAccountSuccess.observe(viewLifecycleOwner) { success ->
+                    if (success) {
+                        findNavController().navigateUp()
+                    }
                 }
             }
+
+
+        }
     }
 
-    private fun sendEmailVerification(completion: (Task<Void>) -> Unit) {
-        val user = firebaseAuth.currentUser
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener { task ->
-                completion(task)
-            }
-    }
+
+
+
+
 
 
 
