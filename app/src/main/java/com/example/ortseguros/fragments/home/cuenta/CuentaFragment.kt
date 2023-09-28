@@ -28,6 +28,11 @@ class CuentaFragment : Fragment() {
     lateinit var btnConfig : Button
     lateinit var db : FirebaseFirestore
     lateinit var txtNombre : TextView
+    lateinit var txtApellido : TextView
+    lateinit var txtDni : TextView
+    lateinit var txtEmail : TextView
+    lateinit var txtDomicilio : TextView
+    lateinit var txtTelefono : TextView
 
 
     override fun onCreateView(
@@ -39,6 +44,11 @@ class CuentaFragment : Fragment() {
         btnConfig = v.findViewById(R.id.btnConfig)
         db = Firebase.firestore
         txtNombre = v.findViewById(R.id.txtNombre)
+        txtApellido = v.findViewById(R.id.txtApellido)
+        txtDni = v.findViewById(R.id.txtDni)
+        txtEmail = v.findViewById(R.id.txtEmail)
+        txtDomicilio = v.findViewById(R.id.txtDomicilio)
+        txtTelefono = v.findViewById(R.id.txtTelefono)
 
         viewModelCuenta = ViewModelProvider(this)[CuentaViewModel::class.java]
 
@@ -82,6 +92,11 @@ class CuentaFragment : Fragment() {
                 if (document != null) {
                     Log.d(TAG, "DocumentSnapshot data: ${document.data}")
                     txtNombre.text = document.getString("nombre")
+                    txtApellido.text = document.getString("apellido")
+                    txtDni.text = document.getString("dni")
+                    txtEmail.text = document.getString("email")
+                    txtDomicilio.text = document.getString("domicilio")
+                    txtTelefono.text = document.getString("telefono")
                 } else {
                     Log.d(TAG, "No such document")
                 }
