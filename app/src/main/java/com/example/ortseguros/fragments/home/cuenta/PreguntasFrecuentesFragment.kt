@@ -10,9 +10,6 @@ import com.example.ortseguros.R
 
 class PreguntasFrecuentesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = PreguntasFrecuentesFragment()
-    }
 
     private lateinit var viewModel: PreguntasFrecuentesViewModel
 
@@ -23,10 +20,5 @@ class PreguntasFrecuentesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_preguntas_frecuentes, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PreguntasFrecuentesViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

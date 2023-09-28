@@ -10,9 +10,6 @@ import com.example.ortseguros.R
 
 class EditarCuentaFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = EditarCuentaFragment()
-    }
 
     private lateinit var viewModel: EditarCuentaViewModel
 
@@ -23,10 +20,5 @@ class EditarCuentaFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_editar_cuenta, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(EditarCuentaViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

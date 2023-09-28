@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
-        android:id="@+id/txtEditarCuenta"
+        android:id="@+id/btnEditarCuenta"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtConfigTitle" />
 
     <Button
-        android:id="@+id/txtPreguntasFrecuentes"
+        android:id="@+id/btnPreguntasFrecuentes"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
@@ -37,10 +37,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEditarCuenta" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEditarCuenta" />
 
     <Button
-        android:id="@+id/txtAsisMecanica"
+        android:id="@+id/btnAsisMecanica"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginTop="44dp"
@@ -48,10 +48,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPreguntasFrecuentes" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPreguntasFrecuentes" />
 
     <Button
-        android:id="@+id/txtContacto"
+        android:id="@+id/btnContacto"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginTop="40dp"
@@ -59,6 +59,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAsisMecanica" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAsisMecanica" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
