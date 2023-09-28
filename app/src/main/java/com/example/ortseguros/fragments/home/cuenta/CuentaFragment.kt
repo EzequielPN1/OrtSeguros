@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,7 @@ class CuentaFragment : Fragment() {
     private lateinit var viewModelCuenta: CuentaViewModel
     lateinit var v: View
     lateinit var btnTextCerrarSesion: TextView
+    lateinit var btnConfig : Button
 
 
     override fun onCreateView(
@@ -25,6 +27,7 @@ class CuentaFragment : Fragment() {
     ): View {
         v = inflater.inflate(R.layout.fragment_cuenta, container, false)
         btnTextCerrarSesion = v.findViewById(R.id.btnTxtCerrarSesion)
+        btnConfig = v.findViewById(R.id.btnConfig)
 
         viewModelCuenta = ViewModelProvider(this)[CuentaViewModel::class.java]
 
@@ -40,6 +43,11 @@ class CuentaFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        btnConfig.setOnClickListener{
+            val action = CuentaFragmentDirections.actionCuentaFragmentToConfiguracionFragment()
+            findNavController().navigate(action)
+        }
 
 
         btnTextCerrarSesion.setOnClickListener {

@@ -33,4 +33,6 @@
     <string name="ConfirmarContraseña">Confirmar contraseña</string>
 
     <string name="CrearCuenta">Crear cuenta</string>
+
+    <string name="btnConfig">Configuración</string>
 </resources>
