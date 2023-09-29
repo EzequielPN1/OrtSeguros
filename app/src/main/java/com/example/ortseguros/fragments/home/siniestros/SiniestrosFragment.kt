@@ -7,17 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.ortseguros.R
-import com.example.ortseguros.fragments.login.LoginFragmentDirections
+import com.example.ortseguros.adapters.SiniestroAdapter
+
 
 class SiniestrosFragment : Fragment() {
 
     private lateinit var siniestroViewModel: SiniestrosViewModel
     lateinit var v: View
-
     private lateinit var btnNuevoSiniestro: Button
+
+    lateinit var recyclerSiniestro: RecyclerView
+    lateinit var siniestroAdapter : SiniestroAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +31,10 @@ class SiniestrosFragment : Fragment() {
         v = inflater.inflate(R.layout.fragment_siniestros, container, false)
         siniestroViewModel = ViewModelProvider(this)[SiniestrosViewModel::class.java]
         btnNuevoSiniestro = v.findViewById(R.id.btnNuevoSiniestro)
+
+        recyclerSiniestro =  v.findViewById(R.id.recSiniestro)
+
+
 
 
 
@@ -42,8 +51,9 @@ class SiniestrosFragment : Fragment() {
         }
 
 
-
-
+        recyclerSiniestro.layoutManager = LinearLayoutManager(context)
+        siniestroAdapter = SiniestroAdapter(siniestroViewModel.obtenerSiniestros())
+        recyclerSiniestro.adapter = siniestroAdapter
     }
 
 }

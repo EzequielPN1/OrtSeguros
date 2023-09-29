@@ -16,13 +16,13 @@ class PolizaAdapter(private var polizaList: MutableList<Poliza>) :
 
         fun setMarca(marca: String) {
             // Configura la vista para mostrar la marca
-            var txtMarca : TextView = view.findViewById(R.id.txtMarca)
+            val txtMarca : TextView = view.findViewById(R.id.txtFecha)
              txtMarca.text = marca
         }
 
         fun setPatente(patente: String) {
             // Configura la vista para mostrar la patente
-             var txtPatente : TextView = view.findViewById(R.id.txtPatente)
+             val txtPatente : TextView = view.findViewById(R.id.txtPatente)
              txtPatente.text = patente
         }
     }
