@@ -1,6 +1,6 @@
 package com.example.ortseguros.entities
 
-import java.util.Date
+
 
 class Poliza (
     var id : String,
@@ -11,8 +11,8 @@ class Poliza (
     var patente : String,
     var numMotor : Int,
     var numChasis : Int,
-    var vigenciaDesde : Date,
-    var vigenciaHasta : Date,
+    var vigenciaDesde : String,
+    var vigenciaHasta : String,
     var respCivil : Boolean,
     var danioTotal : Boolean,
     var granizo : Boolean,
