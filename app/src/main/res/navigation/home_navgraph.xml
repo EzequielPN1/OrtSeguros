@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_siniestrosFragment_to_nuevoSiniestroFragment"
             app:destination="@id/nuevoSiniestroFragment" />
+        <action
+            android:id="@+id/action_siniestrosFragment_to_detalleSiniestroFragment"
+            app:destination="@id/detalleSiniestroFragment" />
     </fragment>
     <fragment
         android:id="@+id/nuevaPolizaFragment"
@@ -46,4 +49,13 @@
         android:name="com.example.ortseguros.fragments.home.siniestros.NuevoSiniestroFragment"
         android:label="fragment_nuevo_siniestro"
         tools:layout="@layout/fragment_nuevo_siniestro" />
+    <fragment
+        android:id="@+id/detalleSiniestroFragment"
+        android:name="com.example.ortseguros.fragments.home.siniestros.DetalleSiniestroFragment"
+        android:label="fragment_detalle_siniestro"
+        tools:layout="@layout/fragment_detalle_siniestro" >
+        <argument
+            android:name="siniestro"
+            app:argType="com.example.ortseguros.entities.Siniestro" />
+    </fragment>
 </navigation>

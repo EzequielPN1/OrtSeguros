@@ -6,9 +6,13 @@ import com.example.ortseguros.entities.Siniestro
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import com.example.ortseguros.R
 
-class SiniestroAdapter(private var siniestroList: MutableList<Siniestro>) : RecyclerView.Adapter<SiniestroAdapter.SiniestroHolder>() {
+class SiniestroAdapter(
+    private var siniestroList: MutableList<Siniestro>,
+    private var onClick : (Int) -> Unit
+    ) : RecyclerView.Adapter<SiniestroAdapter.SiniestroHolder>() {
 
     class SiniestroHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
@@ -23,6 +27,9 @@ class SiniestroAdapter(private var siniestroList: MutableList<Siniestro>) : Recy
             txtHora.text = hora
         }
 
+        fun getCard():CardView{
+            return view.findViewById(R.id.idCardViewSiniestro)
+        }
 
     }
 
@@ -36,6 +43,10 @@ class SiniestroAdapter(private var siniestroList: MutableList<Siniestro>) : Recy
 
         holder.setFecha(siniestro.fecha)
         holder.setHora(siniestro.hora)
+
+        holder.getCard().setOnClickListener(){
+            onClick(position)
+        }
     }
 
     override fun getItemCount(): Int {

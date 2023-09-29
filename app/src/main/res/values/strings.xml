@@ -9,6 +9,12 @@
     <string name="title_home">Mis polizas</string>
     <string name="Cuenta">Cuenta</string>
     <string name="Siniestros">Siniestros</string>
+    <string name="Siniestro">Siniestro</string>
+    <string name="Fecha">Fecha</string>
+    <string name="Hora">hora</string>
+    <string name="Ubicacion">Ubicacion</string>
+    <string name="Descripcion">Descripcion</string>
+
     <string name="AgregarPoliza">Agregar poliza</string>
 
     <string name="Login">Login</string>

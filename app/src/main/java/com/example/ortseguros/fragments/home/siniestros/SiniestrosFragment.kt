@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +22,7 @@ class SiniestrosFragment : Fragment() {
     private lateinit var btnNuevoSiniestro: Button
 
     lateinit var recyclerSiniestro: RecyclerView
-    lateinit var siniestroAdapter : SiniestroAdapter
-
+    lateinit var siniestroAdapter: SiniestroAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,28 +32,33 @@ class SiniestrosFragment : Fragment() {
         siniestroViewModel = ViewModelProvider(this)[SiniestrosViewModel::class.java]
         btnNuevoSiniestro = v.findViewById(R.id.btnNuevoSiniestro)
 
-        recyclerSiniestro =  v.findViewById(R.id.recSiniestro)
-
-
-
-
+        recyclerSiniestro = v.findViewById(R.id.recSiniestro)
 
         return v
     }
 
-
     override fun onStart() {
         super.onStart()
 
-        btnNuevoSiniestro.setOnClickListener(){
+        btnNuevoSiniestro.setOnClickListener {
             val action = SiniestrosFragmentDirections.actionSiniestrosFragmentToNuevoSiniestroFragment()
             findNavController().navigate(action)
         }
 
-
         recyclerSiniestro.layoutManager = LinearLayoutManager(context)
-        siniestroAdapter = SiniestroAdapter(siniestroViewModel.obtenerSiniestros())
-        recyclerSiniestro.adapter = siniestroAdapter
+
+        siniestroViewModel.siniestrosLiveData.observe(viewLifecycleOwner) { siniestros ->
+            val siniestrosMutableList = siniestros.toMutableList()
+
+            siniestroAdapter = SiniestroAdapter(siniestrosMutableList){position->
+                val action = SiniestrosFragmentDirections.actionSiniestrosFragmentToDetalleSiniestroFragment(siniestrosMutableList[position])
+                findNavController().navigate(action)
+            }
+            recyclerSiniestro.adapter = siniestroAdapter
+        }
+
+        siniestroViewModel.obtenerSiniestros()
     }
+
 
 }

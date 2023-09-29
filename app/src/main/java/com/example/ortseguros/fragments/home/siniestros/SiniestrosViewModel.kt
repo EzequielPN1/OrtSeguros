@@ -1,5 +1,8 @@
 package com.example.ortseguros.fragments.home.siniestros
 
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ortseguros.entities.Siniestro
 import com.google.firebase.auth.FirebaseAuth
@@ -12,57 +15,33 @@ class SiniestrosViewModel : ViewModel() {
     private val db = Firebase.firestore
     private lateinit var firebaseAuth: FirebaseAuth
 
-    fun obtenerSiniestros(): MutableList<Siniestro> {
+    private val _siniestrosLiveData = MutableLiveData<List<Siniestro>>()
+    val siniestrosLiveData: LiveData<List<Siniestro>> = _siniestrosLiveData
 
+
+
+    fun obtenerSiniestros() {
         firebaseAuth = Firebase.auth
+        val user = firebaseAuth.currentUser
+        val userId = user?.uid.toString()
 
 
         val listaSiniestros = mutableListOf<Siniestro>()
 
-        // Agregar siniestros a la lista de forma hardcodeada
-        listaSiniestros.add(
-            Siniestro(
-                "1",
-                "usuario1",
-                "poliza1",
-                "2023-09-30",
-                "10:00 AM",
-                "Ubicación 1"
-            )
-        )
-        listaSiniestros.add(
-            Siniestro(
-                "2",
-                "usuario1",
-                "poliza2",
-                "2023-09-30",
-                "11:30 AM",
-                "Ubicación 2"
-            )
-        )
-        listaSiniestros.add(
-            Siniestro(
-                "3",
-                "usuario2",
-                "poliza1",
-                "2023-10-01",
-                "03:45 PM",
-                "Ubicación 3"
-            )
-        )
+        val siniestrosRef = db.collection("siniestros")
+            .whereEqualTo("idUsuario", userId)
 
-        return listaSiniestros
+        siniestrosRef.get()
+            .addOnSuccessListener { snapshot ->
+                for (siniestro in snapshot) {
+                    val siniestroData = siniestro.toObject(Siniestro::class.java)
+                    listaSiniestros.add(siniestroData)
+                }
+                _siniestrosLiveData.value = listaSiniestros
+            }
+            .addOnFailureListener { exception ->
+                exception.printStackTrace()
+                _siniestrosLiveData.value = emptyList() // Devuelve una lista vacía en caso de error
+            }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
