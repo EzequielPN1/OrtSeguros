@@ -1,13 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.home.cuenta.PreguntasFrecuentesFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Pregunta 1 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. ¿Cómo puedo agregar una nueva póliza?"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Para agregar una nueva póliza, ve al menú principal y selecciona 'Agregar Póliza'. Completa los detalles requeridos, como el tipo de póliza, la fecha de inicio y otros datos relevantes."
+                android:layout_marginTop="8dp"/>
+
+            <!-- Pregunta 2 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2. ¿Cómo registro un siniestro?"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Si necesitas registrar un siniestro, dirígete a la sección 'Siniestros'. Desde allí, puedes agregar un nuevo siniestro, proporcionando detalles como la fecha en que ocurrió, la descripción del evento y cualquier información relacionada."
+                android:layout_marginTop="8dp"/>
+
+            <!-- Pregunta 3 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3. ¿Cómo puedo ver el estado de mis siniestros existentes?"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Para ver el estado de tus siniestros existentes, dirígete a la sección 'Mis Siniestros'. Allí encontrarás una lista de todos tus siniestros registrados, incluyendo su estado actual, fecha de registro y cualquier actualización relevante."
+                android:layout_marginTop="8dp"/>
+
+            <!-- Pregunta 4 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4. ¿Cómo puedo actualizar la información de una póliza existente?"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Si necesitas actualizar la información de una póliza existente, ve a la sección 'Mis Pólizas'. Desde allí, selecciona la póliza que deseas actualizar y elige la opción de edición. Puedes modificar los detalles según sea necesario."
+                android:layout_marginTop="8dp"/>
+
+            <!-- Más preguntas y respuestas aquí -->
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
