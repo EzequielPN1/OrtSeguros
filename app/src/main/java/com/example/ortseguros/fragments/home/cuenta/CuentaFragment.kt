@@ -38,6 +38,14 @@ class CuentaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         v = inflater.inflate(R.layout.fragment_cuenta, container, false)
+
+
+        viewModelCuenta = ViewModelProvider(this)[CuentaViewModel::class.java]
+
+        viewModelCuenta.toastMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+
         btnTextCerrarSesion = v.findViewById(R.id.btnTxtCerrarSesion)
         btnConfig = v.findViewById(R.id.btnConfig)
         db = Firebase.firestore
@@ -48,10 +56,14 @@ class CuentaFragment : Fragment() {
         txtDomicilio = v.findViewById(R.id.txtDomicilio)
         txtTelefono = v.findViewById(R.id.txtTelefono)
 
-        viewModelCuenta = ViewModelProvider(this)[CuentaViewModel::class.java]
-
-        viewModelCuenta.toastMessage.observe(viewLifecycleOwner) { message ->
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        viewModelCuenta.usuarioData.observe(viewLifecycleOwner) { usuario ->
+            // Actualiza la vista con los datos del usuario
+            txtNombre.text = usuario.nombre
+            txtApellido.text = usuario.apellido
+            txtDni.text = usuario.dni
+            txtEmail.text = usuario.email
+            txtDomicilio.text = usuario.domicilio
+            txtTelefono.text = usuario.telefono
         }
 
 
@@ -84,25 +96,7 @@ class CuentaFragment : Fragment() {
 
 
 
-        val docRef = db.collection("usuarios").document("${Firebase.auth.currentUser?.uid}")
-        docRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
 
-                    txtNombre.text = document.getString("nombre")
-                    txtApellido.text = document.getString("apellido")
-                    txtDni.text = document.getString("dni")
-                    txtEmail.text = document.getString("email")
-                    txtDomicilio.text = document.getString("domicilio")
-                    txtTelefono.text = document.getString("telefono")
-                } else {
-                    Log.d(TAG, "No such document")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
 
     }
 
