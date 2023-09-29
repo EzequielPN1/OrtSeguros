@@ -17,22 +17,20 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
-
 
 class CuentaFragment : Fragment() {
 
     private lateinit var viewModelCuenta: CuentaViewModel
-    lateinit var v: View
-    lateinit var btnTextCerrarSesion: TextView
-    lateinit var btnConfig : Button
-    lateinit var db : FirebaseFirestore
-    lateinit var txtNombre : TextView
-    lateinit var txtApellido : TextView
-    lateinit var txtDni : TextView
-    lateinit var txtEmail : TextView
-    lateinit var txtDomicilio : TextView
-    lateinit var txtTelefono : TextView
+    private lateinit var v: View
+    private lateinit var btnTextCerrarSesion: TextView
+    private lateinit var btnConfig : Button
+    private lateinit var db : FirebaseFirestore
+    private lateinit var txtNombre : TextView
+    private lateinit var txtApellido : TextView
+    private lateinit var txtDni : TextView
+    private lateinit var txtEmail : TextView
+    private lateinit var txtDomicilio : TextView
+    private lateinit var txtTelefono : TextView
 
 
     override fun onCreateView(
@@ -91,6 +89,7 @@ class CuentaFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (document != null) {
                     Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+
                     txtNombre.text = document.getString("nombre")
                     txtApellido.text = document.getString("apellido")
                     txtDni.text = document.getString("dni")
