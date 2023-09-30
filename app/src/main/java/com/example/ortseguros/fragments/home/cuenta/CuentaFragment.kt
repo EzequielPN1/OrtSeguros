@@ -85,6 +85,7 @@ class CuentaFragment : Fragment() {
                 }
             }
         }
+        viewModelCuenta.loadUserData()
         viewModelCuenta.usuarioData.observe(viewLifecycleOwner) { usuario ->
             // Actualiza la vista con los datos del usuario
             txtNombre.text = usuario.nombre

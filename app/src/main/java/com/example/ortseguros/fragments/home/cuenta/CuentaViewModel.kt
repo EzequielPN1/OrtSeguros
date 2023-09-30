@@ -20,11 +20,8 @@ class CuentaViewModel : ViewModel() {
 
     private val _usuarioData = MutableLiveData<Usuario>()
     private val db = Firebase.firestore
-    val usuarioData: LiveData<Usuario> get() = _usuarioData
+    val usuarioData: MutableLiveData<Usuario> get() = _usuarioData
 
-    init {
-        loadUserData()
-    }
 
      fun loadUserData() {
         val userId = Firebase.auth.currentUser?.uid
