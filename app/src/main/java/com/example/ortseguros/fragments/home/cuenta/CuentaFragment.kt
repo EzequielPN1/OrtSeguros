@@ -56,15 +56,7 @@ class CuentaFragment : Fragment() {
         txtDomicilio = v.findViewById(R.id.txtDomicilio)
         txtTelefono = v.findViewById(R.id.txtTelefono)
 
-        viewModelCuenta.usuarioData.observe(viewLifecycleOwner) { usuario ->
-            // Actualiza la vista con los datos del usuario
-            txtNombre.text = usuario.nombre
-            txtApellido.text = usuario.apellido
-            txtDni.text = usuario.dni
-            txtEmail.text = usuario.email
-            txtDomicilio.text = usuario.domicilio
-            txtTelefono.text = usuario.telefono
-        }
+
 
 
         return v
@@ -93,12 +85,14 @@ class CuentaFragment : Fragment() {
                 }
             }
         }
-
-
-
-
-
+        viewModelCuenta.usuarioData.observe(viewLifecycleOwner) { usuario ->
+            // Actualiza la vista con los datos del usuario
+            txtNombre.text = usuario.nombre
+            txtApellido.text = usuario.apellido
+            txtDni.text = usuario.dni
+            txtEmail.text = usuario.email
+            txtDomicilio.text = usuario.domicilio
+            txtTelefono.text = usuario.telefono
+        }
     }
-
-
 }

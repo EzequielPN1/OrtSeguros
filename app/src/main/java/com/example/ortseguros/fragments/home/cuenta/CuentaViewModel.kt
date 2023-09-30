@@ -26,7 +26,7 @@ class CuentaViewModel : ViewModel() {
         loadUserData()
     }
 
-    private fun loadUserData() {
+     fun loadUserData() {
         val userId = Firebase.auth.currentUser?.uid
         if (userId != null) {
             val docRef = db.collection("usuarios").document(userId)
