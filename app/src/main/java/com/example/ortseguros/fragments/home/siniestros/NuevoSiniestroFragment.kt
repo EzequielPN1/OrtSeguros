@@ -18,13 +18,14 @@ class NuevoSiniestroFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_nuevo_siniestro, container, false)
+        viewModel = ViewModelProvider(this)[NuevoSiniestroViewModel::class.java]
+
+
         return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(NuevoSiniestroViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
+
+
 
 }
