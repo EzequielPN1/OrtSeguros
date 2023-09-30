@@ -18,7 +18,6 @@ class EditarCuentaFragment : Fragment() {
      lateinit var inputNombre : EditText
      lateinit var inputApellido : EditText
      lateinit var inputDni : EditText
-     lateinit var inputEmail : EditText
      lateinit var inputDomicilio : EditText
      lateinit var inputTelefono : EditText
      lateinit var btnAplicarCambios : Button
@@ -33,7 +32,6 @@ class EditarCuentaFragment : Fragment() {
         inputNombre = v.findViewById(R.id.inputNombre)
         inputApellido = v.findViewById(R.id.inputApellido)
         inputDni = v.findViewById(R.id.inputDni)
-        inputEmail = v.findViewById(R.id.inputEmail)
         inputDomicilio = v.findViewById(R.id.inputDomicilio)
         inputTelefono = v.findViewById(R.id.inputTelefono)
         btnAplicarCambios = v.findViewById(R.id.btnAplicarCambios)
@@ -47,7 +45,6 @@ class EditarCuentaFragment : Fragment() {
             inputNombre.setText(usuario.nombre)
             inputApellido.setText(usuario.apellido)
             inputDni.setText(usuario.dni)
-            inputEmail.setText(usuario.email)
             inputDomicilio.setText(usuario.domicilio)
             inputTelefono.setText(usuario.telefono)
         }
@@ -56,7 +53,6 @@ class EditarCuentaFragment : Fragment() {
             viewModelEditarCuenta.setNombre(inputNombre.text.toString())
             viewModelEditarCuenta.setApellido(inputApellido.text.toString())
             viewModelEditarCuenta.setDni(inputDni.text.toString())
-            viewModelEditarCuenta.setEmail(inputEmail.text.toString())
             viewModelEditarCuenta.setDomicilio(inputDomicilio.text.toString())
             viewModelEditarCuenta.setTelefono(inputTelefono.text.toString())
 

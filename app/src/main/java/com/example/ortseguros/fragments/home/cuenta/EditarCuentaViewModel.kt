@@ -65,9 +65,6 @@ class EditarCuentaViewModel : ViewModel() {
     private val _dni = MutableLiveData<String>()
     val dni: LiveData<String> get() = _dni
 
-    private val _email = MutableLiveData<String>()
-    val email: LiveData<String> get() = _email
-
     private val _domicilio = MutableLiveData<String>()
     val domicilio: LiveData<String> get() = _domicilio
 
@@ -80,13 +77,9 @@ class EditarCuentaViewModel : ViewModel() {
         val nuevoNombre = _nombre.value // Obtener el valor del LiveData "_nombre"
         val nuevoApellido = _apellido.value
         val nuevoDni = _dni.value
-        val nuevoEmail = _email.value
         val nuevoDomicilio = _domicilio.value
         val nuevoTelefono = _telefono.value
 
-        fun setNombre(nuevoNombre: String) {
-            _nombre.value = nuevoNombre
-        }
 
         if (userId != null) {
             val docRef = db.collection("usuarios").document(userId)
@@ -96,7 +89,6 @@ class EditarCuentaViewModel : ViewModel() {
                 "nombre" to nuevoNombre,
                 "apellido" to nuevoApellido,
                 "dni" to nuevoDni,
-                "email" to nuevoEmail,
                 "domicilio" to nuevoDomicilio,
                 "telefono" to nuevoTelefono
             )
@@ -117,9 +109,6 @@ class EditarCuentaViewModel : ViewModel() {
     }
     fun setDni(i: String) {
         _dni.value = i
-    }
-    fun setEmail(i: String) {
-        _email.value = i
     }
     fun setTelefono(i: String) {
         _telefono.value = i

@@ -40,4 +40,5 @@
     <string name="txtPreguntasFrecuentes">Preguntas Frecuentes</string>
     <string name="txtAsisMecanica">Asistencia mecánica </string>
     <string name="txtContacto">Contacto</string>
+    <string name="btnAplicarCambios">Aplicar cambios</string>
 </resources>

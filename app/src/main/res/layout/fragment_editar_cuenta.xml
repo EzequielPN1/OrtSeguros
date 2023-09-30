@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:labelFor="@id/inputNombre"
         android:text="@string/Nombre"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,125 +27,122 @@
         android:id="@+id/inputNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:autofillHints="@string/Nombre"
+        android:inputType="text"
         android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleNombre"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleNombre" />
 
     <!-- Apellido -->
     <TextView
         android:id="@+id/txtTitleApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/inputApellido"
         android:text="@string/Apellido"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputNombre"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/inputNombre" />
 
     <EditText
         android:id="@+id/inputApellido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:autofillHints="@string/Apellido"
+        android:inputType="text"
         android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleApellido"
-        android:layout_marginTop="8dp"/>
+        tools:ignore="VisualLintTextFieldSize" />
 
     <!-- DNI -->
     <TextView
         android:id="@+id/txtTitleDni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/inputDni"
         android:text="@string/Dni"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputApellido"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/inputApellido" />
 
     <EditText
         android:id="@+id/inputDni"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:autofillHints="@string/Dni"
+        android:inputType="text"
         android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleDni"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleDni" />
 
     <!-- Email -->
-    <TextView
-        android:id="@+id/txtTitleEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Email"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputDni"
-        android:layout_marginTop="24dp"/>
-
-    <EditText
-        android:id="@+id/inputEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleEmail"
-        android:layout_marginTop="8dp"/>
 
     <!-- Domicilio -->
+
     <TextView
         android:id="@+id/txtTitleDomicilio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/inputDomicilio"
         android:text="@string/Domicilio"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmail"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/inputDni" />
 
     <EditText
         android:id="@+id/inputDomicilio"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:autofillHints="@string/Domicilio"
+        android:inputType="text"
         android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleDomicilio"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleDomicilio" />
 
     <!-- Teléfono -->
     <TextView
         android:id="@+id/txtTitleTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:labelFor="@id/inputTelefono"
         android:text="@string/Telefono"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputDomicilio"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/inputDomicilio" />
 
     <EditText
         android:id="@+id/inputTelefono"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:autofillHints="@string/Telefono"
+        android:inputType="text"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleTelefono"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintVertical_bias="0.037" />
 
     <Button
         android:id="@+id/btnAplicarCambios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Modificar"
+        android:text="@string/btnAplicarCambios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
