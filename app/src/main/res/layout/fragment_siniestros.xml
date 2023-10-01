@@ -23,29 +23,31 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recSiniestro"
-        android:layout_width="396dp"
-        android:layout_height="499dp"
+        android:layout_width="390dp"
+        android:layout_height="352dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="81dp"
         app:layout_constraintBottom_toTopOf="@+id/btnNuevoSiniestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSiniestros" />
 
     <TextView
         android:id="@+id/txtSiniestros"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="173dp"
+        android:layout_marginStart="170dp"
         android:layout_marginTop="27dp"
-        android:layout_marginEnd="181dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="170dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/Siniestros"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/recSiniestro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

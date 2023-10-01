@@ -33,10 +33,12 @@ class RegisterViewModel : ViewModel() {
 
 
 
-
     private val _createAccountSuccess = MutableLiveData<Boolean>()
     val createAccountSuccess: LiveData<Boolean>
         get() = _createAccountSuccess
+
+
+
 
 
     val selectedDateLiveData = MutableLiveData<String>()
