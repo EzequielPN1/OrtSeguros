@@ -31,6 +31,12 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/txtPatenteCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="patente" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
