@@ -22,9 +22,16 @@ class RegisterViewModel : ViewModel() {
     private lateinit var firebaseAuth: FirebaseAuth
 
 
+
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String>
         get() = _toastMessage
+
+    fun setToastMessage(message: String) {
+        _toastMessage.value = message
+    }
+
+
 
 
     private val _createAccountSuccess = MutableLiveData<Boolean>()

@@ -16,6 +16,10 @@ class LoginViewModel : ViewModel() {
     val toastMessage: LiveData<String>
         get() = _toastMessage
 
+    fun setToastMessage(message: String) {
+        _toastMessage.value = message
+    }
+
 
     private val _signInSuccess = MutableLiveData<Boolean>()
     val signInSuccess: LiveData<Boolean>
@@ -75,11 +79,11 @@ class LoginViewModel : ViewModel() {
         } else if (ingresoUsuario.isEmpty()) {
             _toastMessage.value = "Por favor, ingrese su email."
             camposValidos = false
+        }else if (!validarEmail(inputUsuario)) {
+                _toastMessage.value = "Por favor, ingrese un email correcto."
+                camposValidos = false
         } else if (ingresoContrasenia.isEmpty()) {
             _toastMessage.value = "Por favor, ingrese su contraseña."
-            camposValidos = false
-        } else if (!validarEmail(inputUsuario)) {
-            _toastMessage.value = "Por favor, ingrese un email correcto."
             camposValidos = false
         }
 

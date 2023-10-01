@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_cuentaFragment_to_loginActivity"
             app:destination="@id/loginActivity" />
+        <action
+            android:id="@+id/action_cuentaFragment_to_configuracionFragment"
+            app:destination="@id/configuracionFragment" />
     </fragment>
     <activity
         android:id="@+id/loginActivity"
@@ -58,4 +61,26 @@
             android:name="siniestro"
             app:argType="com.example.ortseguros.entities.Siniestro" />
     </fragment>
+    <fragment
+        android:id="@+id/editarCuentaFragment"
+        android:name="com.example.ortseguros.fragments.home.cuenta.EditarCuentaFragment"
+        android:label="fragment_editar_cuenta"
+        tools:layout="@layout/fragment_editar_cuenta" />
+    <fragment
+        android:id="@+id/configuracionFragment"
+        android:name="com.example.ortseguros.fragments.home.cuenta.ConfiguracionFragment"
+        android:label="fragment_configuracion"
+        tools:layout="@layout/fragment_configuracion" >
+        <action
+            android:id="@+id/action_configuracionFragment_to_editarCuentaFragment"
+            app:destination="@id/editarCuentaFragment" />
+        <action
+            android:id="@+id/action_configuracionFragment_to_preguntasFrecuentesFragment"
+            app:destination="@id/preguntasFrecuentesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/preguntasFrecuentesFragment"
+        android:name="com.example.ortseguros.fragments.home.cuenta.PreguntasFrecuentesFragment"
+        android:label="fragment_preguntas_frecuentes"
+        tools:layout="@layout/fragment_preguntas_frecuentes" />
 </navigation>

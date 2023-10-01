@@ -59,7 +59,10 @@ class RegisterFragment : Fragment() {
         }
 
         viewModelRegister.toastMessage.observe(viewLifecycleOwner) { message ->
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            if (!message.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                viewModelRegister.setToastMessage("")
+            }
         }
 
         return v
