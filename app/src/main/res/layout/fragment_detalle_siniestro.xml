@@ -13,13 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Fecha"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toStartOf="@+id/txtFechaSiniestro"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="30sp"
 
-         />
+        />
 
     <TextView
         android:id="@+id/txtFechaSiniestro"
@@ -76,7 +76,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView11"
 
         android:textSize="30sp"
-   />
+        />
 
     <TextView
         android:id="@+id/txtUbicacionSiniestro"
@@ -91,7 +91,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txtDescripcionSiniestro"
 
         android:textSize="30sp"
-  />
+        />
 
 
     <TextView
@@ -100,13 +100,12 @@
         android:layout_height="wrap_content"
         android:text="@string/Hora"
 
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintEnd_toStartOf="@+id/txtHoraSiniestro"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
 
-        android:textSize="30sp"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/textView11"
@@ -120,6 +119,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9"
 
         android:textSize="30sp"
- />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
