@@ -27,6 +27,11 @@ class SiniestroAdapter(
             txtHora.text = hora
         }
 
+        fun setPatente(patente:String){
+            val txtPatente: TextView = view.findViewById(R.id.txtPatenteCardView)
+            txtPatente.text = patente
+        }
+
         fun getCard():CardView{
             return view.findViewById(R.id.idCardViewSiniestro)
         }
@@ -43,7 +48,7 @@ class SiniestroAdapter(
 
         holder.setFecha(siniestro.fecha)
         holder.setHora(siniestro.hora)
-
+        holder.setPatente(siniestro.patente)
         holder.getCard().setOnClickListener(){
             onClick(position)
         }
@@ -52,6 +57,8 @@ class SiniestroAdapter(
     override fun getItemCount(): Int {
         return siniestroList.size
     }
+
+
 
 
 }
