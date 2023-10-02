@@ -44,4 +44,8 @@ class SiniestrosViewModel : ViewModel() {
                 _siniestrosLiveData.value = emptyList() // Devuelve una lista vacía en caso de error
             }
     }
+
+
+
+
 }
