@@ -1,13 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.misPolizas.NuevaPolizaFragment">
+    tools:context=".fragments.home.misPolizas.NuevaPolizaFragment" >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+    <Switch
+        android:id="@+id/swc_roboTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="115dp"
+        android:text="@string/roboTotal"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swc_roboParcial" />
 
-</FrameLayout>
+    <Switch
+        android:id="@+id/swc_roboParcial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="161dp"
+        android:text="@string/roboParcial"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swc_granizo" />
+
+    <Switch
+        android:id="@+id/swc_granizo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="162dp"
+        android:text="@string/granizo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swc_danioTotal" />
+
+    <Switch
+        android:id="@+id/swc_danioTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="163dp"
+        android:text="@string/danioTotal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swc_respCivil" />
+
+    <EditText
+        android:id="@+id/inputValorVehiculo"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+
+        android:autofillHints="name"
+        android:background="@drawable/custom_input"
+
+        android:clickable="false"
+        android:drawableStart="@drawable/icon_text"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="@string/valorDelVehiculo"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputPatente" />
+
+    <EditText
+        android:id="@+id/inputPatente"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="name"
+
+        android:background="@drawable/custom_input"
+        android:clickable="false"
+
+        android:drawableStart="@drawable/icon_text"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="@string/Patente"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputFechaAlta" />
+
+    <EditText
+        android:id="@+id/inputFechaAlta"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="date"
+        android:background="@drawable/custom_input"
+        android:clickable="false"
+        android:drawableStart="@drawable/icon_calendar"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:focusable="false"
+
+        android:hint="@string/FechaAlta"
+        android:inputType="date"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputMarcaModelo" />
+
+    <EditText
+        android:id="@+id/inputMarcaModelo"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="65dp"
+        android:autofillHints="name"
+
+        android:background="@drawable/custom_input"
+        android:clickable="false"
+
+        android:drawableStart="@drawable/icon_text"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="@string/MarcaModelo"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/swc_respCivil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="163dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="163dp"
+        android:text="@string/respCivil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputValorVehiculo" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="174dp"
+        android:layout_marginEnd="147dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/AgregarPoliza"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

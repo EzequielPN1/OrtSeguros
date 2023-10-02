@@ -16,6 +16,15 @@
     <string name="Descripcion">Descripcion</string>
 
     <string name="AgregarPoliza">Agregar poliza</string>
+    <string name="MarcaModelo">Marca modelo</string>
+    <string name="FechaAlta">Fecha de alta</string>
+    <string name="Patente">Pantente</string>
+    <string name="valorDelVehiculo">Valor del vehiculo</string>
+    <string name="respCivil">Responsabilidad Civil</string>
+    <string name="danioTotal">Daño total</string>
+    <string name="granizo">Granizo</string>
+    <string name="roboParcial">Robo parcial</string>
+    <string name="roboTotal">Robo total</string>
 
     <string name="Login">Login</string>
     <string name="Entrar">Entrar</string>

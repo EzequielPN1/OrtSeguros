@@ -21,8 +21,8 @@ class SiniestrosFragment : Fragment() {
     lateinit var v: View
     private lateinit var btnNuevoSiniestro: Button
 
-    lateinit var recyclerSiniestro: RecyclerView
-    lateinit var siniestroAdapter: SiniestroAdapter
+    private lateinit var recyclerSiniestro: RecyclerView
+    private lateinit var siniestroAdapter: SiniestroAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +31,6 @@ class SiniestrosFragment : Fragment() {
         v = inflater.inflate(R.layout.fragment_siniestros, container, false)
         siniestroViewModel = ViewModelProvider(this)[SiniestrosViewModel::class.java]
         btnNuevoSiniestro = v.findViewById(R.id.btnNuevoSiniestro)
-
         recyclerSiniestro = v.findViewById(R.id.recSiniestro)
 
         return v
