@@ -12,5 +12,5 @@ class Siniestro (
     var hora: String = "",
     var ubicacion: String = "",
     var descripcion: String = "",
-    var patente: String = ""
+    var patente: String = "",
 ): Parcelable

@@ -18,15 +18,15 @@ class PolizaAdapter(
         private var view: View = v
 
         fun setMarca(marca: String) {
-            // Configura la vista para mostrar la marca
+
             val txtMarca : TextView = view.findViewById(R.id.txtFecha)
-             txtMarca.text = marca
+            txtMarca.text = marca
         }
 
         fun setPatente(patente: String) {
-            // Configura la vista para mostrar la patente
-             val txtPatente : TextView = view.findViewById(R.id.txtPatente)
-             txtPatente.text = patente
+
+            val txtPatente : TextView = view.findViewById(R.id.txtPatente)
+            txtPatente.text = patente
         }
 
         fun getCard(): CardView {

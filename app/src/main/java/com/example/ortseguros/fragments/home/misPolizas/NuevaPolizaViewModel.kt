@@ -36,27 +36,6 @@ class NuevaPolizaViewModel : ViewModel() {
     }
 
 
-    fun obtenerMarcasModelos(callback: (List<String>?, String?) -> Unit) {
-        db.collection("Vehiculos")
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    for (document in task.result!!) {
-                        val marcaModelo = document.getString("marcaModelo")
-                        if (marcaModelo != null) {
-                            marcasModelosList.add(marcaModelo)
-                        }
-                    }
-                    callback(marcasModelosList, null)
-                } else {
-                    callback(null, "Error al obtener las marcasModelosList")
-                }
-            }
-    }
-
-
-
-
     fun guardarNuevaPoliza(
         marcaModelo: String,
         fechaAltaVehiculo: String,
@@ -110,6 +89,25 @@ class NuevaPolizaViewModel : ViewModel() {
                 callback(false, "No se pudo encontrar el valor del vehículo.")
             }
         }
+    }
+
+
+    fun obtenerMarcasModelos(callback: (List<String>?, String?) -> Unit) {
+        db.collection("Vehiculos")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        val marcaModelo = document.getString("marcaModelo")
+                        if (marcaModelo != null) {
+                            marcasModelosList.add(marcaModelo)
+                        }
+                    }
+                    callback(marcasModelosList, null)
+                } else {
+                    callback(null, "Error al obtener las marcasModelosList")
+                }
+            }
     }
 
     private fun calcularDiferenciaAnios(fechaAlta: String, fechaActual: String): Int {
