@@ -71,6 +71,14 @@ class NuevoSiniestroFragment : Fragment() {
         }
 
 
+        viewModelNuevoSiniestro.toastMessage.observe(viewLifecycleOwner) { message ->
+            if (!message.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                viewModelNuevoSiniestro.setToastMessage("")
+            }
+        }
+
+
         return v
     }
 
@@ -100,29 +108,47 @@ class NuevoSiniestroFragment : Fragment() {
 
 
         btnNuevoSniestro.setOnClickListener {
+
             val patente = spinner.selectedItem.toString()
-            val descripcion = inputDescripcion.text.toString()
             val fecha = inputFecha.text.toString()
             val hora = inputHora.text.toString()
             val ubicacion = inputUbicacion.text.toString()
+            val descripcion = inputDescripcion.text.toString()
 
-            viewModelNuevoSiniestro.guardarNuevoSiniestro(
-                patente,
-                descripcion,
-                fecha,
-                hora,
-                ubicacion
-            ) { exito, mensajeError ->
-                if (exito) {
-                    Toast.makeText(requireContext(), "Siniestro guardado con éxito", Toast.LENGTH_SHORT).show()
-                    findNavController().navigateUp()
-                } else {
-                    Toast.makeText(requireContext(), "Error al guardar el siniestro: $mensajeError", Toast.LENGTH_SHORT).show()
+
+
+            viewModelNuevoSiniestro.validarCampos(fecha,hora,ubicacion,descripcion)
+                .observe(viewLifecycleOwner) { camposValidos ->
+                    if (camposValidos) {
+
+                        viewModelNuevoSiniestro.guardarNuevoSiniestro(
+                            patente,
+                            descripcion,
+                            fecha,
+                            hora,
+                            ubicacion
+                        ) { exito, mensajeError ->
+                            if (exito) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Siniestro guardado con éxito",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                findNavController().navigateUp()
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Error al guardar el siniestro: $mensajeError",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                    }
+
                 }
-            }
+
         }
-
-
 
     }
 

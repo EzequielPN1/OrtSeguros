@@ -1,6 +1,7 @@
 package com.example.ortseguros.fragments.home.siniestros
 
 import android.text.Editable
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ortseguros.entities.Siniestro
@@ -9,6 +10,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.TimeZone
 
 class NuevoSiniestroViewModel : ViewModel() {
 
@@ -24,12 +28,22 @@ class NuevoSiniestroViewModel : ViewModel() {
     }
 
 
-
     val selectedTimeLiveData = MutableLiveData<String>()
     fun onTimeSelected(time:String){
         val horaSiniestro = Editable.Factory.getInstance().newEditable(time)
         selectedTimeLiveData.value = horaSiniestro.toString()
     }
+
+
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String>
+        get() = _toastMessage
+
+    fun setToastMessage(message: String) {
+        _toastMessage.value = message
+    }
+
+
 
 
 
@@ -111,6 +125,61 @@ class NuevoSiniestroViewModel : ViewModel() {
 
 
 
+
+
+    fun validarCampos(
+        fechaSiniestro: String,
+        hora: String,
+        ubicacion: String,
+        descripcion: String
+    ): LiveData<Boolean> {
+        val fechaActual = obtenerFechaActual()
+        val camposValidosLiveData = MutableLiveData<Boolean>()
+
+        if (fechaSiniestro.isEmpty()) {
+            _toastMessage.value = "El campo fecha del siniestro no puede estar vacío."
+            camposValidosLiveData.value = false
+        } else if (!esFechaValida(fechaSiniestro, fechaActual)) {
+            _toastMessage.value = "La fecha del siniestro debe ser menor o igual a la fecha actual."
+            camposValidosLiveData.value = false
+        } else if (hora.isEmpty()) {
+            _toastMessage.value = "El campo hora no puede estar vacío."
+            camposValidosLiveData.value = false
+        } else if (ubicacion.isEmpty()) {
+            _toastMessage.value = "El campo ubicación no puede estar vacío."
+            camposValidosLiveData.value = false
+        } else if (descripcion.isEmpty()) {
+            _toastMessage.value = "El campo descripción no puede estar vacío."
+            camposValidosLiveData.value = false
+        } else {
+            camposValidosLiveData.value = true
+        }
+
+        return camposValidosLiveData
+    }
+
+
+
+
+
+
+
+    private fun esFechaValida(fecha: String, fechaActual: String): Boolean {
+        val formato = SimpleDateFormat("dd/MM/yyyy")
+        val fechaAltaDate = formato.parse(fecha)
+        val fechaActualDate = formato.parse(fechaActual)
+
+        return !fechaAltaDate.after(fechaActualDate)
+    }
+    private fun obtenerFechaActual(): String {
+        val timeZone = TimeZone.getTimeZone("America/Argentina/Buenos_Aires")
+        val calendar = Calendar.getInstance(timeZone)
+
+        val formato = SimpleDateFormat("dd/MM/yyyy")
+        formato.timeZone = timeZone
+
+        return formato.format(calendar.time)
+    }
 
 
 }

@@ -105,7 +105,15 @@ class NuevaPolizaFragment : Fragment() {
             val roboParcial = swcRoboParcial.isChecked
             val roboTotal = swcRoboTotal.isChecked
 
-            viewModelNuevaPoliza.validarCampos(fechaAltaVehiculo, patente).observe(viewLifecycleOwner) { camposValidos ->
+            viewModelNuevaPoliza.validarCampos(
+                fechaAltaVehiculo,
+                patente,
+                respCivil,
+                danioTotal,
+                granizo,
+                roboParcial,
+                roboTotal
+                ).observe(viewLifecycleOwner) { camposValidos ->
                 if (camposValidos) {
                     viewModelNuevaPoliza.guardarNuevaPoliza(
                         marcaModelo,

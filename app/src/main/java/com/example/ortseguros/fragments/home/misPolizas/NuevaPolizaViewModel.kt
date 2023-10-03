@@ -203,9 +203,24 @@ class NuevaPolizaViewModel : ViewModel() {
         return formato.format(calendar.time)
     }
 
-    fun validarCampos(fechaAltaVehiculo: String, patente: String): LiveData<Boolean> {
+    fun validarCampos(
+        fechaAltaVehiculo: String,
+        patente: String,
+        respCivil: Boolean,
+        danioTotal: Boolean,
+        granizo: Boolean,
+        roboParcial: Boolean,
+        roboTotal: Boolean
+    ): LiveData<Boolean> {
         val fechaActual = obtenerFechaActual()
         val camposValidosLiveData = MutableLiveData<Boolean>()
+
+
+        if (fechaAltaVehiculo.isEmpty() || patente.isEmpty()) {
+            _toastMessage.value = "Los campos fecha de alta y patente no pueden estar vacíos."
+            camposValidosLiveData.value = false
+            return camposValidosLiveData
+        }
 
         verificarPatenteUnica(patente) { esUnica ->
             if (!esUnica) {
@@ -216,13 +231,20 @@ class NuevaPolizaViewModel : ViewModel() {
                     _toastMessage.value = "La fecha de alta debe ser menor o igual a la fecha actual."
                     camposValidosLiveData.value = false
                 } else {
-                    camposValidosLiveData.value = true
+                    if (!respCivil && !danioTotal && !granizo && !roboParcial && !roboTotal) {
+                        _toastMessage.value = "Tiene que seleccionar por lo menos una cobertura."
+                        camposValidosLiveData.value = false
+                    } else {
+                        camposValidosLiveData.value = true
+                    }
                 }
             }
         }
 
         return camposValidosLiveData
     }
+
+
 
 
 
