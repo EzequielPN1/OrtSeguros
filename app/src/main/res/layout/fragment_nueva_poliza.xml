@@ -27,7 +27,7 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="150dp"
-        android:text="@string/roboTotal"
+        android:text="roboTotal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swc_roboParcial" />
@@ -39,7 +39,7 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="150dp"
-        android:text="@string/roboParcial"
+        android:text="roboParcial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swc_granizo" />
@@ -51,7 +51,7 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="150dp"
-        android:text="@string/granizo"
+        android:text="granizo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swc_danioTotal" />
@@ -63,7 +63,7 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="150dp"
-        android:text="@string/danioTotal"
+        android:text="danioTotal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swc_respCivil" />
@@ -83,7 +83,7 @@
         android:drawableStart="@drawable/icon_text"
         android:drawablePadding="12dp"
         android:ems="10"
-        android:hint="@string/Patente"
+        android:hint="Patente"
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -106,7 +106,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:focusable="false"
-        android:hint="@string/FechaAltaVehiculo"
+        android:hint="FechaAltaVehiculo"
         android:inputType="date"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -121,7 +121,7 @@
         android:layout_marginStart="115dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="115dp"
-        android:text="@string/respCivil"
+        android:text="respCivil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPatente" />

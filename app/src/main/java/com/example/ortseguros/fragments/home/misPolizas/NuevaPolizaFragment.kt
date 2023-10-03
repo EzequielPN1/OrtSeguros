@@ -122,7 +122,7 @@ class NuevaPolizaFragment : Fragment() {
                                 "Póliza guardada con éxito",
                                 Toast.LENGTH_SHORT
                             ).show()
-                             findNavController().navigateUp()
+                            findNavController().navigateUp()
                         } else {
                             Toast.makeText(
                                 requireContext(),
