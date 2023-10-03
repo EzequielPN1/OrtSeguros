@@ -4,26 +4,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ortseguros.R
 import com.example.ortseguros.entities.Poliza
 
-class PolizaAdapter(private var polizaList: MutableList<Poliza>) :
+class PolizaAdapter(
+    private var polizaList: MutableList<Poliza>,
+    private var onClick : (Int) -> Unit) :
     RecyclerView.Adapter<PolizaAdapter.PolizaHolder>() {
 
     class PolizaHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
 
         fun setMarca(marca: String) {
-            // Configura la vista para mostrar la marca
+
             val txtMarca : TextView = view.findViewById(R.id.txtFecha)
-             txtMarca.text = marca
+            txtMarca.text = marca
         }
 
         fun setPatente(patente: String) {
-            // Configura la vista para mostrar la patente
-             val txtPatente : TextView = view.findViewById(R.id.txtPatente)
-             txtPatente.text = patente
+
+            val txtPatente : TextView = view.findViewById(R.id.txtPatente)
+            txtPatente.text = patente
+        }
+
+        fun getCard(): CardView {
+            return view.findViewById(R.id.idCardViewPoliza)
         }
     }
 
@@ -35,8 +42,12 @@ class PolizaAdapter(private var polizaList: MutableList<Poliza>) :
     override fun onBindViewHolder(holder: PolizaHolder, position: Int) {
         val poliza = polizaList[position]
 
-        holder.setMarca(poliza.marca)
+        holder.setMarca(poliza.marcaModelo)
         holder.setPatente(poliza.patente)
+
+        holder.getCard().setOnClickListener(){
+            onClick(position)
+        }
     }
 
     override fun getItemCount(): Int {

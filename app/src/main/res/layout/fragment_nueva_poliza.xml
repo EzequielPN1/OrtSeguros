@@ -1,13 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.misPolizas.NuevaPolizaFragment">
+    tools:context=".fragments.home.misPolizas.NuevaPolizaFragment" >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+    <Spinner
+        android:id="@+id/spinner_marcaModelo"
+        android:layout_width="188dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputFechaAltaVehiculo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <Switch
+        android:id="@+id/swc_roboTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="150dp"
+        android:text="roboTotal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swc_roboParcial" />
+
+    <Switch
+        android:id="@+id/swc_roboParcial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="150dp"
+        android:text="roboParcial"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swc_granizo" />
+
+    <Switch
+        android:id="@+id/swc_granizo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="150dp"
+        android:text="granizo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swc_danioTotal" />
+
+    <Switch
+        android:id="@+id/swc_danioTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="150dp"
+        android:text="danioTotal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swc_respCivil" />
+
+    <EditText
+        android:id="@+id/inputPatente"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+
+        android:autofillHints="name"
+        android:background="@drawable/custom_input"
+        android:clickable="false"
+        android:drawableStart="@drawable/icon_text"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Patente"
+        android:inputType="text"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputFechaAltaVehiculo" />
+
+    <EditText
+        android:id="@+id/inputFechaAltaVehiculo"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints="date"
+        android:background="@drawable/custom_input"
+        android:clickable="false"
+
+        android:drawableStart="@drawable/icon_calendar"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="FechaAltaVehiculo"
+        android:inputType="date"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_marcaModelo" />
+
+    <Switch
+        android:id="@+id/swc_respCivil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="115dp"
+        android:text="respCivil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputPatente" />
+
+    <Button
+        android:id="@+id/btnNuevaPoliza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="174dp"
+        android:layout_marginEnd="147dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/AgregarPoliza"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.764"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnNuevaImagen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:text="agregar imagen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="554dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

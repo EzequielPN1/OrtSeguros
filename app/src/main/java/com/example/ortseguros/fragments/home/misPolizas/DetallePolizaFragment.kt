@@ -7,26 +7,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.ortseguros.R
+import com.example.ortseguros.fragments.home.siniestros.DetalleSiniestroFragmentArgs
 
 class DetallePolizaFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = DetallePolizaFragment()
-    }
+    private lateinit var viewModelDetallePoliza: DetallePolizaViewModel
+    private lateinit var v: View
 
-    private lateinit var viewModel: DetallePolizaViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_detalle_poliza, container, false)
+
+        viewModelDetallePoliza = ViewModelProvider(this)[DetallePolizaViewModel::class.java]
+        v = inflater.inflate(R.layout.fragment_detalle_poliza, container, false)
+
+
+
+
+
+        return v
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetallePolizaViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
+
+    override fun onStart() {
+        super.onStart()
+
+        val poliza = DetallePolizaFragmentArgs.fromBundle(requireArguments()).Poliza
+
+    }
 }

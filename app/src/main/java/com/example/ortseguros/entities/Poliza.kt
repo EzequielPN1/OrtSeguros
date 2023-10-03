@@ -1,25 +1,21 @@
 package com.example.ortseguros.entities
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 
-class Poliza (
-    var id : String,
-    var idUsuario: String,
-    var marca : String,
-    var modelo : String,
-    var anio : Int,
-    var patente : String,
-    var numMotor : Int,
-    var numChasis : Int,
-    var vigenciaDesde : String,
-    var vigenciaHasta : String,
-    var respCivil : Boolean,
-    var danioTotal : Boolean,
-    var granizo : Boolean,
-    var roboParcial : Boolean,
-    var roboTotal : Boolean,
-    var valorDelVehiculo : Int,
-    var sumaAsegurada : Int,
-    var valorCuota : Int,
-
-)
+@Parcelize
+data class Poliza (
+    var idUsuario: String = "",
+    var marcaModelo: String = "",
+    var fechaAltaVehiculo: String = "",
+    var patente: String = "",
+    var fechaInicioPoliza: String = "",
+    var sumaAsegurada: String = "",
+    var valorCuota: String = "",
+    var respCivil: Boolean = false,
+    var danioTotal: Boolean = false,
+    var granizo: Boolean = false,
+    var roboParcial: Boolean = false,
+    var roboTotal: Boolean = false
+) : Parcelable

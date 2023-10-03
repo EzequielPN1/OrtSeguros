@@ -6,12 +6,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class Siniestro (
-    var id: String = "",
     var idUsuario: String = "",
     var idPoliza: String = "",
     var fecha: String = "",
     var hora: String = "",
     var ubicacion: String = "",
     var descripcion: String = "",
-    var patente: String = ""
+    var patente: String = "",
+    var tipoSiniestro: String = "",
 ): Parcelable

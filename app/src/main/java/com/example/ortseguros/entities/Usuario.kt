@@ -9,5 +9,4 @@ data class Usuario(
     var domicilio:String,
     var email:String,
     var telefono:String,
-
 )

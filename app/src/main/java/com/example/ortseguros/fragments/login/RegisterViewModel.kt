@@ -191,14 +191,12 @@ class RegisterViewModel : ViewModel() {
 
     private fun validarEmail(inputEmail: TextView): Boolean {
         val email = inputEmail.text.toString()
-        val emailValido = email.matches(Regex("^[a-zA-Z0-9._%+-]+@(hotmail\\.com|gmail\\.com)$"))
-        return emailValido
+        return email.matches(Regex("^[a-zA-Z0-9._%+-]+@(hotmail\\.com|gmail\\.com)$"))
     }
 
     private fun validarContrasenia(inputContrasenia: TextView): Boolean {
         val contrasenia = inputContrasenia.text.toString()
-        val contraseniaValida = contrasenia.matches(Regex("^(?=.*[a-zA-Z])(?=.*\\d).{6,}\$"))
-        return contraseniaValida
+        return contrasenia.matches(Regex("^(?=.*[a-zA-Z])(?=.*\\d).{6,}\$"))
     }
 
     private fun confirmarContrasenias(
