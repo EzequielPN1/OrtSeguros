@@ -22,6 +22,7 @@ class NuevoSiniestroFragment : Fragment() {
     private lateinit var viewModelNuevoSiniestro: NuevoSiniestroViewModel
     lateinit var v: View
     private lateinit var spinner: Spinner
+    private lateinit var spinnerSiniestros:Spinner
     private lateinit var inputFecha: EditText
     private lateinit var inputHora: EditText
     private lateinit var inputUbicacion :EditText
@@ -41,6 +42,7 @@ class NuevoSiniestroFragment : Fragment() {
         inputDescripcion = v.findViewById(R.id.inputDescripcionNuevoSiniestro)
         btnNuevoSniestro = v.findViewById(R.id.btnGuardarNuevoSniestro)
         spinner = v.findViewById(R.id.spinner)
+        spinnerSiniestros = v.findViewById(R.id.spinnerSiniestros)
 
 
         viewModelNuevoSiniestro.selectedDateLiveData.observe(
@@ -79,6 +81,18 @@ class NuevoSiniestroFragment : Fragment() {
         }
 
 
+        viewModelNuevoSiniestro.obtenerTipoSiniestrosFirestore { siniestros, error ->
+            if (error == null && siniestros != null) {
+                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, siniestros)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerSiniestros.adapter = adapter
+            } else {
+                Toast.makeText(requireContext(), error ?: "Error desconocido", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
         return v
     }
 
@@ -114,10 +128,10 @@ class NuevoSiniestroFragment : Fragment() {
             val hora = inputHora.text.toString()
             val ubicacion = inputUbicacion.text.toString()
             val descripcion = inputDescripcion.text.toString()
+            val tipoSiniestro = spinnerSiniestros.selectedItem.toString()
 
 
-
-            viewModelNuevoSiniestro.validarCampos(fecha,hora,ubicacion,descripcion)
+            viewModelNuevoSiniestro.validarCampos(fecha,hora,ubicacion)
                 .observe(viewLifecycleOwner) { camposValidos ->
                     if (camposValidos) {
 
@@ -126,7 +140,8 @@ class NuevoSiniestroFragment : Fragment() {
                             descripcion,
                             fecha,
                             hora,
-                            ubicacion
+                            ubicacion,
+                            tipoSiniestro
                         ) { exito, mensajeError ->
                             if (exito) {
                                 Toast.makeText(

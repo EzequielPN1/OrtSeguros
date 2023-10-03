@@ -69,12 +69,33 @@ class NuevoSiniestroViewModel : ViewModel() {
     }
 
 
+    fun obtenerTipoSiniestrosFirestore(callback: (List<String>?, String?) -> Unit) {
+        db.collection("tipoSiniestros")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val nombresArray = mutableListOf<String>() // Crear una lista para almacenar los nombres
+
+                    for (document in task.result!!) {
+                        val nombres = document.get("nombre") as? List<String>
+                        if (nombres != null) {
+                            nombresArray.addAll(nombres)
+                        }
+                    }
+                    callback(nombresArray, null)
+                } else {
+                    callback(null, "Error al obtener los nombres")
+                }
+            }
+    }
+
     fun guardarNuevoSiniestro(
         patente: String,
         descripcion: String,
         fecha: String,
         hora: String,
         ubicacion: String,
+        tipoSiniestro:String,
         callback: (Boolean, String?) -> Unit
     ) {
         firebaseAuth = Firebase.auth
@@ -92,6 +113,7 @@ class NuevoSiniestroViewModel : ViewModel() {
                     ubicacion = ubicacion,
                     descripcion = descripcion,
                     patente = patente,
+                    tipoSiniestro = tipoSiniestro,
                 )
                 db.collection("siniestros")
                     .add(nuevoSiniestro)
@@ -131,7 +153,6 @@ class NuevoSiniestroViewModel : ViewModel() {
         fechaSiniestro: String,
         hora: String,
         ubicacion: String,
-        descripcion: String
     ): LiveData<Boolean> {
         val fechaActual = obtenerFechaActual()
         val camposValidosLiveData = MutableLiveData<Boolean>()
@@ -148,10 +169,7 @@ class NuevoSiniestroViewModel : ViewModel() {
         } else if (ubicacion.isEmpty()) {
             _toastMessage.value = "El campo ubicación no puede estar vacío."
             camposValidosLiveData.value = false
-        } else if (descripcion.isEmpty()) {
-            _toastMessage.value = "El campo descripción no puede estar vacío."
-            camposValidosLiveData.value = false
-        } else {
+        }  else {
             camposValidosLiveData.value = true
         }
 
