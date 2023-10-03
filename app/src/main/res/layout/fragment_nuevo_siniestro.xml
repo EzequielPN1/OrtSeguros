@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".fragments.home.siniestros.NuevoSiniestroFragment" >
 
+    <Spinner
+        android:id="@+id/spinnerSiniestros"
+        android:layout_width="189dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputFechaSiniestro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
     <EditText
         android:id="@+id/inputDescripcionNuevoSiniestro"
         android:layout_width="320dp"
@@ -14,11 +25,11 @@
         android:layout_marginTop="16dp"
         android:autofillHints="name"
         android:background="@drawable/custom_input"
+
         android:clickable="false"
-
         android:drawableStart="@drawable/icon_text"
-        android:drawablePadding="12dp"
 
+        android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/Descripcion"
         android:inputType="text"
@@ -77,7 +88,7 @@
         android:id="@+id/inputFechaSiniestro"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:autofillHints="date"
         android:background="@drawable/custom_input"
@@ -86,8 +97,8 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:focusable="false"
-        android:hint="@string/Fecha"
 
+        android:hint="@string/Fecha"
         android:inputType="date"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -95,7 +106,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSiniestros" />
 
     <TextView
         android:id="@+id/textView"
@@ -104,7 +115,7 @@
         android:layout_marginStart="170dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="170dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginBottom="32dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/NuevoSiniestro"
         android:textSize="30sp"
@@ -120,8 +131,6 @@
         android:layout_width="189dp"
         android:layout_height="27dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/inputFechaSiniestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />

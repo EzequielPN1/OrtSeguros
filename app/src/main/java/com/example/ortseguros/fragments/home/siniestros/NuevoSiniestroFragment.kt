@@ -22,6 +22,7 @@ class NuevoSiniestroFragment : Fragment() {
     private lateinit var viewModelNuevoSiniestro: NuevoSiniestroViewModel
     lateinit var v: View
     private lateinit var spinner: Spinner
+    private lateinit var spinnerSiniestros:Spinner
     private lateinit var inputFecha: EditText
     private lateinit var inputHora: EditText
     private lateinit var inputUbicacion :EditText
@@ -41,6 +42,7 @@ class NuevoSiniestroFragment : Fragment() {
         inputDescripcion = v.findViewById(R.id.inputDescripcionNuevoSiniestro)
         btnNuevoSniestro = v.findViewById(R.id.btnGuardarNuevoSniestro)
         spinner = v.findViewById(R.id.spinner)
+        spinnerSiniestros = v.findViewById(R.id.spinnerSiniestros)
 
 
         viewModelNuevoSiniestro.selectedDateLiveData.observe(
@@ -69,6 +71,26 @@ class NuevoSiniestroFragment : Fragment() {
                 Toast.makeText(requireContext(), error ?: "Error desconocido", Toast.LENGTH_SHORT).show()
             }
         }
+
+
+        viewModelNuevoSiniestro.toastMessage.observe(viewLifecycleOwner) { message ->
+            if (!message.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                viewModelNuevoSiniestro.setToastMessage("")
+            }
+        }
+
+
+        viewModelNuevoSiniestro.obtenerTipoSiniestrosFirestore { siniestros, error ->
+            if (error == null && siniestros != null) {
+                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, siniestros)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerSiniestros.adapter = adapter
+            } else {
+                Toast.makeText(requireContext(), error ?: "Error desconocido", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
 
         return v
@@ -100,29 +122,48 @@ class NuevoSiniestroFragment : Fragment() {
 
 
         btnNuevoSniestro.setOnClickListener {
-            val patente = spinner.selectedItem.toString() // Obtiene la patente seleccionada del Spinner
-            val descripcion = inputDescripcion.text.toString()
+
+            val patente = spinner.selectedItem.toString()
             val fecha = inputFecha.text.toString()
             val hora = inputHora.text.toString()
             val ubicacion = inputUbicacion.text.toString()
+            val descripcion = inputDescripcion.text.toString()
+            val tipoSiniestro = spinnerSiniestros.selectedItem.toString()
 
-            viewModelNuevoSiniestro.guardarNuevoSiniestro(
-                patente,
-                descripcion,
-                fecha,
-                hora,
-                ubicacion
-            ) { exito, mensajeError ->
-                if (exito) {
-                    Toast.makeText(requireContext(), "Siniestro guardado con éxito", Toast.LENGTH_SHORT).show()
-                    findNavController().navigateUp()
-                } else {
-                    Toast.makeText(requireContext(), "Error al guardar el siniestro: $mensajeError", Toast.LENGTH_SHORT).show()
+
+            viewModelNuevoSiniestro.validarCampos(fecha,hora,ubicacion)
+                .observe(viewLifecycleOwner) { camposValidos ->
+                    if (camposValidos) {
+
+                        viewModelNuevoSiniestro.guardarNuevoSiniestro(
+                            patente,
+                            descripcion,
+                            fecha,
+                            hora,
+                            ubicacion,
+                            tipoSiniestro
+                        ) { exito, mensajeError ->
+                            if (exito) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Siniestro guardado con éxito",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                findNavController().navigateUp()
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Error al guardar el siniestro: $mensajeError",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                    }
+
                 }
-            }
+
         }
-
-
 
     }
 
