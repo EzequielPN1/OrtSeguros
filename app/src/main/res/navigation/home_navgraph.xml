@@ -94,5 +94,13 @@
         <argument
             android:name="Poliza"
             app:argType="com.example.ortseguros.entities.Poliza" />
+        <action
+            android:id="@+id/action_detallePolizaFragment_to_pagosFragment"
+            app:destination="@id/pagosFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/pagosFragment"
+        android:name="com.example.ortseguros.fragments.home.misPolizas.PagosFragment"
+        android:label="fragment_pagos"
+        tools:layout="@layout/fragment_pagos" />
 </navigation>
