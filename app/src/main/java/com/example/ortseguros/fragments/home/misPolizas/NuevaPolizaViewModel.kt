@@ -4,6 +4,7 @@ package com.example.ortseguros.fragments.home.misPolizas
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.ortseguros.entities.Pago
 import com.example.ortseguros.entities.Poliza
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -72,7 +73,8 @@ class NuevaPolizaViewModel : ViewModel() {
                     danioTotal = danioTotal,
                     granizo = granizo,
                     roboParcial = roboParcial,
-                    roboTotal = roboTotal
+                    roboTotal = roboTotal,
+                    pagos = generarPagos()
                 )
 
 
@@ -271,6 +273,35 @@ class NuevaPolizaViewModel : ViewModel() {
                     callback(false)
                 }
             }
+    }
+
+
+
+    private fun generarPagos(): List<Pago> {
+        val pagos = mutableListOf<Pago>()
+
+        val formato = SimpleDateFormat("dd/MM/yyyy")
+        val calendar = Calendar.getInstance()
+
+
+        calendar.set(Calendar.DAY_OF_MONTH, 5)
+
+        for (numeroPago in 1..12) {
+            // Crear un nuevo pago con el número de pago y la fecha de vencimiento
+            val fechaVencimiento = formato.format(calendar.time)
+            val nuevoPago = Pago(
+                numeroPago = numeroPago.toString(),
+                fechaVencimiento = fechaVencimiento,
+                fechaPago = "",
+                abonado = false
+            )
+            pagos.add(nuevoPago)
+
+
+            calendar.add(Calendar.MONTH, 1)
+        }
+
+        return pagos
     }
 
 

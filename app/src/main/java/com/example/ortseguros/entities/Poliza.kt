@@ -17,5 +17,6 @@ data class Poliza (
     var danioTotal: Boolean = false,
     var granizo: Boolean = false,
     var roboParcial: Boolean = false,
-    var roboTotal: Boolean = false
+    var roboTotal: Boolean = false,
+    var pagos: List<Pago> = mutableListOf(),
 ) : Parcelable
