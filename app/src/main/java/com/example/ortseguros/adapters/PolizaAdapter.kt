@@ -19,7 +19,7 @@ class PolizaAdapter(
 
         fun setMarca(marca: String) {
 
-            val txtMarca : TextView = view.findViewById(R.id.txtFecha)
+            val txtMarca : TextView = view.findViewById(R.id.txtFechaVencimientoCardView)
             txtMarca.text = marca
         }
 

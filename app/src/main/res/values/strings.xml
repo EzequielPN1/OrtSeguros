@@ -49,4 +49,18 @@
     <string name="txtAsisMecanica">Asistencia mecánica </string>
     <string name="txtContacto">Contacto</string>
     <string name="btnAplicarCambios">Aplicar cambios</string>
+
+
+    <string name="marcaModelo">Marca modelo:</string>
+    <string name="danioTotal">Daño total</string>
+    <string name="fechaInicioPoliza">Fecha inicio</string>
+    <string name="granizo">Granizo:</string>
+    <string name="patente">Patente:</string>
+    <string name="respCivil">Resp civil:</string>
+    <string name="roboParcial">Robo parcial:</string>
+    <string name="roboTotal">Robo total:</string>
+    <string name="SumaAsegurada">Suma asegurada:</string>
+    <string name="ValorCuota">Valor de cuota:</string>
+    <string name="Pagos">Pagos</string>
+
 </resources>
