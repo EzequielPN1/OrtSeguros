@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Switch
 import android.widget.Toast
@@ -18,6 +19,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 import com.example.ortseguros.utils.DatePickerFragment
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 
 class NuevaPolizaFragment : Fragment() {
@@ -35,12 +38,18 @@ class NuevaPolizaFragment : Fragment() {
     private lateinit var btnNuevaPoliza: Button
 
     private lateinit var btnImage : Button
+    private lateinit var imageView: ImageView
+
+
+    private val storage = Firebase.storage
+
+
+
+
 
      private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
        if(uri != null){
-
-       }else{
-
+          imageView.setImageURI(uri)
        }
     }
 
@@ -61,7 +70,7 @@ class NuevaPolizaFragment : Fragment() {
         btnNuevaPoliza = v.findViewById(R.id.btnNuevaPoliza)
 
         btnImage = v.findViewById(R.id.btnNuevaImagen)
-
+        imageView = v.findViewById(R.id.imageView)
 
         viewModelNuevaPoliza.selectedDateLiveData.observe(
             viewLifecycleOwner

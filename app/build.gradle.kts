@@ -66,5 +66,8 @@ dependencies {
 
     implementation("androidx.core:core-splashscreen:1.0.1")//splashscreen
 
+    implementation("com.google.firebase:firebase-storage-ktx")
+
+
 
 }
