@@ -10,8 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
-import com.example.ortseguros.fragments.home.siniestros.DetalleSiniestroFragmentArgs
-import com.example.ortseguros.fragments.home.siniestros.DetalleSiniestroFragmentArgs.Companion.fromBundle
+
 
 class DetallePolizaFragment : Fragment() {
 

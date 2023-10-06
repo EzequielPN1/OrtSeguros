@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ortseguros.R
 import com.example.ortseguros.adapters.PagoAdapter
-import com.example.ortseguros.adapters.PolizaAdapter
-import kotlin.math.log
+
 
 class PagosFragment : Fragment() {
 
