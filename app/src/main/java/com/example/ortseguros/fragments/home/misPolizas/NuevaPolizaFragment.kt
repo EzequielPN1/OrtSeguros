@@ -152,20 +152,9 @@ class NuevaPolizaFragment : Fragment() {
                         granizo,
                         roboParcial,
                         roboTotal
-                    ) { exito, mensajeError ->
+                    ) { exito ->
                         if (exito) {
-                            Toast.makeText(
-                                requireContext(),
-                                "Póliza guardada con éxito",
-                                Toast.LENGTH_SHORT
-                            ).show()
                             findNavController().navigateUp()
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Error al guardar la póliza: $mensajeError",
-                                Toast.LENGTH_SHORT
-                            ).show()
                         }
                     }
                 }

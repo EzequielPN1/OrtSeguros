@@ -77,7 +77,7 @@ class DetallePolizaFragment : Fragment() {
 
         btnPagos.setOnClickListener{
 
-            val action = DetallePolizaFragmentDirections.actionDetallePolizaFragmentToPagosFragment()
+            val action = DetallePolizaFragmentDirections.actionDetallePolizaFragmentToPagosFragment(poliza)
             findNavController().navigate(action)
 
 

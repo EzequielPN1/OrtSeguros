@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Poliza (
+    var id : String="",
     var idUsuario: String = "",
     var marcaModelo: String = "",
     var fechaAltaVehiculo: String = "",

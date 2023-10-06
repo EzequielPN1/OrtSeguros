@@ -62,5 +62,6 @@
     <string name="SumaAsegurada">Suma asegurada:</string>
     <string name="ValorCuota">Valor de cuota:</string>
     <string name="Pagos">Pagos</string>
+    <string name="RealizarPago">Realizar pago</string>
 
 </resources>

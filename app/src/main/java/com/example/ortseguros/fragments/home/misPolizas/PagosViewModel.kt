@@ -19,7 +19,7 @@ class PagosViewModel : ViewModel() {
 
 
 
-    fun obtenerPagos() {
+    fun obtenerPagos(poliza: Poliza) {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
         val userId = user?.uid.toString()
@@ -28,16 +28,17 @@ class PagosViewModel : ViewModel() {
 
         val polizasRef = db.collection("polizas")
             .whereEqualTo("idUsuario", userId)
+            .whereEqualTo("id", poliza.id)
 
         polizasRef.get()
             .addOnSuccessListener { snapshot ->
                 for (poliza in snapshot) {
                     val polizaData = poliza.toObject(Poliza::class.java)
-                    // Obtener la lista de pagos de la poliza
+
                     val pagos = polizaData.pagos
                     listaPagos.addAll(pagos)
                 }
-                // Actualizar el LiveData con la lista de pagos
+
                 _pagosLiveData.value = listaPagos
             }
             .addOnFailureListener { exception ->

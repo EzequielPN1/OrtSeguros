@@ -41,6 +41,7 @@ class PagosFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val poliza = PagosFragmentArgs.fromBundle(requireArguments()).Poliza
 
         recyclerPago.layoutManager = LinearLayoutManager(context)
 
@@ -51,15 +52,17 @@ class PagosFragment : Fragment() {
 
             pagoAdapter = PagoAdapter(pagosMutableList){position->
 
-              //  val action = PagosFragmentDirections.actionPagosFragmentToDetalle        (pagosMutableList[position])
-              //  findNavController().navigate(action)
+                val action = PagosFragmentDirections.actionPagosFragmentToRealizarPagoFragment(pagosMutableList[position],poliza)
+                findNavController().navigate(action)
+
+
             }
             recyclerPago.adapter = pagoAdapter
         }
 
 
 
-        viewModelPagos.obtenerPagos()
+        viewModelPagos.obtenerPagos(poliza)
 
 
 
