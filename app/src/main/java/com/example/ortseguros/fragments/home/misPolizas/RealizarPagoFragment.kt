@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 
 class RealizarPagoFragment : Fragment() {
@@ -47,11 +48,15 @@ class RealizarPagoFragment : Fragment() {
         val pago = RealizarPagoFragmentArgs.fromBundle(requireArguments()).Pago
         val poliza = RealizarPagoFragmentArgs.fromBundle(requireArguments()).poliza
 
-        btnRealizarPago.setOnClickListener{
+        btnRealizarPago.setOnClickListener {
 
-            viewModelRealizarPago.realizarPago(pago,poliza)
-
+            viewModelRealizarPago.realizarPago(pago, poliza) { exito ->
+                if (exito) {
+                 findNavController().navigateUp()
+                }
+            }
         }
+
 
 
     }

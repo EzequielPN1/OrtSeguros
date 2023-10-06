@@ -28,7 +28,7 @@ class RealizarPagoViewModel : ViewModel() {
         _toastMessage.value = message
     }
 
-    fun realizarPago(pago: Pago,poliza: Poliza) {
+    fun realizarPago(pago: Pago, poliza: Poliza, callback: (Boolean) -> Unit) {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
         val userId = user?.uid.toString()
@@ -40,34 +40,31 @@ class RealizarPagoViewModel : ViewModel() {
         polizasRef.get()
             .addOnSuccessListener { snapshot ->
                 for (poliza in snapshot) {
-                    val polizaData = poliza.toObject(Poliza::class.java)
-                    // Obtener la lista de pagos de la poliza
-                    val pagos = polizaData.pagos
 
-                    // Buscar el pago con el número proporcionado
+                    val polizaData = poliza.toObject(Poliza::class.java)
+                    val pagos = polizaData.pagos
                     val pagoEncontrado = pagos.find { it.numeroPago == pago.numeroPago }
 
                     if (pagoEncontrado != null) {
-                        // Actualizar los atributos del pago
-                        pagoEncontrado.abonado = true
-                        pagoEncontrado.fechaPago = obtenerFechaActual()
+                            pagoEncontrado.abonado = true
+                            pagoEncontrado.fechaPago = obtenerFechaActual()
 
-                        // Actualizar la poliza en la base de datos
-                        poliza.reference.set(polizaData)
-                            .addOnSuccessListener {
-                                // La poliza se actualizó con éxito
-                                _toastMessage.value ="Pago realizado con exito"
-                            }
-                            .addOnFailureListener { exception ->
-                                exception.printStackTrace()
+                            poliza.reference.set(polizaData)
+                                .addOnSuccessListener {
+                                    _toastMessage.value = "Pago realizado con éxito"
+                                    callback(true)
+                                }
+                                .addOnFailureListener { exception ->
+                                    exception.printStackTrace()
+                                    callback(false)
+                                }
 
-                            }
                     }
                 }
             }
             .addOnFailureListener { exception ->
                 exception.printStackTrace()
-
+                callback(false)
             }
     }
 
@@ -80,7 +77,9 @@ class RealizarPagoViewModel : ViewModel() {
 
 
 
-private fun obtenerFechaActual(): String {
+
+
+    private fun obtenerFechaActual(): String {
     val timeZone = TimeZone.getTimeZone("America/Argentina/Buenos_Aires")
     val calendar = Calendar.getInstance(timeZone)
 

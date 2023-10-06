@@ -47,5 +47,39 @@ class PagosViewModel : ViewModel() {
             }
     }
 
+    fun validarPago(pago: Pago, poliza: Poliza,  callback: (Boolean) -> Unit) {
+        firebaseAuth = Firebase.auth
+        val user = firebaseAuth.currentUser
+        val userId = user?.uid.toString()
+
+        val polizasRef = db.collection("polizas")
+            .whereEqualTo("idUsuario", userId)
+            .whereEqualTo("id", poliza.id)
+
+        polizasRef.get()
+            .addOnSuccessListener { snapshot ->
+                for (poliza in snapshot) {
+
+                    val polizaData = poliza.toObject(Poliza::class.java)
+                    val pagos = polizaData.pagos
+                    val pagoEncontrado = pagos.find { it.numeroPago == pago.numeroPago }
+
+                    if (pagoEncontrado != null) {
+
+                        if (pagoEncontrado.fechaPago.isNotEmpty() ) {
+                            callback(false)
+
+                        } else {
+                            callback(true)
+                        }
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                exception.printStackTrace()
+                callback(false)
+            }
+    }
+
 
 }

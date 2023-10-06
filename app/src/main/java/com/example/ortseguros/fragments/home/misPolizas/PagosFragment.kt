@@ -52,10 +52,19 @@ class PagosFragment : Fragment() {
 
             pagoAdapter = PagoAdapter(pagosMutableList){position->
 
-                val action = PagosFragmentDirections.actionPagosFragmentToRealizarPagoFragment(pagosMutableList[position],poliza)
-                findNavController().navigate(action)
+                viewModelPagos.validarPago(pagosMutableList[position],poliza) { exito ->
 
+                if(exito){
+                    val action = PagosFragmentDirections.actionPagosFragmentToRealizarPagoFragment(
+                        pagosMutableList[position],
+                        poliza
+                    )
+                    findNavController().navigate(action)
+                }else{
+                    Toast.makeText(requireContext(), "pago ya realizado", Toast.LENGTH_SHORT).show()
+                }
 
+                }
             }
             recyclerPago.adapter = pagoAdapter
         }
