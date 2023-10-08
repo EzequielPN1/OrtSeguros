@@ -14,7 +14,9 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/car_posterior"
+        android:longClickable="true"/>
 
     <ImageView
         android:id="@+id/imageLatDer"
@@ -23,7 +25,9 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toStartOf="@+id/imagePosterior"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/car_lat_der"
+        android:longClickable="true"/>
 
     <ImageView
         android:id="@+id/imageLatIzq"
@@ -32,20 +36,38 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toStartOf="@+id/imageLatDer"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/car_lat_izq"
+        android:longClickable="true"/>
+
+    <ImageView
+        android:id="@+id/imageFrente"
+        android:layout_width="62dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageLatIzq"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/car_frontal"
+        android:longClickable="true"/>
 
     <Spinner
         android:id="@+id/spinner_marcaModelo"
         android:layout_width="188dp"
         android:layout_height="34dp"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="90dp"
         android:layout_marginBottom="50dp"
+        android:longClickable="true"
         app:layout_constraintBottom_toTopOf="@+id/inputFechaAltaVehiculo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <Switch
         android:id="@+id/swc_roboTotal"
@@ -166,40 +188,5 @@
         app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnNuevaImagen"
-        android:layout_width="149dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="16dp"
-        android:text="agregar imagen"
-        app:layout_constraintBottom_toTopOf="@+id/btnNuevaPoliza"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageFrente"
-        android:layout_width="62dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageLatIzq"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="334dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/ImagenMensaje"
-        app:layout_constraintBottom_toTopOf="@+id/btnNuevaImagen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swc_roboTotal" />
 </androidx.constraintlayout.widget.ConstraintLayout>

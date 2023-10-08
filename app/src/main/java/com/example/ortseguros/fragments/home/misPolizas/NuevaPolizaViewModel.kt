@@ -1,6 +1,7 @@
 package com.example.ortseguros.fragments.home.misPolizas
 
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
+import com.google.firebase.storage.ktx.storage
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.TimeZone
@@ -233,39 +237,42 @@ class NuevaPolizaViewModel : ViewModel() {
         danioTotal: Boolean,
         granizo: Boolean,
         roboParcial: Boolean,
-        roboTotal: Boolean
+        roboTotal: Boolean,
+        uriImageFrente: String,
+        uriImageLatIzq: String,
+        uriImageLatDer: String,
+        uriImagePosterior: String
     ): LiveData<Boolean> {
         val fechaActual = obtenerFechaActual()
         val camposValidosLiveData = MutableLiveData<Boolean>()
 
-
-        if (fechaAltaVehiculo.isEmpty() || patente.isEmpty()) {
+        val camposNoVacios = listOf(fechaAltaVehiculo, patente).all { it.isNotBlank() }
+        if (!camposNoVacios) {
             _toastMessage.value = "Los campos fecha de alta y patente no pueden estar vacíos."
             camposValidosLiveData.value = false
-            return camposValidosLiveData
-        }
-
-        verificarPatenteUnica(patente) { esUnica ->
-            if (!esUnica) {
-                _toastMessage.value = "La patente ingresada ya está registrada en otra póliza."
-                camposValidosLiveData.value = false
-            } else {
-                if (!esFechaValida(fechaAltaVehiculo, fechaActual)) {
-                    _toastMessage.value = "La fecha de alta debe ser menor o igual a la fecha actual."
+        } else if (!esFechaValida(fechaAltaVehiculo, fechaActual)) {
+            _toastMessage.value = "La fecha de alta debe ser menor o igual a la fecha actual."
+            camposValidosLiveData.value = false
+        } else if (!respCivil && !danioTotal && !granizo && !roboParcial && !roboTotal) {
+            _toastMessage.value = "Tiene que seleccionar por lo menos una cobertura."
+            camposValidosLiveData.value = false
+        } else if (listOf(uriImageFrente, uriImageLatIzq, uriImageLatDer, uriImagePosterior).any { it.isEmpty() }) {
+            _toastMessage.value = "Tiene que ingresar todas las fotos del vehiculo."
+            camposValidosLiveData.value = false
+        } else {
+            verificarPatenteUnica(patente) { esUnica ->
+                if (!esUnica) {
+                    _toastMessage.value = "La patente ingresada ya está registrada en otra póliza."
                     camposValidosLiveData.value = false
                 } else {
-                    if (!respCivil && !danioTotal && !granizo && !roboParcial && !roboTotal) {
-                        _toastMessage.value = "Tiene que seleccionar por lo menos una cobertura."
-                        camposValidosLiveData.value = false
-                    } else {
-                        camposValidosLiveData.value = true
-                    }
+                    camposValidosLiveData.value = true
                 }
             }
         }
 
         return camposValidosLiveData
     }
+
 
 
 
@@ -327,10 +334,24 @@ class NuevaPolizaViewModel : ViewModel() {
 
 
 
+    private val storage = Firebase.storage
+    private val storageRef = storage.getReferenceFromUrl("gs://apportseguros-c6dea.appspot.com")
 
 
+    fun cargarImagenEnFirestore(uri: Uri, onSuccess: (String) -> Unit) {
+
+        firebaseAuth = Firebase.auth
+        val user = firebaseAuth.currentUser
 
 
+        val imageName = "images/$user?.uid.toString()/${System.currentTimeMillis()}_${uri.lastPathSegment}"
+        val imageRef: StorageReference = storageRef.child(imageName)
+        val uploadTask: UploadTask = uri.let { imageRef.putFile(it) }
+
+        uploadTask.addOnSuccessListener {
+            onSuccess(imageName)
+        }
+    }
 
 
 
