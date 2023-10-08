@@ -46,6 +46,7 @@ class NuevaPolizaViewModel : ViewModel() {
         granizo: Boolean,
         roboParcial: Boolean,
         roboTotal: Boolean,
+        uriImage:String,
         callback: (Boolean) -> Unit
     ) {
         firebaseAuth = Firebase.auth
@@ -71,7 +72,8 @@ class NuevaPolizaViewModel : ViewModel() {
                     granizo = granizo,
                     roboParcial = roboParcial,
                     roboTotal = roboTotal,
-                    pagos = generarPagos()
+                    pagos = generarPagos(),
+                    uriImage = uriImage
                 )
 
                 db.collection("polizas")
@@ -314,6 +316,28 @@ class NuevaPolizaViewModel : ViewModel() {
 
         return pagos
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
