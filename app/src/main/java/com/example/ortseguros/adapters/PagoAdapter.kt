@@ -69,7 +69,7 @@ class PagoAdapter (private var pagoList: MutableList<Pago>,
          holder.setAbonado(pago.abonado)
 
 
-        holder.getCard().setOnClickListener(){
+        holder.getCard().setOnClickListener {
             onClick(position)
         }
     }

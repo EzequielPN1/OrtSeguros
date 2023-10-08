@@ -1,6 +1,5 @@
 package com.example.ortseguros.fragments.home.misPolizas
 
-import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
@@ -40,25 +39,54 @@ class NuevaPolizaFragment : Fragment() {
     private lateinit var swcRoboTotal: Switch
     private lateinit var btnNuevaPoliza: Button
 
-    private lateinit var uriImage:String
+    private lateinit var uriImageFrente:String
+    private lateinit var uriImageLatIzq:String
+    private lateinit var uriImageLatDer:String
+    private lateinit var uriImagePosterior:String
+
     private lateinit var btnImage : Button
-    private lateinit var imageView: ImageView
+
+    private lateinit var imageFrente: ImageView
+    private lateinit var imageLatIzq: ImageView
+    private lateinit var imageLatDer: ImageView
+    private lateinit var imagePosterior: ImageView
+
+    private var imageCounter = 0
+
     private val storage = Firebase.storage
     private val storageRef = storage.getReferenceFromUrl("gs://apportseguros-c6dea.appspot.com")
 
     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        if (uri != null) {
-            imageView.setImageURI(uri)
+        if (uri != null && imageCounter < 4) {
             val imageName = "images/${System.currentTimeMillis()}_${uri.lastPathSegment}"
-            uriImage = imageName
             val imageRef: StorageReference = storageRef.child(imageName)
-
-            // Sube la imagen al almacenamiento
-            val uploadTask: UploadTask? = uri.let { imageRef.putFile(it) }
+            val uploadTask: UploadTask = uri.let { imageRef.putFile(it) }
 
             uploadTask?.addOnFailureListener { _ ->
                 // Ocurrió un error al subir la imagen
             }
+
+            when (imageCounter) {
+                0 -> {
+                    imageFrente.setImageURI(uri)
+                    uriImageFrente = imageName
+                }
+                1 -> {
+                    imageLatIzq.setImageURI(uri)
+                    uriImageLatIzq = imageName
+                }
+                2 -> {
+                    imageLatDer.setImageURI(uri)
+                    uriImageLatDer = imageName
+                }
+                3 -> {
+                    imagePosterior.setImageURI(uri)
+                    uriImagePosterior = imageName
+                }
+            }
+
+            // Incrementar el contador sin reiniciarlo si es menor a 4
+            imageCounter++
         }
     }
 
@@ -67,7 +95,7 @@ class NuevaPolizaFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_nueva_poliza, container, false)
         viewModelNuevaPoliza = ViewModelProvider(this)[NuevaPolizaViewModel::class.java]
         spinnerMarcaModelo = v.findViewById(R.id.spinner_marcaModelo)
@@ -81,7 +109,11 @@ class NuevaPolizaFragment : Fragment() {
         btnNuevaPoliza = v.findViewById(R.id.btnNuevaPoliza)
 
         btnImage = v.findViewById(R.id.btnNuevaImagen)
-        imageView = v.findViewById(R.id.imageView)
+
+        imageFrente = v.findViewById(R.id.imageFrente)
+        imageLatIzq = v.findViewById(R.id.imageLatIzq)
+        imageLatDer = v.findViewById(R.id.imageLatDer)
+        imagePosterior = v.findViewById(R.id.imagePosterior)
 
         viewModelNuevaPoliza.selectedDateLiveData.observe(
             viewLifecycleOwner
@@ -120,7 +152,7 @@ class NuevaPolizaFragment : Fragment() {
         super.onStart()
 
 
-        btnImage.setOnClickListener(){
+        btnImage.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
@@ -163,7 +195,10 @@ class NuevaPolizaFragment : Fragment() {
                         granizo,
                         roboParcial,
                         roboTotal,
-                        uriImage
+                        uriImageFrente,
+                        uriImageLatIzq,
+                        uriImageLatDer,
+                        uriImagePosterior,
                     ) { exito ->
                         if (exito) {
                             findNavController().navigateUp()

@@ -33,7 +33,7 @@ class NuevoSiniestroFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_nuevo_siniestro, container, false)
         viewModelNuevoSiniestro = ViewModelProvider(this)[NuevoSiniestroViewModel::class.java]
         inputFecha = v.findViewById(R.id.inputFechaSiniestro)

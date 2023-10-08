@@ -34,7 +34,7 @@ class DetallePolizaFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         viewModelDetallePoliza = ViewModelProvider(this)[DetallePolizaViewModel::class.java]
         v = inflater.inflate(R.layout.fragment_detalle_poliza, container, false)

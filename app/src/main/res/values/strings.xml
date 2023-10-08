@@ -64,4 +64,6 @@
     <string name="Pagos">Pagos</string>
     <string name="RealizarPago">Realizar pago</string>
 
+    <string name="ImagenMensaje">Ingresar fotos del Vehiculo: frontal, lat izquierdo, lat derecho y posterior</string>
+
 </resources>

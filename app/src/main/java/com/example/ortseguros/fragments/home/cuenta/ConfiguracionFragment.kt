@@ -20,7 +20,7 @@ class ConfiguracionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_configuracion, container, false)
         btnEditarCuenta = v.findViewById(R.id.btnEditarCuenta)
         btnPreguntasFrecuentes = v.findViewById(R.id.btnPreguntasFrecuentes)
