@@ -18,22 +18,22 @@ class SiniestroAdapter(
         private var view: View = v
 
        fun setFecha(fecha:String){
-           val txtFecha: TextView = view.findViewById(R.id.txtFecha)
+           val txtFecha: TextView = view.findViewById(R.id.txtFechaVencimientoCardView)
            txtFecha.text = fecha
        }
 
         fun setHora(hora:String){
-            val txtHora: TextView = view.findViewById(R.id.txtHora)
+            val txtHora: TextView = view.findViewById(R.id.txtFechaPagoCardView)
             txtHora.text = hora
         }
 
         fun setPatente(patente:String){
-            val txtPatente: TextView = view.findViewById(R.id.txtPatenteCardView)
+            val txtPatente: TextView = view.findViewById(R.id.txtAbonadoCardView)
             txtPatente.text = patente
         }
 
         fun getCard():CardView{
-            return view.findViewById(R.id.idCardViewSiniestro)
+            return view.findViewById(R.id.idCardViewPago)
         }
 
     }

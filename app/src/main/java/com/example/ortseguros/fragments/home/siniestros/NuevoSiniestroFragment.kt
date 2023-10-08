@@ -130,8 +130,7 @@ class NuevoSiniestroFragment : Fragment() {
             val descripcion = inputDescripcion.text.toString()
             val tipoSiniestro = spinnerSiniestros.selectedItem.toString()
 
-
-            viewModelNuevoSiniestro.validarCampos(fecha,hora,ubicacion)
+            viewModelNuevoSiniestro.validarCampos(fecha, hora, ubicacion,patente,tipoSiniestro)
                 .observe(viewLifecycleOwner) { camposValidos ->
                     if (camposValidos) {
 
@@ -142,7 +141,7 @@ class NuevoSiniestroFragment : Fragment() {
                             hora,
                             ubicacion,
                             tipoSiniestro
-                        ) { exito, mensajeError ->
+                        ) { exito, mensajeError, idGenerado ->
                             if (exito) {
                                 Toast.makeText(
                                     requireContext(),
@@ -162,8 +161,8 @@ class NuevoSiniestroFragment : Fragment() {
                     }
 
                 }
-
         }
+
 
     }
 

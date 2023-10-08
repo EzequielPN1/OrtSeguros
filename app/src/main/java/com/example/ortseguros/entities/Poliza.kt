@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Poliza (
+    var id : String="",
     var idUsuario: String = "",
     var marcaModelo: String = "",
     var fechaAltaVehiculo: String = "",
@@ -19,4 +20,5 @@ data class Poliza (
     var roboParcial: Boolean = false,
     var roboTotal: Boolean = false,
     var pagos: List<Pago> = mutableListOf(),
+    var uriImage:String = "",
 ) : Parcelable

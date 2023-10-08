@@ -94,5 +94,32 @@
         <argument
             android:name="Poliza"
             app:argType="com.example.ortseguros.entities.Poliza" />
+        <action
+            android:id="@+id/action_detallePolizaFragment_to_pagosFragment"
+            app:destination="@id/pagosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pagosFragment"
+        android:name="com.example.ortseguros.fragments.home.misPolizas.PagosFragment"
+        android:label="fragment_pagos"
+        tools:layout="@layout/fragment_pagos" >
+        <action
+            android:id="@+id/action_pagosFragment_to_realizarPagoFragment"
+            app:destination="@id/realizarPagoFragment" />
+        <argument
+            android:name="Poliza"
+            app:argType="com.example.ortseguros.entities.Poliza" />
+    </fragment>
+    <fragment
+        android:id="@+id/realizarPagoFragment"
+        android:name="com.example.ortseguros.fragments.home.misPolizas.RealizarPagoFragment"
+        android:label="fragment_realizar_pago"
+        tools:layout="@layout/fragment_realizar_pago" >
+        <argument
+            android:name="Pago"
+            app:argType="com.example.ortseguros.entities.Pago" />
+        <argument
+            android:name="poliza"
+            app:argType="com.example.ortseguros.entities.Poliza" />
     </fragment>
 </navigation>

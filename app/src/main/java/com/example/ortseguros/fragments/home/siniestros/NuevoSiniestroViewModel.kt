@@ -50,8 +50,7 @@ class NuevoSiniestroViewModel : ViewModel() {
     fun obtenerPatentesDesdeFirestore(callback: (List<String>?, String?) -> Unit) {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
-
-         val patentesList = ArrayList<String>()
+        val patentesList = ArrayList<String>()
 
         db.collection("polizas")  .whereEqualTo("idUsuario", user?.uid.toString())
             .get()
@@ -97,17 +96,16 @@ class NuevoSiniestroViewModel : ViewModel() {
         fecha: String,
         hora: String,
         ubicacion: String,
-        tipoSiniestro:String,
-        callback: (Boolean, String?) -> Unit
+        tipoSiniestro: String,
+        callback: (Boolean, String?, String?) -> Unit // Agrega un parámetro para el ID generado
     ) {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
 
-
         buscarIdPoliza(patente) { idPoliza ->
             if (idPoliza != null) {
-
                 val nuevoSiniestro = Siniestro(
+                    // No incluyas el campo 'id' aquí para que Firebase Firestore genere el ID automáticamente
                     idUsuario = user?.uid.toString(),
                     idPoliza = idPoliza,
                     fecha = fecha,
@@ -119,17 +117,30 @@ class NuevoSiniestroViewModel : ViewModel() {
                 )
                 db.collection("siniestros")
                     .add(nuevoSiniestro)
-                    .addOnSuccessListener {
-                        callback(true, null)
+                    .addOnSuccessListener { documentReference ->
+                        // Aquí obtienes el ID generado automáticamente por Firebase Firestore
+                        val idGenerado = documentReference.id
+
+                        // Asigna el ID generado al campo 'id' del siniestro
+                        db.collection("siniestros")
+                            .document(idGenerado)
+                            .update("id", idGenerado)
+                            .addOnSuccessListener {
+                                callback(true, null, idGenerado)
+                            }
+                            .addOnFailureListener { e ->
+                                callback(false, e.message, null)
+                            }
                     }
                     .addOnFailureListener { e ->
-                        callback(false, e.message)
+                        callback(false, e.message, null)
                     }
             } else {
-                callback(false, "Póliza no encontrada")
+                callback(false, "Póliza no encontrada", null)
             }
         }
     }
+
 
     private fun buscarIdPoliza(patente: String, callback: (String?) -> Unit) {
         val polizasCollection = db.collection("polizas")
@@ -155,34 +166,65 @@ class NuevoSiniestroViewModel : ViewModel() {
         fechaSiniestro: String,
         hora: String,
         ubicacion: String,
+        patente: String,
+        tipoSiniestro: String
     ): LiveData<Boolean> {
         val fechaActual = obtenerFechaActual()
         val camposValidosLiveData = MutableLiveData<Boolean>()
 
-        if (fechaSiniestro.isEmpty()) {
-            _toastMessage.value = "El campo fecha del siniestro no puede estar vacío."
-            camposValidosLiveData.value = false
-        } else if (!esFechaValida(fechaSiniestro, fechaActual)) {
-            _toastMessage.value = "La fecha del siniestro debe ser menor o igual a la fecha actual."
-            camposValidosLiveData.value = false
-        } else if (hora.isEmpty()) {
-            _toastMessage.value = "El campo hora no puede estar vacío."
-            camposValidosLiveData.value = false
-        } else if (ubicacion.isEmpty()) {
-            _toastMessage.value = "El campo ubicación no puede estar vacío."
-            camposValidosLiveData.value = false
-        }  else {
-            camposValidosLiveData.value = true
+        contratoTipoSeguro(patente, tipoSiniestro) { contratoValido ->
+            if (!contratoValido) {
+                _toastMessage.value = "El tipo de seguro no fue contratado."
+                camposValidosLiveData.value = false
+            } else if (fechaSiniestro.isEmpty()) {
+                _toastMessage.value = "El campo fecha del siniestro no puede estar vacío."
+                camposValidosLiveData.value = false
+            } else if (!esFechaValida(fechaSiniestro, fechaActual)) {
+                _toastMessage.value = "La fecha del siniestro debe ser menor o igual a la fecha actual."
+                camposValidosLiveData.value = false
+            } else if (hora.isEmpty()) {
+                _toastMessage.value = "El campo hora no puede estar vacío."
+                camposValidosLiveData.value = false
+            } else if (ubicacion.isEmpty()) {
+                _toastMessage.value = "El campo ubicación no puede estar vacío."
+                camposValidosLiveData.value = false
+            } else {
+                camposValidosLiveData.value = true
+            }
         }
 
         return camposValidosLiveData
     }
 
 
+    private fun contratoTipoSeguro(
+        patente: String,
+        tipoSiniestro: String,
+        callback: (Boolean) -> Unit
+    ) {
+        firebaseAuth = Firebase.auth
+        val user = firebaseAuth.currentUser
 
+        db.collection("polizas")
+            .whereEqualTo("idUsuario", user?.uid.toString())
+            .whereEqualTo("patente", patente)
+            .get()
+            .addOnSuccessListener { documents ->
+                var contratoValido = false
 
+                for (document in documents) {
+                    val tipoSiniestroEncontrado = document.getBoolean(tipoSiniestro)
+                    if (tipoSiniestroEncontrado != null && tipoSiniestroEncontrado) {
+                        contratoValido = true
+                    }
 
-
+                }
+                callback(contratoValido)
+            }
+            .addOnFailureListener {
+                callback(false)
+            }
+    }
 
     private fun esFechaValida(fecha: String, fechaActual: String): Boolean {
         val formato = SimpleDateFormat("dd/MM/yyyy")

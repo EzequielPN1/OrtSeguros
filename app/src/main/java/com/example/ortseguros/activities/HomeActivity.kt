@@ -6,9 +6,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.ortseguros.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+
 
 class HomeActivity : AppCompatActivity() {
 

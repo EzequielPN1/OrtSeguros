@@ -1,5 +1,6 @@
 package com.example.ortseguros.fragments.home.misPolizas
 
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Editable
@@ -20,6 +21,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 import com.example.ortseguros.utils.DatePickerFragment
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 
 
@@ -37,21 +40,29 @@ class NuevaPolizaFragment : Fragment() {
     private lateinit var swcRoboTotal: Switch
     private lateinit var btnNuevaPoliza: Button
 
+    private lateinit var uriImage:String
     private lateinit var btnImage : Button
     private lateinit var imageView: ImageView
-
-
     private val storage = Firebase.storage
+    private val storageRef = storage.getReferenceFromUrl("gs://apportseguros-c6dea.appspot.com")
 
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            imageView.setImageURI(uri)
+            val imageName = "images/${System.currentTimeMillis()}_${uri.lastPathSegment}"
+            uriImage = imageName
+            val imageRef: StorageReference = storageRef.child(imageName)
 
+            // Sube la imagen al almacenamiento
+            val uploadTask: UploadTask? = uri.let { imageRef.putFile(it) }
 
-
-
-     private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-       if(uri != null){
-          imageView.setImageURI(uri)
-       }
+            uploadTask?.addOnFailureListener { _ ->
+                // Ocurrió un error al subir la imagen
+            }
+        }
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -151,21 +162,11 @@ class NuevaPolizaFragment : Fragment() {
                         danioTotal,
                         granizo,
                         roboParcial,
-                        roboTotal
-                    ) { exito, mensajeError ->
+                        roboTotal,
+                        uriImage
+                    ) { exito ->
                         if (exito) {
-                            Toast.makeText(
-                                requireContext(),
-                                "Póliza guardada con éxito",
-                                Toast.LENGTH_SHORT
-                            ).show()
                             findNavController().navigateUp()
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Error al guardar la póliza: $mensajeError",
-                                Toast.LENGTH_SHORT
-                            ).show()
                         }
                     }
                 }

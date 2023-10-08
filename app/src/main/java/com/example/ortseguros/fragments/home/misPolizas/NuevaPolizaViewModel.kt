@@ -46,7 +46,8 @@ class NuevaPolizaViewModel : ViewModel() {
         granizo: Boolean,
         roboParcial: Boolean,
         roboTotal: Boolean,
-        callback: (Boolean, String?) -> Unit
+        uriImage:String,
+        callback: (Boolean) -> Unit
     ) {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
@@ -54,11 +55,8 @@ class NuevaPolizaViewModel : ViewModel() {
         obtenerValorVehiculo(marcaModelo) { valor ->
             if (valor != null) {
                 val fechaActual = obtenerFechaActual()
-
                 val diferenciaEnAnios = calcularDiferenciaAnios(fechaAltaVehiculo, fechaActual)
-
                 val valorSumaAsegurada = calcularSumaAsegurada(valor.toDouble(), diferenciaEnAnios)
-
                 val cuotaMensual = calcularValorCuota(valorSumaAsegurada, respCivil, danioTotal, granizo, roboParcial, roboTotal)
 
                 val poliza = Poliza(
@@ -74,24 +72,39 @@ class NuevaPolizaViewModel : ViewModel() {
                     granizo = granizo,
                     roboParcial = roboParcial,
                     roboTotal = roboTotal,
-                    pagos = generarPagos()
+                    pagos = generarPagos(),
+                    uriImage = uriImage
                 )
-
 
                 db.collection("polizas")
                     .add(poliza)
-                    .addOnSuccessListener {
-                        callback(true, null)
+                    .addOnSuccessListener { documentReference ->
+                        val idGenerado = documentReference.id
+
+                        // Actualizar el ID en la póliza misma
+                        db.collection("polizas")
+                            .document(idGenerado)
+                            .update("id", idGenerado)
+                            .addOnSuccessListener {
+                                callback(true)
+                                _toastMessage.value = "Póliza guardada con éxito"
+                            }
+                            .addOnFailureListener { e ->
+                                callback(false)
+                                _toastMessage.value = e.message
+                            }
                     }
                     .addOnFailureListener { e ->
-                        callback(false, e.message)
+                        callback(false)
+                        _toastMessage.value= e.message
                     }
             } else {
-
-                callback(false, "No se pudo encontrar el valor del vehículo.")
+                callback(false )
+                _toastMessage.value= "No se pudo encontrar el valor del vehículo."
             }
         }
     }
+
 
 
     fun obtenerMarcasModelos(callback: (List<String>?, String?) -> Unit) {
@@ -303,6 +316,28 @@ class NuevaPolizaViewModel : ViewModel() {
 
         return pagos
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
