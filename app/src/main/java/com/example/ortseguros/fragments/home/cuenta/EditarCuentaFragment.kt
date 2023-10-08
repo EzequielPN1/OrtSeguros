@@ -25,7 +25,7 @@ class EditarCuentaFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_editar_cuenta, container, false)
 
         viewModelEditarCuenta = ViewModelProvider(this)[EditarCuentaViewModel::class.java]

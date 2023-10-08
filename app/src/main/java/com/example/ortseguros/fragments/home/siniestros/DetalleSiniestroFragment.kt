@@ -22,7 +22,7 @@ class DetalleSiniestroFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_detalle_siniestro, container, false)
         viewModel = ViewModelProvider(this)[DetalleSiniestroViewModel::class.java]
         fecha = v.findViewById(R.id.txtFechaSiniestro)
