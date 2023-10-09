@@ -53,23 +53,61 @@ class NuevaPolizaFragment : Fragment() {
 
 
 
+
     private val pickMediaFrente = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
-            viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName -> uriImageFrente = imageName })
+            if (uriImageFrente.isNullOrEmpty()) {
+                viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                    uriImageFrente = imageName
+                })
+            } else {
+                viewModelNuevaPoliza.eliminarImagenEnFirestore(uriImageFrente) { eliminada ->
+                    if (eliminada) {
+                        viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                            uriImageFrente = imageName
+                        })
+                    }
+                }
+            }
             imageFrente.setImageURI(uri)
         }
     }
 
+
     private val pickMediaLatIzq = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
-            viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName -> uriImageLatIzq = imageName })
+            if (uriImageLatIzq.isNullOrEmpty()) {
+                viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                    uriImageLatIzq = imageName
+                })
+            } else {
+                viewModelNuevaPoliza.eliminarImagenEnFirestore(uriImageLatIzq) { eliminada ->
+                    if (eliminada) {
+                        viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                            uriImageLatIzq = imageName
+                        })
+                    }
+                }
+            }
             imageLatIzq.setImageURI(uri)
         }
     }
 
     private val pickMediaLatDer = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
-            viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName -> uriImageLatDer = imageName })
+            if (uriImageLatDer.isNullOrEmpty()) {
+                viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                    uriImageLatDer = imageName
+                })
+            } else {
+                viewModelNuevaPoliza.eliminarImagenEnFirestore(uriImageLatDer) { eliminada ->
+                    if (eliminada) {
+                        viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                            uriImageLatDer = imageName
+                        })
+                    }
+                }
+            }
             imageLatDer.setImageURI(uri)
         }
     }
@@ -77,7 +115,19 @@ class NuevaPolizaFragment : Fragment() {
 
     private val pickMediaPosterior = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
-            viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName -> uriImagePosterior = imageName })
+            if (uriImagePosterior.isNullOrEmpty()) {
+                viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                    uriImagePosterior = imageName
+                })
+            } else {
+                viewModelNuevaPoliza.eliminarImagenEnFirestore(uriImagePosterior) { eliminada ->
+                    if (eliminada) {
+                        viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                            uriImagePosterior = imageName
+                        })
+                    }
+                }
+            }
             imagePosterior.setImageURI(uri)
         }
     }

@@ -2,6 +2,7 @@ package com.example.ortseguros.fragments.home.misPolizas
 
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,8 +23,6 @@ class NuevaPolizaViewModel : ViewModel() {
 
     private val db = Firebase.firestore
     private lateinit var firebaseAuth: FirebaseAuth
-
-
 
     val selectedDateLiveData = MutableLiveData<String>()
     fun onDateSelected(day: Int, month: Int, year: Int) {
@@ -326,7 +325,6 @@ class NuevaPolizaViewModel : ViewModel() {
 
             calendar.add(Calendar.MONTH, 1)
         }
-
         return pagos
     }
 
@@ -339,10 +337,8 @@ class NuevaPolizaViewModel : ViewModel() {
 
 
     fun cargarImagenEnFirestore(uri: Uri, onSuccess: (String) -> Unit) {
-
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
-
 
         val imageName = "images/$user?.uid.toString()/${System.currentTimeMillis()}_${uri.lastPathSegment}"
         val imageRef: StorageReference = storageRef.child(imageName)
@@ -351,6 +347,18 @@ class NuevaPolizaViewModel : ViewModel() {
         uploadTask.addOnSuccessListener {
             onSuccess(imageName)
         }
+    }
+
+
+    fun eliminarImagenEnFirestore(imagePath: String, onComplete: (Boolean) -> Unit) {
+        val imageRef = storageRef.child(imagePath)
+        imageRef.delete()
+            .addOnSuccessListener {
+                onComplete(true)
+            }
+            .addOnFailureListener {
+                onComplete(false)
+            }
     }
 
 
