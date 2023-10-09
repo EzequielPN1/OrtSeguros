@@ -2,14 +2,20 @@ package com.example.ortseguros.fragments.home.misPolizas
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.ortseguros.R
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
 
 class DetallePolizaFragment : Fragment() {
@@ -29,7 +35,10 @@ class DetallePolizaFragment : Fragment() {
     private lateinit var inputValorCuota: TextView
     private lateinit var btnPagos: Button
 
-
+    private lateinit var imageFrente: ImageView
+    private lateinit var imageLatIzq: ImageView
+    private lateinit var imageLatDer: ImageView
+    private lateinit var imagePosterior: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +60,10 @@ class DetallePolizaFragment : Fragment() {
         inputValorCuota=v.findViewById(R.id.inputValorCuota)
         btnPagos =v.findViewById(R.id.btnPagos)
 
+        imageFrente = v.findViewById(R.id.imageFrenteDetalle)
+        imageLatIzq = v.findViewById(R.id.imageLatIzqDetalle)
+        imageLatDer = v.findViewById(R.id.imageLatDerDetalle)
+        imagePosterior = v.findViewById(R.id.imagePosteriorDetalle)
 
         return v
     }
@@ -61,6 +74,7 @@ class DetallePolizaFragment : Fragment() {
         super.onStart()
 
         val poliza = DetallePolizaFragmentArgs.fromBundle(requireArguments()).Poliza
+
         inputMarcaModelo.text = poliza.marcaModelo
         inputPatentePoliza.text = poliza.patente
         inputFechaInicio.text = poliza.fechaInicioPoliza
@@ -71,15 +85,15 @@ class DetallePolizaFragment : Fragment() {
         inputRoboTotal.text = if (poliza.roboTotal) "contratado" else "no"
         inputSumaAsegurada.text = poliza.sumaAsegurada
         inputValorCuota.text = poliza.valorCuota
-
-
+        viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImageFrente, imageFrente)
+        viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImageLatIzq, imageLatIzq)
+        viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImageLatDer, imageLatDer)
+        viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImagePosterior, imagePosterior)
 
         btnPagos.setOnClickListener{
 
             val action = DetallePolizaFragmentDirections.actionDetallePolizaFragmentToPagosFragment(poliza)
             findNavController().navigate(action)
-
-
 
         }
 

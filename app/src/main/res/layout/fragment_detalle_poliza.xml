@@ -7,6 +7,63 @@
     android:layout_height="match_parent"
     tools:context=".fragments.home.misPolizas.DetallePolizaFragment">
 
+    <ImageView
+        android:id="@+id/imagePosteriorDetalle"
+        android:layout_width="62dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="50dp"
+        android:longClickable="true"
+        android:src="@drawable/car_posterior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageLatDerDetalle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.773" />
+
+    <ImageView
+        android:id="@+id/imageLatDerDetalle"
+        android:layout_width="62dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:longClickable="true"
+        android:src="@drawable/car_lat_der"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imagePosteriorDetalle"
+        app:layout_constraintStart_toEndOf="@+id/imageLatIzqDetalle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.773" />
+
+    <ImageView
+        android:id="@+id/imageLatIzqDetalle"
+        android:layout_width="62dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:longClickable="true"
+        android:src="@drawable/car_lat_izq"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageLatDerDetalle"
+        app:layout_constraintStart_toEndOf="@+id/imageFrenteDetalle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.773" />
+
+    <ImageView
+        android:id="@+id/imageFrenteDetalle"
+        android:layout_width="62dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="10dp"
+        android:longClickable="true"
+        android:src="@drawable/car_frontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageLatIzqDetalle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.773" />
+
     <TextView
         android:id="@+id/inputMarcaModelo"
         android:layout_width="0dp"
@@ -236,10 +293,10 @@
         android:text="@string/Pagos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827" />
+        app:layout_constraintVertical_bias="0.947" />
 
     <TextView
         android:id="@+id/inputSumaAsegurada"
