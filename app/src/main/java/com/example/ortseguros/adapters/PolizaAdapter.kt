@@ -63,7 +63,7 @@ class PolizaAdapter(
         holder.setPatente(poliza.patente)
 
         // Reemplaza esta línea con la ubicación correcta de tu imagen en Firebase Storage
-        val pathToImage = "${poliza.uriImage}"
+        val pathToImage = "${poliza.uriImageFrente}"
 
         Log.e("MiApp", pathToImage)
 
@@ -89,7 +89,7 @@ class PolizaAdapter(
             Log.e("MiApp", "Error al obtener la URL de descarga de la imagen: $exception")
         }
 
-        holder.getCard().setOnClickListener(){
+        holder.getCard().setOnClickListener {
             onClick(position)
         }
     }

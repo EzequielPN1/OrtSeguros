@@ -10,6 +10,7 @@ import com.example.ortseguros.entities.Usuario
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
@@ -68,44 +69,63 @@ class RegisterViewModel : ViewModel() {
                 if (task.isSuccessful) {
 
                     val user = firebaseAuth.currentUser
-                    val usuario = Usuario(
-                        user?.uid.toString(),
-                        inputNombre.text.toString(),
-                        inputApellido.text.toString(),
-                        inputFechaNac.text.toString(),
-                        inputDni.text.toString(),
-                        inputDomicilio.text.toString(),
-                        user?.email.toString(),
-                        inputTelefono.text.toString()
-                    )
 
-                    db.collection("usuarios").document(user?.uid.toString()).set(usuario)
+                    // Obtener el número del último usuario ingresado
+                    db.collection("usuarios")
+                        .orderBy("numCliente", Query.Direction.DESCENDING)
+                        .limit(1)
+                        .get()
+                        .addOnCompleteListener { queryTask ->
+                            if (queryTask.isSuccessful) {
+                                val lastUser = queryTask.result?.documents?.firstOrNull()
+                                val numClienteString = lastUser?.get("numCliente") as? String
 
-                        .addOnCompleteListener { databaseTask ->
-                            if (databaseTask.isSuccessful) {
+                                val numCliente = (numClienteString?.toInt() ?: 0) + 1
 
-                                sendEmailVerification { emailVerificationTask ->
+                                val usuario = Usuario(
+                                    numCliente.toString(),
+                                    user?.uid.toString(),
+                                    inputNombre.text.toString(),
+                                    inputApellido.text.toString(),
+                                    inputFechaNac.text.toString(),
+                                    inputDni.text.toString(),
+                                    inputDomicilio.text.toString(),
+                                    user?.email.toString(),
+                                    inputTelefono.text.toString(),
 
-                                    if (emailVerificationTask.isSuccessful) {
-                                        _toastMessage.value = "Cuenta creada correctamente ,email de confirmacion enviado"
-                                        _createAccountSuccess.value = true
-                                    } else {
-                                        _toastMessage.value = "Error al enviar la verificación por correo electrónico: ${emailVerificationTask.exception}"
-                                        _createAccountSuccess.value = false
+                                )
+
+                                db.collection("usuarios").document(user?.uid.toString()).set(usuario)
+                                    .addOnCompleteListener { databaseTask ->
+                                        if (databaseTask.isSuccessful) {
+                                            sendEmailVerification { emailVerificationTask ->
+                                                if (emailVerificationTask.isSuccessful) {
+                                                    _toastMessage.value = "Cuenta creada correctamente, email de confirmación enviado"
+                                                    _createAccountSuccess.value = true
+                                                } else {
+                                                    _toastMessage.value = "Error al enviar la verificación por correo electrónico: ${emailVerificationTask.exception}"
+                                                    _createAccountSuccess.value = false
+                                                }
+                                            }
+                                        } else {
+                                            _toastMessage.value = "Error al escribir en la base de datos: ${databaseTask.exception}"
+                                            _createAccountSuccess.value = false
+                                        }
                                     }
-                                }
                             } else {
-                                _toastMessage.value = "Error al escribir en la base de datos: ${databaseTask.exception}"
+                                _toastMessage.value = "Error al obtener el último usuario: ${queryTask.exception}"
                                 _createAccountSuccess.value = false
                             }
                         }
                 } else {
                     _toastMessage.value = "Error, no se creó la cuenta"
                     _createAccountSuccess.value = false
-
                 }
             }
     }
+
+
+
 
 
     private fun sendEmailVerification(completion: (Task<Void>) -> Unit) {

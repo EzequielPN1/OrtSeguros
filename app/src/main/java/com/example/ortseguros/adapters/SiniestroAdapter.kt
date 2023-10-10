@@ -49,7 +49,7 @@ class SiniestroAdapter(
         holder.setFecha(siniestro.fecha)
         holder.setHora(siniestro.hora)
         holder.setPatente(siniestro.patente)
-        holder.getCard().setOnClickListener(){
+        holder.getCard().setOnClickListener {
             onClick(position)
         }
     }

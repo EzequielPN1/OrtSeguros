@@ -20,7 +20,7 @@ class RealizarPagoFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v =  inflater.inflate(R.layout.fragment_realizar_pago, container, false)
         viewModelRealizarPago = ViewModelProvider(this)[RealizarPagoViewModel::class.java]
         btnRealizarPago = v.findViewById(R.id.btnRealizarPago)

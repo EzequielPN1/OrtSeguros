@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class Siniestro (
+    var numSiniestro:String="",
     var id:String="",
     var idUsuario: String = "",
     var idPoliza: String = "",

@@ -33,7 +33,7 @@ class NuevoSiniestroFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_nuevo_siniestro, container, false)
         viewModelNuevoSiniestro = ViewModelProvider(this)[NuevoSiniestroViewModel::class.java]
         inputFecha = v.findViewById(R.id.inputFechaSiniestro)
@@ -81,7 +81,7 @@ class NuevoSiniestroFragment : Fragment() {
         }
 
 
-        viewModelNuevoSiniestro.obtenerTipoSiniestrosFirestore { siniestros, error ->
+        viewModelNuevoSiniestro.obtenerCoberturasFirestore() { siniestros, error ->
             if (error == null && siniestros != null) {
                 val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, siniestros)
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
