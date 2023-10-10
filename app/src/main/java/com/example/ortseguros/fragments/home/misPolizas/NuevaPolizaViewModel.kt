@@ -2,6 +2,7 @@ package com.example.ortseguros.fragments.home.misPolizas
 
 
 import android.net.Uri
+import android.util.Log
 import com.google.firebase.firestore.Query
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -49,10 +50,10 @@ class NuevaPolizaViewModel : ViewModel() {
         granizo: Boolean,
         roboParcial: Boolean,
         roboTotal: Boolean,
-        uriImageFrente:String,
-        uriImageLatDer:String,
-        uriImageLatIzq:String,
-        uriImagePosterior:String,
+        uriFrente: Uri,
+        uriLatIzq: Uri,
+        uriLatDer: Uri,
+        uriPosterior: Uri,
         callback: (Boolean) -> Unit
     ) {
         firebaseAuth = Firebase.auth
@@ -73,7 +74,6 @@ class NuevaPolizaViewModel : ViewModel() {
                         if (queryTask.isSuccessful) {
                             val lastPoliza = queryTask.result?.documents?.firstOrNull()
                             val numPolizaString = lastPoliza?.get("numPoliza") as? String
-
                             val numPoliza = (numPolizaString?.toInt() ?: 0) + 1
 
                             val poliza = Poliza(
@@ -91,10 +91,6 @@ class NuevaPolizaViewModel : ViewModel() {
                                 roboParcial = roboParcial,
                                 roboTotal = roboTotal,
                                 pagos = generarPagos(),
-                                uriImageFrente = uriImageFrente,
-                                uriImageLatDer = uriImageLatDer,
-                                uriImageLatIzq = uriImageLatIzq,
-                                uriImagePosterior = uriImagePosterior,
                             )
 
                             db.collection("polizas")
@@ -102,11 +98,29 @@ class NuevaPolizaViewModel : ViewModel() {
                                 .addOnSuccessListener { documentReference ->
                                     val idGenerado = documentReference.id
 
+                                    val uriImageFrente = generarUrl(uriFrente, idGenerado)
+                                    val uriImageLatDer = generarUrl(uriLatIzq, idGenerado)
+                                    val uriImageLatIzq = generarUrl(uriLatDer, idGenerado)
+                                    val uriImagePosterior = generarUrl(uriPosterior, idGenerado)
+
                                     // Actualizar el ID en la póliza misma
                                     db.collection("polizas")
                                         .document(idGenerado)
-                                        .update("id", idGenerado)
+                                        .update(
+                                            "uriImageFrente", uriImageFrente,
+                                            "uriImageLatDer", uriImageLatDer,
+                                            "uriImageLatIzq", uriImageLatIzq,
+                                            "uriImagePosterior", uriImagePosterior,
+                                            "id", idGenerado
+                                        )
+
                                         .addOnSuccessListener {
+                                            // Cargar las imágenes en Firestore
+                                            cargarImagenEnFirestoreModificada(uriFrente, uriImageFrente)
+                                            cargarImagenEnFirestoreModificada(uriLatIzq, uriImageLatIzq)
+                                            cargarImagenEnFirestoreModificada(uriLatDer, uriImageLatDer)
+                                            cargarImagenEnFirestoreModificada(uriPosterior, uriImagePosterior)
+
                                             callback(true)
                                             _toastMessage.value = "Póliza guardada con éxito"
                                         }
@@ -130,6 +144,7 @@ class NuevaPolizaViewModel : ViewModel() {
             }
         }
     }
+
 
 
 
@@ -255,10 +270,10 @@ class NuevaPolizaViewModel : ViewModel() {
         granizo: Boolean,
         roboParcial: Boolean,
         roboTotal: Boolean,
-        uriImageFrente: String,
-        uriImageLatIzq: String,
-        uriImageLatDer: String,
-        uriImagePosterior: String
+        uriFrente: Uri,
+        uriLatIzq: Uri,
+        uriLatDer: Uri,
+        uriPosterior: Uri,
     ): LiveData<Boolean> {
         val fechaActual = obtenerFechaActual()
         val camposValidosLiveData = MutableLiveData<Boolean>()
@@ -273,7 +288,7 @@ class NuevaPolizaViewModel : ViewModel() {
         } else if (!respCivil && !danioTotal && !granizo && !roboParcial && !roboTotal) {
             _toastMessage.value = "Tiene que seleccionar por lo menos una cobertura."
             camposValidosLiveData.value = false
-        } else if (listOf(uriImageFrente, uriImageLatIzq, uriImageLatDer, uriImagePosterior).any { it.isEmpty() }) {
+        }else if (listOf(uriFrente, uriLatIzq, uriLatDer, uriPosterior).any { it == null || it.toString().isEmpty() }) {
             _toastMessage.value = "Tiene que ingresar todas las fotos del vehiculo."
             camposValidosLiveData.value = false
         } else {
@@ -348,42 +363,24 @@ class NuevaPolizaViewModel : ViewModel() {
 
 
 
-
-
     private val storage = Firebase.storage
     private val storageRef = storage.getReferenceFromUrl("gs://apportseguros-c6dea.appspot.com")
 
+    private fun generarUrl(uri: Uri,idGenerado:String): String {
+        val user = Firebase.auth.currentUser
+        return "images/${user?.uid}/${idGenerado}/${System.currentTimeMillis()}_${uri.lastPathSegment}".takeIf { user != null } ?: ""
+    }
 
-    fun cargarImagenEnFirestore(uri: Uri, onSuccess: (String) -> Unit) {
-        firebaseAuth = Firebase.auth
-        val user = firebaseAuth.currentUser
-
-        val imageName = "images/$user?.uid.toString()/${System.currentTimeMillis()}_${uri.lastPathSegment}"
+    private fun cargarImagenEnFirestoreModificada(uri: Uri, imageName: String) {
         val imageRef: StorageReference = storageRef.child(imageName)
-        val uploadTask: UploadTask = uri.let { imageRef.putFile(it) }
-
-        uploadTask.addOnSuccessListener {
-            onSuccess(imageName)
-        }
-    }
-
-
-    fun eliminarImagenEnFirestore(imagePath: String, onComplete: (Boolean) -> Unit) {
-        val imageRef = storageRef.child(imagePath)
-        imageRef.delete()
+        imageRef.putFile(uri)
             .addOnSuccessListener {
-                onComplete(true)
+                Log.d("Carga de imagen", "Imagen subida con éxito: $imageName")
             }
-            .addOnFailureListener {
-                onComplete(false)
+            .addOnFailureListener { e ->
+                Log.e("Carga de imagen", "Error al subir imagen $imageName: ${e.message}")
             }
     }
-
-
-
-
-
-
 
 
 
