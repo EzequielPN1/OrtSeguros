@@ -40,25 +40,95 @@ class NuevaPolizaFragment : Fragment() {
     private lateinit var swcRoboTotal: Switch
     private lateinit var btnNuevaPoliza: Button
 
-    private lateinit var uriImage:String
-    private lateinit var btnImage : Button
-    private lateinit var imageView: ImageView
-    private val storage = Firebase.storage
-    private val storageRef = storage.getReferenceFromUrl("gs://apportseguros-c6dea.appspot.com")
+    private  var uriImageFrente:String=""
+    private  var uriImageLatIzq:String=""
+    private  var uriImageLatDer:String=""
+    private  var uriImagePosterior:String=""
 
-    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+    private lateinit var imageFrente: ImageView
+    private lateinit var imageLatIzq: ImageView
+    private lateinit var imageLatDer: ImageView
+    private lateinit var imagePosterior: ImageView
+
+
+
+
+
+    private val pickMediaFrente = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
-            imageView.setImageURI(uri)
-            val imageName = "images/${System.currentTimeMillis()}_${uri.lastPathSegment}"
-            uriImage = imageName
-            val imageRef: StorageReference = storageRef.child(imageName)
-
-            // Sube la imagen al almacenamiento
-            val uploadTask: UploadTask? = uri.let { imageRef.putFile(it) }
-
-            uploadTask?.addOnFailureListener { _ ->
-                // Ocurrió un error al subir la imagen
+            if (uriImageFrente.isNullOrEmpty()) {
+                viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                    uriImageFrente = imageName
+                })
+            } else {
+                viewModelNuevaPoliza.eliminarImagenEnFirestore(uriImageFrente) { eliminada ->
+                    if (eliminada) {
+                        viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                            uriImageFrente = imageName
+                        })
+                    }
+                }
             }
+            imageFrente.setImageURI(uri)
+        }
+    }
+
+
+    private val pickMediaLatIzq = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            if (uriImageLatIzq.isNullOrEmpty()) {
+                viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                    uriImageLatIzq = imageName
+                })
+            } else {
+                viewModelNuevaPoliza.eliminarImagenEnFirestore(uriImageLatIzq) { eliminada ->
+                    if (eliminada) {
+                        viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                            uriImageLatIzq = imageName
+                        })
+                    }
+                }
+            }
+            imageLatIzq.setImageURI(uri)
+        }
+    }
+
+    private val pickMediaLatDer = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            if (uriImageLatDer.isNullOrEmpty()) {
+                viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                    uriImageLatDer = imageName
+                })
+            } else {
+                viewModelNuevaPoliza.eliminarImagenEnFirestore(uriImageLatDer) { eliminada ->
+                    if (eliminada) {
+                        viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                            uriImageLatDer = imageName
+                        })
+                    }
+                }
+            }
+            imageLatDer.setImageURI(uri)
+        }
+    }
+
+
+    private val pickMediaPosterior = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri != null) {
+            if (uriImagePosterior.isNullOrEmpty()) {
+                viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                    uriImagePosterior = imageName
+                })
+            } else {
+                viewModelNuevaPoliza.eliminarImagenEnFirestore(uriImagePosterior) { eliminada ->
+                    if (eliminada) {
+                        viewModelNuevaPoliza.cargarImagenEnFirestore(uri, onSuccess = { imageName ->
+                            uriImagePosterior = imageName
+                        })
+                    }
+                }
+            }
+            imagePosterior.setImageURI(uri)
         }
     }
 
@@ -67,7 +137,7 @@ class NuevaPolizaFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_nueva_poliza, container, false)
         viewModelNuevaPoliza = ViewModelProvider(this)[NuevaPolizaViewModel::class.java]
         spinnerMarcaModelo = v.findViewById(R.id.spinner_marcaModelo)
@@ -80,8 +150,12 @@ class NuevaPolizaFragment : Fragment() {
         swcRoboTotal  = v.findViewById(R.id.swc_roboTotal)
         btnNuevaPoliza = v.findViewById(R.id.btnNuevaPoliza)
 
-        btnImage = v.findViewById(R.id.btnNuevaImagen)
-        imageView = v.findViewById(R.id.imageView)
+
+
+        imageFrente = v.findViewById(R.id.imageFrente)
+        imageLatIzq = v.findViewById(R.id.imageLatIzq)
+        imageLatDer = v.findViewById(R.id.imageLatDer)
+        imagePosterior = v.findViewById(R.id.imagePosterior)
 
         viewModelNuevaPoliza.selectedDateLiveData.observe(
             viewLifecycleOwner
@@ -111,7 +185,6 @@ class NuevaPolizaFragment : Fragment() {
 
 
 
-
         return v
     }
 
@@ -119,9 +192,20 @@ class NuevaPolizaFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        imageFrente.setOnClickListener{
+            pickMediaFrente.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
 
-        btnImage.setOnClickListener(){
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        imageLatIzq.setOnClickListener{
+            pickMediaLatIzq.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+
+        imageLatDer.setOnClickListener{
+            pickMediaLatDer.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+
+        imagePosterior.setOnClickListener{
+            pickMediaPosterior.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
         inputFechaAltaVehiculo.setOnClickListener {
@@ -130,8 +214,6 @@ class NuevaPolizaFragment : Fragment() {
             }
             datePicker.show(childFragmentManager, "datePicker")
         }
-
-
 
         btnNuevaPoliza.setOnClickListener {
 
@@ -151,7 +233,11 @@ class NuevaPolizaFragment : Fragment() {
                 danioTotal,
                 granizo,
                 roboParcial,
-                roboTotal
+                roboTotal,
+                uriImageFrente,
+                uriImageLatIzq,
+                uriImageLatDer,
+                uriImagePosterior,
                 ).observe(viewLifecycleOwner) { camposValidos ->
                 if (camposValidos) {
                     viewModelNuevaPoliza.guardarNuevaPoliza(
@@ -163,7 +249,10 @@ class NuevaPolizaFragment : Fragment() {
                         granizo,
                         roboParcial,
                         roboTotal,
-                        uriImage
+                        uriImageFrente,
+                        uriImageLatIzq,
+                        uriImageLatDer,
+                        uriImagePosterior,
                     ) { exito ->
                         if (exito) {
                             findNavController().navigateUp()
@@ -174,8 +263,6 @@ class NuevaPolizaFragment : Fragment() {
         }
 
     }
-
-
 
 
 
