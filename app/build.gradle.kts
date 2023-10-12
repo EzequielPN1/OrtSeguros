@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.ortseguros"
-        minSdk = 26
+        minSdk = 31
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -64,9 +64,9 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")         //fireBase
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")       //fireBase
 
-    implementation("androidx.core:core-splashscreen:1.0.1")//splashscreen
+    implementation("androidx.core:core-splashscreen:1.0.1")             //splashscreen
 
-    implementation("com.google.firebase:firebase-storage-ktx")      //storage
+    implementation("com.google.firebase:firebase-storage-ktx")          //storage
 
     implementation ("com.github.bumptech.glide:glide:4.12.0")              //para bajar de store
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")      //para bajar de store

@@ -1,5 +1,6 @@
 package com.example.ortseguros.fragments.home.misPolizas
 
+
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -44,6 +45,8 @@ class NuevaPolizaFragment : Fragment() {
     private var uriLatIzq: Uri? = null
     private var uriLatDer: Uri? = null
     private var uriPosterior: Uri? = null
+
+
 
 
     private val pickMediaFrente = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -95,6 +98,7 @@ class NuevaPolizaFragment : Fragment() {
         imageLatDer = v.findViewById(R.id.imageLatDer)
         imagePosterior = v.findViewById(R.id.imagePosterior)
 
+
         viewModelNuevaPoliza.selectedDateLiveData.observe(
             viewLifecycleOwner
         ) { fechaAltaVehiculo ->
@@ -118,7 +122,6 @@ class NuevaPolizaFragment : Fragment() {
                 viewModelNuevaPoliza.setToastMessage("")
             }
         }
-
 
 
         return v
@@ -153,6 +156,8 @@ class NuevaPolizaFragment : Fragment() {
 
         btnNuevaPoliza.setOnClickListener {
 
+
+
             val marcaModelo = spinnerMarcaModelo.selectedItem.toString()
             val fechaAltaVehiculo = inputFechaAltaVehiculo.text.toString()
             val patente = inputPatente.text.toString()
@@ -176,6 +181,9 @@ class NuevaPolizaFragment : Fragment() {
                 uriPosterior
                 ).observe(viewLifecycleOwner) { camposValidos ->
                 if (camposValidos) {
+
+                    Toast.makeText(requireContext(), "Cargando la póliza....", Toast.LENGTH_LONG * 2).show();
+
                     viewModelNuevaPoliza.guardarNuevaPoliza(
                         marcaModelo,
                         fechaAltaVehiculo,
@@ -192,6 +200,7 @@ class NuevaPolizaFragment : Fragment() {
                     ) { exito ->
                         if (exito) {
                             findNavController().navigateUp()
+
                         }
                     }
                 }

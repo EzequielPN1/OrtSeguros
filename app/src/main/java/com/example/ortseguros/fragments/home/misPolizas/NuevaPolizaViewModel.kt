@@ -14,11 +14,11 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.TimeZone
+import java.util.concurrent.atomic.AtomicInteger
 
 class NuevaPolizaViewModel : ViewModel() {
 
@@ -115,16 +115,13 @@ class NuevaPolizaViewModel : ViewModel() {
                                         )
 
                                         .addOnSuccessListener {
-                                            // Cargar las imágenes en Firestore
-                                            cargarImagenEnFirestoreModificada(uriFrente, uriImageFrente) {
-                                                cargarImagenEnFirestoreModificada(uriLatIzq, uriImageLatIzq) {
-                                                    cargarImagenEnFirestoreModificada(uriLatDer, uriImageLatDer) {
-                                                        cargarImagenEnFirestoreModificada(uriPosterior, uriImagePosterior) {
-                                                            callback(true)
-                                                            _toastMessage.value = "Póliza guardada con éxito"
-                                                        }
-                                                    }
-                                                }
+
+                                            val uris = listOf(uriFrente, uriLatIzq, uriLatDer, uriPosterior)
+                                            val imageNames = listOf(uriImageFrente, uriImageLatIzq, uriImageLatDer, uriImagePosterior)
+
+                                            cargarImagenesEnFirestore(uris, imageNames) {
+                                                _toastMessage.value = "Póliza guardada con éxito"
+                                                callback(true)
                                             }
 
                                         }
@@ -382,19 +379,31 @@ class NuevaPolizaViewModel : ViewModel() {
     }
 
 
-    private fun cargarImagenEnFirestoreModificada(uri: Uri?, imageName: String, callback: () -> Unit) {
-        if (uri != null) {
-            val imageRef: StorageReference = storageRef.child(imageName)
-            imageRef.putFile(uri)
-                .addOnSuccessListener {
-                    Log.d("Carga de imagen", "Imagen subida con éxito: $imageName")
-                    callback() // Llama al callback para cargar la siguiente imagen
-                }
-                .addOnFailureListener { e ->
-                    Log.e("Carga de imagen", "Error al subir imagen $imageName: ${e.message}")
-                }
-        } else {
-            Log.e("Carga de imagen", "Error: La URI de la imagen es nula.")
+    private fun cargarImagenesEnFirestore(uris: List<Uri?>, imageNames: List<String>, callback: () -> Unit) {
+        val uploadedImageCount = AtomicInteger(0)
+
+        for (i in uris.indices) {
+            val uri = uris[i]
+            val imageName = imageNames[i]
+
+            if (uri != null) {
+                val imageRef: StorageReference = storageRef.child(imageName)
+                imageRef.putFile(uri)
+                    .addOnSuccessListener {
+                        Log.d("Carga de imagen", "Imagen subida con éxito: $imageName")
+                        val count = uploadedImageCount.incrementAndGet()
+
+                        if (count == uris.size) {
+                            // Todas las imágenes se han subido con éxito, llamamos al callback
+                            callback()
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("Carga de imagen", "Error al subir imagen $imageName: ${e.message}")
+                    }
+            } else {
+                Log.e("Carga de imagen", "Error: La URI de la imagen es nula para $imageName.")
+            }
         }
     }
 
