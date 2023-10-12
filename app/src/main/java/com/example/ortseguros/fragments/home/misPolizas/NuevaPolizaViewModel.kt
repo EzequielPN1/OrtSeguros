@@ -50,10 +50,10 @@ class NuevaPolizaViewModel : ViewModel() {
         granizo: Boolean,
         roboParcial: Boolean,
         roboTotal: Boolean,
-        uriFrente: Uri,
-        uriLatIzq: Uri,
-        uriLatDer: Uri,
-        uriPosterior: Uri,
+        uriFrente: Uri?,
+        uriLatIzq: Uri?,
+        uriLatDer: Uri?,
+        uriPosterior: Uri?,
         callback: (Boolean) -> Unit
     ) {
         firebaseAuth = Firebase.auth
@@ -274,14 +274,22 @@ class NuevaPolizaViewModel : ViewModel() {
         granizo: Boolean,
         roboParcial: Boolean,
         roboTotal: Boolean,
-        uriFrente: Uri,
-        uriLatIzq: Uri,
-        uriLatDer: Uri,
-        uriPosterior: Uri,
+        uriFrente: Uri?,
+        uriLatIzq: Uri?,
+        uriLatDer: Uri?,
+        uriPosterior: Uri?
     ): LiveData<Boolean> {
         val fechaActual = obtenerFechaActual()
         val camposValidosLiveData = MutableLiveData<Boolean>()
 
+        // Validación de URIs
+        if (uriFrente == null || uriLatIzq == null || uriLatDer == null || uriPosterior == null) {
+            _toastMessage.value = "Por favor, cargue todas las imágenes."
+            camposValidosLiveData.value = false
+            return camposValidosLiveData
+        }
+
+        // Validación de fecha y patente
         val camposNoVacios = listOf(fechaAltaVehiculo, patente).all { it.isNotBlank() }
         if (!camposNoVacios) {
             _toastMessage.value = "Los campos fecha de alta y patente no pueden estar vacíos."
@@ -289,27 +297,25 @@ class NuevaPolizaViewModel : ViewModel() {
         } else if (!esFechaValida(fechaAltaVehiculo, fechaActual)) {
             _toastMessage.value = "La fecha de alta debe ser menor o igual a la fecha actual."
             camposValidosLiveData.value = false
-        } else if (!respCivil && !danioTotal && !granizo && !roboParcial && !roboTotal) {
-            _toastMessage.value = "Tiene que seleccionar por lo menos una cobertura."
-            camposValidosLiveData.value = false
-        }else if (listOf(uriFrente, uriLatIzq, uriLatDer, uriPosterior).any { it == null || it.toString().isEmpty() }) {
-            _toastMessage.value = "Tiene que ingresar todas las fotos del vehiculo."
-            camposValidosLiveData.value = false
         } else {
-            verificarPatenteUnica(patente) { esUnica ->
-                if (!esUnica) {
-                    _toastMessage.value = "La patente ingresada ya está registrada en otra póliza."
-                    camposValidosLiveData.value = false
-                } else {
-                    camposValidosLiveData.value = true
+            // Validación de booleanos
+            if (!respCivil && !danioTotal && !granizo && !roboParcial && !roboTotal) {
+                _toastMessage.value = "Tiene que seleccionar por lo menos una cobertura."
+                camposValidosLiveData.value = false
+            } else {
+                verificarPatenteUnica(patente) { esUnica ->
+                    if (!esUnica) {
+                        _toastMessage.value = "La patente ingresada ya está registrada en otra póliza."
+                        camposValidosLiveData.value = false
+                    } else {
+                        camposValidosLiveData.value = true
+                    }
                 }
             }
         }
 
         return camposValidosLiveData
     }
-
-
 
 
 
@@ -370,26 +376,28 @@ class NuevaPolizaViewModel : ViewModel() {
     private val storage = Firebase.storage
     private val storageRef = storage.getReferenceFromUrl("gs://apportseguros-c6dea.appspot.com")
 
-    private fun generarUrl(uri: Uri,idGenerado:String): String {
+    private fun generarUrl(uri: Uri?, idGenerado: String): String {
         val user = Firebase.auth.currentUser
-        return "images/${user?.uid}/${idGenerado}/${System.currentTimeMillis()}_${uri.lastPathSegment}".takeIf { user != null } ?: ""
+        return "images/${user?.uid.orEmpty()}/$idGenerado/${System.currentTimeMillis()}_${uri?.lastPathSegment.orEmpty()}"
     }
 
-    private fun cargarImagenEnFirestoreModificada(
-        uri: Uri,
-        imageName: String,
-        callback: () -> Unit
-    ) {
-        val imageRef: StorageReference = storageRef.child(imageName)
-        imageRef.putFile(uri)
-            .addOnSuccessListener {
-                Log.d("Carga de imagen", "Imagen subida con éxito: $imageName")
-                callback() // Llama al callback para cargar la siguiente imagen
-            }
-            .addOnFailureListener { e ->
-                Log.e("Carga de imagen", "Error al subir imagen $imageName: ${e.message}")
-            }
+
+    private fun cargarImagenEnFirestoreModificada(uri: Uri?, imageName: String, callback: () -> Unit) {
+        if (uri != null) {
+            val imageRef: StorageReference = storageRef.child(imageName)
+            imageRef.putFile(uri)
+                .addOnSuccessListener {
+                    Log.d("Carga de imagen", "Imagen subida con éxito: $imageName")
+                    callback() // Llama al callback para cargar la siguiente imagen
+                }
+                .addOnFailureListener { e ->
+                    Log.e("Carga de imagen", "Error al subir imagen $imageName: ${e.message}")
+                }
+        } else {
+            Log.e("Carga de imagen", "Error: La URI de la imagen es nula.")
+        }
     }
+
 
 
 

@@ -40,10 +40,11 @@ class NuevaPolizaFragment : Fragment() {
     private lateinit var imageLatIzq: ImageView
     private lateinit var imageLatDer: ImageView
     private lateinit var imagePosterior: ImageView
-    private lateinit var uriFrente: Uri
-    private lateinit var uriLatIzq: Uri
-    private lateinit var uriLatDer: Uri
-    private lateinit var uriPosterior: Uri
+    private var uriFrente: Uri? = null
+    private var uriLatIzq: Uri? = null
+    private var uriLatDer: Uri? = null
+    private var uriPosterior: Uri? = null
+
 
     private val pickMediaFrente = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
