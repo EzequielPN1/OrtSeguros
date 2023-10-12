@@ -10,4 +10,5 @@ data class Pago(
     var fechaVencimiento: String = "",
     var fechaPago: String = "",
     var abonado: Boolean = false,
+    var precio:String = "",
 ): Parcelable
