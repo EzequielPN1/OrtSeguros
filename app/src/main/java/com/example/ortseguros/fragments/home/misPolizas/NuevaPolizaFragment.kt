@@ -156,8 +156,6 @@ class NuevaPolizaFragment : Fragment() {
 
         btnNuevaPoliza.setOnClickListener {
 
-
-
             val marcaModelo = spinnerMarcaModelo.selectedItem.toString()
             val fechaAltaVehiculo = inputFechaAltaVehiculo.text.toString()
             val patente = inputPatente.text.toString()
@@ -181,9 +179,6 @@ class NuevaPolizaFragment : Fragment() {
                 uriPosterior
                 ).observe(viewLifecycleOwner) { camposValidos ->
                 if (camposValidos) {
-
-                    Toast.makeText(requireContext(), "Cargando la póliza....", Toast.LENGTH_LONG * 2).show();
-
                     viewModelNuevaPoliza.guardarNuevaPoliza(
                         marcaModelo,
                         fechaAltaVehiculo,
