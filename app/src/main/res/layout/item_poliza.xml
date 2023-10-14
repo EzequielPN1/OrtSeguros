@@ -1,41 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/idCardViewPoliza"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:cardCornerRadius="16dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/txtFechaVencimientoCardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Marca"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#ff31111d"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ImagePoliza"/>
 
         <ImageView
             android:id="@+id/ImagePoliza"
             android:layout_width="136dp"
-            android:layout_height="127dp" />
+            android:layout_height="127dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtFechaVencimientoCardView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/txtPatente"/>
 
         <TextView
             android:id="@+id/txtPatente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="Patente"
-            android:textSize="18sp" />
+            android:textColor="#ff31111d"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ImagePoliza" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
