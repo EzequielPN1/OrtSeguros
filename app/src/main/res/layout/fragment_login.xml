@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.login.LoginFragment"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp"
+    tools:context=".fragments.login.LoginFragment">
 
     <TextView
         android:id="@+id/textViewLogin"
@@ -15,62 +16,73 @@
         android:text="@string/Login"
         android:textSize="45sp"
         android:textColor="@color/bordo"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/inputEmailLogin"/>
+        app:layout_constraintBottom_toTopOf="@id/groupedLayout" />
 
-    <EditText
-        android:id="@+id/inputEmailLogin"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/groupedLayout"
         android:layout_width="0dp"
-        android:layout_height="45sp"
-        android:autofillHints="emailAddress"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/custom_email_icon"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="@string/Email"
-        android:inputType="textEmailAddress"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewLogin"
-        app:layout_constraintBottom_toTopOf="@id/textPassword" />
-
-    <EditText
-        android:id="@+id/textPassword"
-        android:layout_width="0dp"
-        android:layout_height="45sp"
-        android:layout_marginTop="10dp"
-        android:autofillHints="emailAddress"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/custom_lock_icon"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="@string/Contraseña"
-        android:inputType="textPassword"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputEmailLogin"
-        app:layout_constraintBottom_toTopOf="@id/btnTxtOlvidar"
-        />
-
-    <TextView
-        android:id="@+id/btnTxtOlvidar"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:text="@string/stringOlvidar"
-        android:textColor="@color/bordo"
-        android:textSize="15sp"
-        android:layout_marginBottom="300dp"
         app:layout_constraintBottom_toTopOf="@id/buttonLogin"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textPassword"
-       />
+        app:layout_constraintTop_toBottomOf="@id/textViewLogin"
+        >
+
+        <EditText
+            android:id="@+id/inputEmailLogin"
+            android:layout_width="379dp"
+            android:layout_height="45sp"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/custom_email_icon"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/Email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toSOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/textPassword"/>
+
+        <EditText
+            android:id="@+id/textPassword"
+            android:layout_width="379dp"
+            android:layout_height="45sp"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/custom_lock_icon"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:hint="@string/Contraseña"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toSOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputEmailLogin"
+            app:layout_constraintBottom_toTopOf="@id/btnTxtOlvidar"
+            />
+
+        <TextView
+            android:id="@+id/btnTxtOlvidar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/stringOlvidar"
+            android:textColor="@color/bordo"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textPassword"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/buttonLogin"
@@ -79,10 +91,20 @@
         android:text="@string/Entrar"
         android:backgroundTint="@color/bordo"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/txtUserNew"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groupedLayout"
+        app:layout_constraintBottom_toTopOf="@id/groupedLayout2" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/groupedLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnTxtOlvidar"/>
+        app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+        app:layout_constraintBottom_toBottomOf="parent">
+
 
     <TextView
         android:id="@+id/txtUserNew"
@@ -90,10 +112,10 @@
         android:layout_height="wrap_content"
         android:text="@string/EresUsuarioNuevo"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnTxtCrearCuenta"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin"/>
+        app:layout_constraintEnd_toStartOf="@id/btnTxtCrearCuenta"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/btnTxtCrearCuenta"
@@ -103,11 +125,11 @@
         android:text="@string/stringCrear_Cuenta"
         android:textColor="@color/bordo"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/txtUserNew"
-        app:layout_constraintTop_toBottomOf="@id/buttonLogin"/>
-
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonLogin"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -17,7 +17,7 @@
     <string name="MisPolizas">Mis Polizas</string>
     <string name="AgregarPoliza">Agregar poliza</string>
 
-    <string name="Login">Login</string>
+    <string name="Login"><B>Log In</B></string>
     <string name="Entrar">Entrar</string>
     <string name="EresUsuarioNuevo">¿Eres Usuario Nuevo?</string>
 
