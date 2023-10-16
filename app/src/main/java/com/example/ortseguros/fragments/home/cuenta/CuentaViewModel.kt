@@ -30,7 +30,7 @@ class CuentaViewModel : ViewModel() {
             docRef.get()
                 .addOnSuccessListener { document ->
                     if (document != null && document.exists()) {
-                        val usuariodata = Usuario(
+                        val usuariodata = Usuario(document.getString("numCliente")?:"",
                             userId,
                             document.getString("nombre") ?: "",
                             document.getString("apellido") ?: "",
