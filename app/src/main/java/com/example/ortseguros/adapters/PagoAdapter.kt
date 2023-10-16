@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ortseguros.R
 import com.example.ortseguros.entities.Pago
@@ -36,11 +37,19 @@ class PagoAdapter (private var pagoList: MutableList<Pago>,
                 txtfechaPago.text = "$mensaje $fechaPago"
         }
 
+
         fun setAbonado(abonado: Boolean) {
             val txtAbonado: TextView = view.findViewById(R.id.txtAbonadoCardView)
-            val mensaje = if (abonado) "Abonado" else "Impago"
+            val mensaje = if (abonado) {
+                txtAbonado.setTextColor(ContextCompat.getColor(txtAbonado.context, R.color.colorAbonado))
+                "Abonado"
+            } else {
+                txtAbonado.setTextColor(ContextCompat.getColor(txtAbonado.context, R.color.colorImpago))
+                "Impago"
+            }
             txtAbonado.text = mensaje
         }
+
 
 
 
