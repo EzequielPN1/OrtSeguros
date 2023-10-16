@@ -34,10 +34,10 @@ import java.util.concurrent.atomic.AtomicInteger
 
 class NuevaPolizaViewModel : ViewModel() {
 
-    private val porcentajeAntiguedad = 0.005
-    private val porcentajeCuotaBase = 0.010
     private val db = Firebase.firestore
     private lateinit var firebaseAuth: FirebaseAuth
+    private val storage = Firebase.storage
+    private val storageRef = storage.getReferenceFromUrl("gs://apportseguros-c6dea.appspot.com")
 
     val selectedDateLiveData = MutableLiveData<String>()
     fun onDateSelected(day: Int, month: Int, year: Int) {
@@ -72,111 +72,122 @@ class NuevaPolizaViewModel : ViewModel() {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
 
-        obtenerValorVehiculo(marcaModelo) { valor ->
 
-            if (valor != null) {
-                val fechaActual = obtenerFechaActual()
-                val diferenciaEnAnios = calcularDiferenciaAnios(fechaAltaVehiculo, fechaActual)
-                val valorSumaAsegurada = calcularSumaAsegurada(valor.toDouble(), diferenciaEnAnios)
+        obtenerPorcentajeAntiguedad { porcentajeAntiguedad ->
+            if (porcentajeAntiguedad != null) {
 
-                obtenerPorcentajesCoberturas { porcentajes ->
-                    if (porcentajes != null) {
-                        val cuotaMensual = calcularValorCuota(
-                            valorSumaAsegurada,
-                            respCivil,
-                            danioTotal,
-                            granizo,
-                            roboParcial,
-                            roboTotal,
-                            porcentajes
-                        )
-                        // Resto de tu código para guardar la póliza
+                obtenerValorVehiculo(marcaModelo) { valor ->
+                    if (valor != null) {
+                        val fechaActual = obtenerFechaActual()
+                        val diferenciaEnAnios = calcularDiferenciaAnios(fechaAltaVehiculo, fechaActual)
+                        val valorSumaAsegurada = calcularSumaAsegurada(valor.toDouble(), diferenciaEnAnios, porcentajeAntiguedad)
 
-                        db.collection("polizas")
-                            .orderBy("numPoliza", Query.Direction.DESCENDING)
-                            .limit(1)
-                            .get()
-                            .addOnCompleteListener { queryTask ->
-                                if (queryTask.isSuccessful) {
-                                    val lastPoliza = queryTask.result?.documents?.firstOrNull()
-                                    val numPolizaString = lastPoliza?.get("numPoliza") as? String
-                                    val numPoliza = (numPolizaString?.toInt() ?: 0) + 1
+                        obtenerPorcentajesCoberturas { porcentajes ->
+                            if (porcentajes != null) {
+                                calcularValorCuota(
+                                    valorSumaAsegurada,
+                                    respCivil,
+                                    danioTotal,
+                                    granizo,
+                                    roboParcial,
+                                    roboTotal,
+                                    porcentajes
+                                ) { cuotaMensual ->
+                                    if (cuotaMensual != null) {
 
-                                    val poliza = Poliza(
-                                        numPoliza = numPoliza.toString(),
-                                        idUsuario = user?.uid.toString(),
-                                        marcaModelo = marcaModelo,
-                                        fechaAltaVehiculo = fechaAltaVehiculo,
-                                        patente = patente,
-                                        fechaInicioPoliza = fechaActual,
-                                        sumaAsegurada = valorSumaAsegurada.toString(),
-                                        valorCuota = cuotaMensual.toString(),
-                                        respCivil = respCivil,
-                                        danioTotal = danioTotal,
-                                        granizo = granizo,
-                                        roboParcial = roboParcial,
-                                        roboTotal = roboTotal,
-                                        pagos = generarPagos(cuotaMensual.toString()),
-                                    )
+                                        db.collection("polizas")
+                                            .orderBy("numPoliza", Query.Direction.DESCENDING)
+                                            .limit(1)
+                                            .get()
+                                            .addOnCompleteListener { queryTask ->
+                                                if (queryTask.isSuccessful) {
+                                                    val lastPoliza = queryTask.result?.documents?.firstOrNull()
+                                                    val numPolizaString = lastPoliza?.get("numPoliza") as? String
+                                                    val numPoliza = (numPolizaString?.toInt() ?: 0) + 1
 
-                                    db.collection("polizas")
-                                        .add(poliza)
-                                        .addOnSuccessListener { documentReference ->
-                                            val idGenerado = documentReference.id
-
-                                            val uriImageFrente = generarUrl(uriFrente, idGenerado)
-                                            val uriImageLatDer = generarUrl(uriLatIzq, idGenerado)
-                                            val uriImageLatIzq = generarUrl(uriLatDer, idGenerado)
-                                            val uriImagePosterior =
-                                                generarUrl(uriPosterior, idGenerado)
-
-                                            // Actualizar el ID en la póliza misma
-                                            db.collection("polizas")
-                                                .document(idGenerado)
-                                                .update(
-                                                    "uriImageFrente", uriImageFrente,
-                                                    "uriImageLatDer", uriImageLatDer,
-                                                    "uriImageLatIzq", uriImageLatIzq,
-                                                    "uriImagePosterior", uriImagePosterior,
-                                                    "id", idGenerado
-                                                )
-
-                                                .addOnSuccessListener {
-
-                                                    val uris = listOf(
-                                                        uriFrente,
-                                                        uriLatIzq,
-                                                        uriLatDer,
-                                                        uriPosterior
-                                                    )
-                                                    val imageNames = listOf(
-                                                        uriImageFrente,
-                                                        uriImageLatIzq,
-                                                        uriImageLatDer,
-                                                        uriImagePosterior
+                                                    val poliza = Poliza(
+                                                        numPoliza = numPoliza.toString(),
+                                                        idUsuario = user?.uid.toString(),
+                                                        marcaModelo = marcaModelo,
+                                                        fechaAltaVehiculo = fechaAltaVehiculo,
+                                                        patente = patente,
+                                                        fechaInicioPoliza = fechaActual,
+                                                        sumaAsegurada = valorSumaAsegurada.toString(),
+                                                        valorCuota = cuotaMensual.toString(),
+                                                        respCivil = respCivil,
+                                                        danioTotal = danioTotal,
+                                                        granizo = granizo,
+                                                        roboParcial = roboParcial,
+                                                        roboTotal = roboTotal,
+                                                        pagos = generarPagos(cuotaMensual.toString()),
                                                     )
 
-                                                    cargarImagenes(uris, imageNames) {
-                                                        _toastMessage.value =
-                                                            "Póliza guardada con éxito"
-                                                        callback(true)
-                                                    }
+                                                    db.collection("polizas")
+                                                        .add(poliza)
+                                                        .addOnSuccessListener { documentReference ->
+                                                            val idGenerado = documentReference.id
 
+                                                            val uriImageFrente = generarUrl(uriFrente, idGenerado)
+                                                            val uriImageLatDer = generarUrl(uriLatIzq, idGenerado)
+                                                            val uriImageLatIzq = generarUrl(uriLatDer, idGenerado)
+                                                            val uriImagePosterior = generarUrl(uriPosterior, idGenerado)
+
+                                                            // Actualizar el ID en la póliza misma
+                                                            db.collection("polizas")
+                                                                .document(idGenerado)
+                                                                .update(
+                                                                    "uriImageFrente", uriImageFrente,
+                                                                    "uriImageLatDer", uriImageLatDer,
+                                                                    "uriImageLatIzq", uriImageLatIzq,
+                                                                    "uriImagePosterior", uriImagePosterior,
+                                                                    "id", idGenerado
+                                                                )
+                                                                .addOnSuccessListener {
+                                                                    val uris = listOf(
+                                                                        uriFrente,
+                                                                        uriLatIzq,
+                                                                        uriLatDer,
+                                                                        uriPosterior
+                                                                    )
+                                                                    val imageNames = listOf(
+                                                                        uriImageFrente,
+                                                                        uriImageLatIzq,
+                                                                        uriImageLatDer,
+                                                                        uriImagePosterior
+                                                                    )
+
+                                                                    cargarImagenes(uris, imageNames) {
+                                                                        _toastMessage.value = "Póliza guardada con éxito"
+                                                                        callback(true)
+                                                                    }
+                                                                }
+                                                                .addOnFailureListener {
+                                                                    callback(false)
+                                                                }
+                                                        }
+                                                        .addOnFailureListener {
+                                                            callback(false)
+                                                        }
                                                 }
-                                                .addOnFailureListener {
-                                                    callback(false)
-                                                }
-                                        }
-                                        .addOnFailureListener {
-                                            callback(false)
-                                        }
+                                            }
+                                    } else {
+                                        callback(false)
+                                    }
                                 }
+                            } else {
+                                callback(false)
                             }
+                        }
+                    } else {
+                        callback(false)
                     }
                 }
+            } else {
+                callback(false)
             }
         }
     }
+
 
 
     fun obtenerMarcasModelos(callback: (List<String>?, String?) -> Unit) {
@@ -231,10 +242,26 @@ class NuevaPolizaViewModel : ViewModel() {
             }
     }
 
-    private fun calcularSumaAsegurada(valorVehiculo: Double, diferenciaAnios: Int): Double {
+    private fun calcularSumaAsegurada(valorVehiculo: Double, diferenciaAnios: Int, porcentajeAntiguedad: Double): Double {
         return valorVehiculo - (valorVehiculo * porcentajeAntiguedad * diferenciaAnios)
     }
 
+
+    private fun obtenerPorcentajeAntiguedad(callback: (Double?) -> Unit) {
+        db.collection("valoresBase")
+            .whereEqualTo("nombre", "antiguedad")
+            .get()
+            .addOnCompleteListener { queryTask ->
+                if (queryTask.isSuccessful) {
+                    val document = queryTask.result?.documents?.firstOrNull()
+                    val porcentajeString = document?.get("porcentaje") as? String
+                    val porcentaje = porcentajeString?.toDoubleOrNull()
+                    callback(porcentaje)
+                } else {
+                    callback(null)
+                }
+            }
+    }
 
     private fun calcularValorCuota(
         sumaAsegurada: Double,
@@ -243,37 +270,62 @@ class NuevaPolizaViewModel : ViewModel() {
         granizo: Boolean,
         roboParcial: Boolean,
         roboTotal: Boolean,
-        porcentajes: Map<String, Double>
-    ): Int {
-        var cuotaMensual = sumaAsegurada * porcentajeCuotaBase
+        porcentajes: Map<String, Double>,
+        callback: (Int) -> Unit
+    ) {
+        obtenerPorcentajeCuotaBase { porcentajeCuotaBase ->
+            if (porcentajeCuotaBase != null) {
+                var cuotaMensual = sumaAsegurada * porcentajeCuotaBase
 
-        if (respCivil) {
-            val porcentajeRespCivil = porcentajes["respCivil"] ?: 0.0
-            cuotaMensual += cuotaMensual * porcentajeRespCivil
+                if (respCivil) {
+                    val porcentajeRespCivil = porcentajes["respCivil"] ?: 0.0
+                    cuotaMensual += cuotaMensual * porcentajeRespCivil
+                }
+
+                if (danioTotal) {
+                    val porcentajeDanioTotal = porcentajes["danioTotal"] ?: 0.0
+                    cuotaMensual += cuotaMensual * porcentajeDanioTotal
+                }
+
+                if (granizo) {
+                    val porcentajeGranizo = porcentajes["granizo"] ?: 0.0
+                    cuotaMensual += cuotaMensual * porcentajeGranizo
+                }
+
+                if (roboParcial) {
+                    val porcentajeRoboParcial = porcentajes["roboParcial"] ?: 0.0
+                    cuotaMensual += cuotaMensual * porcentajeRoboParcial
+                }
+
+                if (roboTotal) {
+                    val porcentajeRoboTotal = porcentajes["roboTotal"] ?: 0.0
+                    cuotaMensual += cuotaMensual * porcentajeRoboTotal
+                }
+
+                callback(cuotaMensual.toInt())
+            } else {
+                callback(0) // En caso de error
+            }
         }
-
-        if (danioTotal) {
-            val porcentajeDanioTotal = porcentajes["danioTotal"] ?: 0.0
-            cuotaMensual += cuotaMensual * porcentajeDanioTotal
-        }
-
-        if (granizo) {
-            val porcentajeGranizo = porcentajes["granizo"] ?: 0.0
-            cuotaMensual += cuotaMensual * porcentajeGranizo
-        }
-
-        if (roboParcial) {
-            val porcentajeRoboParcial = porcentajes["roboParcial"] ?: 0.0
-            cuotaMensual += cuotaMensual * porcentajeRoboParcial
-        }
-
-        if (roboTotal) {
-            val porcentajeRoboTotal = porcentajes["roboTotal"] ?: 0.0
-            cuotaMensual += cuotaMensual * porcentajeRoboTotal
-        }
-
-        return cuotaMensual.toInt()
     }
+
+
+    private fun obtenerPorcentajeCuotaBase(callback: (Double?) -> Unit) {
+        db.collection("valoresBase")
+            .whereEqualTo("nombre", "cuotaBase")
+            .get()
+            .addOnCompleteListener { queryTask ->
+                if (queryTask.isSuccessful) {
+                    val document = queryTask.result?.documents?.firstOrNull()
+                    val porcentajeString = document?.get("porcentaje") as? String
+                    val porcentaje = porcentajeString?.toDoubleOrNull()
+                    callback(porcentaje)
+                } else {
+                    callback(null)
+                }
+            }
+    }
+
 
 
     private fun obtenerPorcentajesCoberturas(callback: (Map<String, Double>?) -> Unit) {
@@ -412,8 +464,6 @@ class NuevaPolizaViewModel : ViewModel() {
     }
 
 
-    private val storage = Firebase.storage
-    private val storageRef = storage.getReferenceFromUrl("gs://apportseguros-c6dea.appspot.com")
 
     private fun generarUrl(uri: Uri?, idGenerado: String): String {
         val user = Firebase.auth.currentUser
