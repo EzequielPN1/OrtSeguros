@@ -102,6 +102,7 @@ class EditarCuentaViewModel : ViewModel() {
                 .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
                 .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
         }
+        setToastMessage("Cambios aplicados exitosamente")
     }
 
     fun setNombre(nuevoNombre: String) {
