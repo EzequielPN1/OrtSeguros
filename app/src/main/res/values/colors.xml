@@ -2,6 +2,6 @@
 <resources>
 
     <color name="white">#FFFFFFFF</color>
-
+    <color name="bordo">#ff31111d</color>
 
 </resources>
