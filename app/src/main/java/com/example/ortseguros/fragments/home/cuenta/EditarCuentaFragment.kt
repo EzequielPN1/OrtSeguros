@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.ortseguros.R
 
@@ -35,6 +36,13 @@ class EditarCuentaFragment : Fragment() {
         inputDomicilio = v.findViewById(R.id.inputDomicilio)
         inputTelefono = v.findViewById(R.id.inputTelefono)
         btnAplicarCambios = v.findViewById(R.id.btnAplicarCambios)
+
+        viewModelEditarCuenta.toastMessage.observe(viewLifecycleOwner) { message ->
+            if (!message.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                viewModelEditarCuenta.setToastMessage("")
+            }
+        }
         return v
     }
 
@@ -49,6 +57,8 @@ class EditarCuentaFragment : Fragment() {
             inputTelefono.setText(usuario.telefono)
         }
         btnAplicarCambios.setOnClickListener{
+
+            if(viewModelEditarCuenta.validarCampos(inputNombre,inputApellido,inputDni,inputDomicilio,inputTelefono)){
             // Actualizar los LiveData en el ViewModel con los valores de los EditText
             viewModelEditarCuenta.setNombre(inputNombre.text.toString())
             viewModelEditarCuenta.setApellido(inputApellido.text.toString())
@@ -58,6 +68,7 @@ class EditarCuentaFragment : Fragment() {
 
             // Aplicar los cambios en Firebase
             viewModelEditarCuenta.aplicarCambios()
+            }
         }
     }
 
