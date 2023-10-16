@@ -7,53 +7,61 @@
     android:layout_height="match_parent"
     tools:context=".fragments.home.misPolizas.NuevaPolizaFragment">
 
-
-
-    <ImageView
-        android:id="@+id/imagePosterior"
-        android:layout_width="62dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="50dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fotosAgrupadas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/spinner_marcaModelo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/car_posterior"
-        android:longClickable="true"/>
-
-    <ImageView
-        android:id="@+id/imageLatDer"
-        android:layout_width="62dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/imagePosterior"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/car_lat_der"
-        android:longClickable="true"/>
-
-    <ImageView
-        android:id="@+id/imageLatIzq"
-        android:layout_width="62dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageLatDer"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/car_lat_izq"
-        android:longClickable="true"/>
-
-    <ImageView
-        android:id="@+id/imageFrente"
-        android:layout_width="62dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageLatIzq"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/car_frontal"
-        android:longClickable="true"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imagePosterior"
+            android:layout_width="62dp"
+            android:layout_height="59dp"
+            android:longClickable="true"
+            android:src="@drawable/car_posterior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageLatDer"/>
+
+        <ImageView
+            android:id="@+id/imageLatDer"
+            android:layout_width="62dp"
+            android:layout_height="59dp"
+            android:longClickable="true"
+            android:src="@drawable/car_lat_der"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imagePosterior"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageLatIzq"/>
+
+        <ImageView
+            android:id="@+id/imageLatIzq"
+            android:layout_width="62dp"
+            android:layout_height="59dp"
+            android:longClickable="true"
+            android:src="@drawable/car_lat_izq"
+            app:layout_constraintEnd_toStartOf="@+id/imageLatDer"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageFrente"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/imageFrente"
+            android:layout_width="62dp"
+            android:layout_height="59dp"
+            android:longClickable="true"
+            android:src="@drawable/car_frontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageLatIzq"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Spinner
         android:id="@+id/spinner_marcaModelo"
