@@ -1,5 +1,10 @@
 <resources>
 
+    <string name="daniototal2">daño total</string>
+    <string name="respCivil2">responsabilidad civil</string>
+    <string name="granizo2">granizo</string>
+    <string name="roboparcial2">robo parcial</string>
+    <string name="robototal2">robo total</string>
 
 
     <string name="app_name">OrtSeguros</string>

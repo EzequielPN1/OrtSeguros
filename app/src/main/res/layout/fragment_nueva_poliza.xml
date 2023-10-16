@@ -69,56 +69,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
-    <Switch
-        android:id="@+id/swc_roboTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="154dp"
-        android:text="roboTotal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swc_roboParcial" />
-
-    <Switch
-        android:id="@+id/swc_roboParcial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="150dp"
-        android:text="roboParcial"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swc_granizo" />
-
-    <Switch
-        android:id="@+id/swc_granizo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="150dp"
-        android:text="granizo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swc_danioTotal" />
-
-    <Switch
-        android:id="@+id/swc_danioTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="150dp"
-        android:text="danioTotal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swc_respCivil" />
-
     <EditText
         android:id="@+id/inputPatente"
         android:layout_width="320dp"
@@ -165,30 +115,85 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_marcaModelo" />
 
-    <Switch
-        android:id="@+id/swc_respCivil"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/groupedLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="115dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="115dp"
-        android:text="respCivil"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPatente" />
+        app:layout_constraintBottom_toTopOf="@id/btnNuevaPoliza"
+        app:layout_constraintEnd_toEndOf="@id/inputPatente"
+        app:layout_constraintStart_toStartOf="@id/inputPatente"
+        app:layout_constraintTop_toBottomOf="@+id/inputPatente">
+
+        <Switch
+            android:id="@+id/swc_respCivil"
+            style="@style/switchStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/respCivil2"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/swc_danioTotal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/groupedLayout" />
+
+        <Switch
+            android:id="@+id/swc_danioTotal"
+            style="@style/switchStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/daniototal2"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/swc_granizo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/swc_respCivil" />
+
+        <Switch
+            android:id="@+id/swc_granizo"
+            style="@style/switchStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/granizo2"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/swc_roboParcial"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/swc_danioTotal" />
+
+        <Switch
+            android:id="@+id/swc_roboParcial"
+            style="@style/switchStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/roboparcial2"
+            app:layout_constraintBottom_toTopOf="@id/swc_roboTotal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/swc_granizo" />
+
+        <Switch
+            android:id="@+id/swc_roboTotal"
+            style="@style/switchStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/robototal2"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/groupedLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/swc_roboParcial" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btnNuevaPoliza"
-        android:layout_width="307dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/AgregarPoliza"
-        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/btnStyle"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.465"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
