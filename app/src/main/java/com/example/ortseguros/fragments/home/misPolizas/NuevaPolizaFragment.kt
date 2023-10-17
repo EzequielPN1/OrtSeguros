@@ -1,7 +1,7 @@
 package com.example.ortseguros.fragments.home.misPolizas
 
 
-import android.app.ProgressDialog
+
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
