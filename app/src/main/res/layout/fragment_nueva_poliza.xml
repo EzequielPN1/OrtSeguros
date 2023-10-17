@@ -73,36 +73,36 @@
         app:layout_constraintEnd_toEndOf="@id/fotosAgrupadas"
         app:layout_constraintStart_toStartOf="@id/fotosAgrupadas"
         app:layout_constraintTop_toBottomOf="@id/fotosAgrupadas">
-    <Spinner
-        android:id="@+id/spinner_marcaModelo"
-        android:layout_margin="8dp"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:longClickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/inputFechaAltaVehiculo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Spinner
+            android:id="@+id/spinner_marcaModelo"
+            android:layout_margin="8dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:longClickable="true"
+            app:layout_constraintBottom_toTopOf="@+id/inputFechaAltaVehiculo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/inputPatente"
-        android:layout_margin="8dp"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:autofillHints="name"
-        android:background="@drawable/custom_input"
-        android:clickable="false"
-        android:drawableStart="@drawable/icon_text"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="Patente"
-        android:inputType="text"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputFechaAltaVehiculo"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <EditText
+            android:id="@+id/inputPatente"
+            android:layout_margin="8dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:autofillHints="name"
+            android:background="@drawable/custom_input"
+            android:clickable="false"
+            android:drawableStart="@drawable/icon_text"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="Patente"
+            android:inputType="text"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputFechaAltaVehiculo"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <EditText
             android:id="@+id/inputFechaAltaVehiculo"
@@ -125,7 +125,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_marcaModelo" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/groupedLayout"
