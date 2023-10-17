@@ -48,9 +48,8 @@ class NuevaPolizaFragment : Fragment() {
     private var uriLatIzq: Uri? = null
     private var uriLatDer: Uri? = null
     private var uriPosterior: Uri? = null
-
-
-
+    private lateinit var progresBar : ProgressBar
+    private lateinit var progressText: TextView
 
 
     private val pickMediaFrente = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -101,6 +100,8 @@ class NuevaPolizaFragment : Fragment() {
         imageLatIzq = v.findViewById(R.id.imageLatIzq)
         imageLatDer = v.findViewById(R.id.imageLatDer)
         imagePosterior = v.findViewById(R.id.imagePosterior)
+        progresBar = v.findViewById(R.id.progressBar)
+        progressText = v.findViewById(R.id.progressText)
 
         viewModelNuevaPoliza.selectedDateLiveData.observe(
             viewLifecycleOwner
@@ -183,7 +184,8 @@ class NuevaPolizaFragment : Fragment() {
                 ).observe(viewLifecycleOwner) { camposValidos ->
                 if (camposValidos) {
 
-
+                    progresBar.visibility = View.VISIBLE
+                    progressText.visibility = View.VISIBLE
 
                     viewModelNuevaPoliza.guardarNuevaPoliza(
                         marcaModelo,
@@ -200,7 +202,8 @@ class NuevaPolizaFragment : Fragment() {
                         uriPosterior
                     ) { exito ->
 
-
+                        progresBar.visibility = View.INVISIBLE
+                        progressText.visibility = View.INVISIBLE
 
                         if (exito) {
                             findNavController().navigateUp()
