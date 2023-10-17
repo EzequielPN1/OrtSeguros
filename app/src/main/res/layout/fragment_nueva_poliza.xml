@@ -5,13 +5,15 @@
     android:id="@+id/frameLayout8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     tools:context=".fragments.home.misPolizas.NuevaPolizaFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fotosAgrupadas"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/spinner_marcaModelo"
+        android:layout_margin="32dp"
+        app:layout_constraintBottom_toTopOf="@id/datosAgrupados"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -63,14 +65,19 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/datosAgrupados"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/groupedLayout"
+        app:layout_constraintEnd_toEndOf="@id/fotosAgrupadas"
+        app:layout_constraintStart_toStartOf="@id/fotosAgrupadas"
+        app:layout_constraintTop_toBottomOf="@id/fotosAgrupadas">
     <Spinner
         android:id="@+id/spinner_marcaModelo"
-        android:layout_width="188dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="90dp"
-        android:layout_marginBottom="50dp"
+        android:layout_margin="8dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:longClickable="true"
         app:layout_constraintBottom_toTopOf="@+id/inputFechaAltaVehiculo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,13 +86,9 @@
 
     <EditText
         android:id="@+id/inputPatente"
-        android:layout_width="320dp"
+        android:layout_margin="8dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-
         android:autofillHints="name"
         android:background="@drawable/custom_input"
         android:clickable="false"
@@ -98,39 +101,41 @@
         android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputFechaAltaVehiculo" />
+        app:layout_constraintTop_toBottomOf="@+id/inputFechaAltaVehiculo"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <EditText
-        android:id="@+id/inputFechaAltaVehiculo"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="32dp"
-        android:autofillHints="date"
-        android:background="@drawable/custom_input"
-        android:clickable="false"
+        <EditText
+            android:id="@+id/inputFechaAltaVehiculo"
+            android:layout_margin="8dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:autofillHints="date"
+            android:background="@drawable/custom_input"
+            android:clickable="false"
+            android:drawableStart="@drawable/icon_calendar"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="FechaAltaVehiculo"
+            android:inputType="date"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:layout_constraintBottom_toTopOf="@id/inputPatente"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner_marcaModelo" />
 
-        android:drawableStart="@drawable/icon_calendar"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:focusable="false"
-        android:hint="FechaAltaVehiculo"
-        android:inputType="date"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_marcaModelo" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/groupedLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/btnNuevaPoliza"
-        app:layout_constraintEnd_toEndOf="@id/inputPatente"
-        app:layout_constraintStart_toStartOf="@id/inputPatente"
-        app:layout_constraintTop_toBottomOf="@+id/inputPatente">
+        app:layout_constraintEnd_toEndOf="@id/fotosAgrupadas"
+        app:layout_constraintStart_toStartOf="@id/fotosAgrupadas"
+        app:layout_constraintTop_toBottomOf="@id/datosAgrupados"
+        >
 
         <Switch
             android:id="@+id/swc_respCivil"
@@ -197,7 +202,6 @@
         android:id="@+id/btnNuevaPoliza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:text="@string/AgregarPoliza"
         style="@style/btnStyle"
         app:layout_constraintStart_toStartOf="parent"
