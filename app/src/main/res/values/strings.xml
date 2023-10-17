@@ -1,5 +1,10 @@
 <resources>
 
+    <string name="daniototal2">daño total</string>
+    <string name="respCivil2">responsabilidad civil</string>
+    <string name="granizo2">granizo</string>
+    <string name="roboparcial2">robo parcial</string>
+    <string name="robototal2">robo total</string>
 
 
     <string name="app_name">OrtSeguros</string>
@@ -14,10 +19,10 @@
     <string name="Hora">Hora</string>
     <string name="Ubicacion">Ubicacion</string>
     <string name="Descripcion">Descripcion</string>
-
+    <string name="MisPolizas">Mis Polizas</string>
     <string name="AgregarPoliza">Agregar poliza</string>
 
-    <string name="Login">Login</string>
+    <string name="Login"><B>Log In</B></string>
     <string name="Entrar">Entrar</string>
     <string name="EresUsuarioNuevo">¿Eres Usuario Nuevo?</string>
 
