@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_mis_polizas)
 
         navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-        bottomNavView = findViewById(R.id.button_bar)
+        bottomNavView = findViewById(R.id.bottom_bar)
         NavigationUI.setupWithNavController(bottomNavView, navHostFragment.navController)
     }
 
