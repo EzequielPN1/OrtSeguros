@@ -1,6 +1,7 @@
 package com.example.ortseguros.fragments.home.misPolizas
 
 
+import android.app.ProgressDialog
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -13,8 +14,10 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.Switch
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,6 +48,8 @@ class NuevaPolizaFragment : Fragment() {
     private var uriLatIzq: Uri? = null
     private var uriLatDer: Uri? = null
     private var uriPosterior: Uri? = null
+    private lateinit var progresBar : ProgressBar
+    private lateinit var progressText: TextView
 
 
 
@@ -97,7 +102,8 @@ class NuevaPolizaFragment : Fragment() {
         imageLatIzq = v.findViewById(R.id.imageLatIzq)
         imageLatDer = v.findViewById(R.id.imageLatDer)
         imagePosterior = v.findViewById(R.id.imagePosterior)
-
+        progresBar = v.findViewById(R.id.progressBar)
+        progressText = v.findViewById(R.id.progressText)
 
         viewModelNuevaPoliza.selectedDateLiveData.observe(
             viewLifecycleOwner
@@ -156,8 +162,6 @@ class NuevaPolizaFragment : Fragment() {
 
         btnNuevaPoliza.setOnClickListener {
 
-
-
             val marcaModelo = spinnerMarcaModelo.selectedItem.toString()
             val fechaAltaVehiculo = inputFechaAltaVehiculo.text.toString()
             val patente = inputPatente.text.toString()
@@ -182,7 +186,8 @@ class NuevaPolizaFragment : Fragment() {
                 ).observe(viewLifecycleOwner) { camposValidos ->
                 if (camposValidos) {
 
-                    Toast.makeText(requireContext(), "Cargando la póliza....", Toast.LENGTH_LONG * 2).show();
+                    progresBar.visibility = View.VISIBLE
+                    progressText.visibility = View.VISIBLE
 
                     viewModelNuevaPoliza.guardarNuevaPoliza(
                         marcaModelo,
@@ -198,6 +203,10 @@ class NuevaPolizaFragment : Fragment() {
                         uriLatDer,
                         uriPosterior
                     ) { exito ->
+
+                        progresBar.visibility = View.INVISIBLE
+                        progressText.visibility = View.INVISIBLE
+
                         if (exito) {
                             findNavController().navigateUp()
 
