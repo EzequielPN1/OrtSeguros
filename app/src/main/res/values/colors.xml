@@ -2,6 +2,13 @@
 <resources>
 
         <color name="white">#FFFFFFFF</color>
+
+
+        <color name="colorAbonado">#00FF00</color>  <!-- Verde -->
+        <color name="colorImpago">#FF0000</color>  <!-- Rojo -->
         <color name="bordo">#ff31111d</color>
+
+
+
 
 </resources>
