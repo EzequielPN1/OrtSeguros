@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -40,6 +42,8 @@ class DetallePolizaFragment : Fragment() {
     private lateinit var imageLatDer: ImageView
     private lateinit var imagePosterior: ImageView
 
+    private lateinit var btnBajaPoliza: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +69,16 @@ class DetallePolizaFragment : Fragment() {
         imageLatDer = v.findViewById(R.id.imageLatDerDetalle)
         imagePosterior = v.findViewById(R.id.imagePosteriorDetalle)
 
+        btnBajaPoliza = v.findViewById(R.id.btnBajaPoliza)
+
+
+        viewModelDetallePoliza.toastMessage.observe(viewLifecycleOwner) { message ->
+            if (!message.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                viewModelDetallePoliza.setToastMessage("")
+            }
+        }
+
         return v
     }
 
@@ -83,8 +97,8 @@ class DetallePolizaFragment : Fragment() {
         inputGranizo.text = if (poliza.granizo) "contratado" else "no"
         inputRoboParcial.text = if (poliza.roboParcial) "contratado" else "no"
         inputRoboTotal.text = if (poliza.roboTotal) "contratado" else "no"
-        inputSumaAsegurada.text = poliza.sumaAsegurada
-        inputValorCuota.text = poliza.valorCuota
+        inputSumaAsegurada.text = "${poliza.sumaAsegurada} pesos"
+        inputValorCuota.text = "${poliza.valorCuota} pesos"
         viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImageFrente, imageFrente)
         viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImageLatIzq, imageLatIzq)
         viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImageLatDer, imageLatDer)
@@ -96,6 +110,29 @@ class DetallePolizaFragment : Fragment() {
             findNavController().navigate(action)
 
         }
+
+        btnBajaPoliza.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setTitle("Confirmación")
+            builder.setMessage("¿Está seguro de que desea dar de baja esta póliza?")
+
+            builder.setPositiveButton("Sí") { dialog, _ ->
+                // Si el usuario hace clic en "Sí", entonces se da de baja la póliza
+                viewModelDetallePoliza.darBajaPoliza(poliza) { exito ->
+                    if (exito) {
+                        findNavController().navigateUp()
+                    }
+                }
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("No") { dialog, which ->
+                dialog.dismiss()
+            }
+            val alertDialog = builder.create()
+            alertDialog.show()
+        }
+
+
 
     }
 }

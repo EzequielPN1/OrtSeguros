@@ -71,4 +71,6 @@
 
     <string name="ImagenMensaje">Ingresar fotos del Vehiculo: frontal, lat izquierdo, lat derecho y posterior</string>
 
+    <string name="BajaPoliza">Baja de poliza</string>
+
 </resources>

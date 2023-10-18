@@ -24,11 +24,11 @@ class MisPolizasViewModel : ViewModel() {
         val user = firebaseAuth.currentUser
         val userId = user?.uid.toString()
 
-
         val listaPolizas = mutableListOf<Poliza>()
 
         val siniestrosRef = db.collection("polizas")
             .whereEqualTo("idUsuario", userId)
+            .whereEqualTo("activa", true) // Agregar esta condición
 
         siniestrosRef.get()
             .addOnSuccessListener { snapshot ->
@@ -43,6 +43,7 @@ class MisPolizasViewModel : ViewModel() {
                 _polizasLiveData.value = emptyList()
             }
     }
+
 
 
 }
