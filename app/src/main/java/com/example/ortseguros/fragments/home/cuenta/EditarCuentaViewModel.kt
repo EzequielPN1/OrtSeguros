@@ -2,6 +2,7 @@ package com.example.ortseguros.fragments.home.cuenta
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,11 +13,6 @@ import com.google.firebase.ktx.Firebase
 
 class EditarCuentaViewModel : ViewModel() {
     // TODO: Implement the ViewModel
-
-    private val _toastMessage = MutableLiveData<String>()
-    val toastMessage: LiveData<String>
-        get() = _toastMessage
-
 
     private val _usuarioData = MutableLiveData<Usuario>()
     private val db = Firebase.firestore
@@ -33,7 +29,7 @@ class EditarCuentaViewModel : ViewModel() {
             docRef.get()
                 .addOnSuccessListener { document ->
                     if (document != null && document.exists()) {
-                        val usuariodata = Usuario(
+                        val usuariodata = Usuario(document.getString("numCliente") ?: "",
                             userId,
                             document.getString("nombre") ?: "",
                             document.getString("apellido") ?: "",
@@ -71,6 +67,14 @@ class EditarCuentaViewModel : ViewModel() {
     private val _telefono = MutableLiveData<String>()
     val telefono: LiveData<String> get() = _telefono
 
+    private val _toastMessage = MutableLiveData<String>()
+    val toastMessage: LiveData<String>
+        get() = _toastMessage
+
+    fun setToastMessage(message: String) {
+        _toastMessage.value = message
+    }
+
 
     fun aplicarCambios() {
         val userId = Firebase.auth.currentUser?.uid
@@ -98,6 +102,7 @@ class EditarCuentaViewModel : ViewModel() {
                 .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
                 .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
         }
+        setToastMessage("Cambios aplicados exitosamente")
     }
 
     fun setNombre(nuevoNombre: String) {
@@ -115,5 +120,34 @@ class EditarCuentaViewModel : ViewModel() {
     }
     fun setDomicilio(i: String) {
         _domicilio.value = i
+    }
+
+    fun validarCampos(
+        nombre: TextView, apellido: TextView,
+        dni: TextView, domicilio: TextView, telefono: TextView): Boolean {
+        var camposValidos = true
+
+        if (validarIngresoVacio(nombre)) {
+            _toastMessage.value = "Por favor, ingrese su nombre."
+            camposValidos = false
+        } else if (validarIngresoVacio(apellido)) {
+            _toastMessage.value = "Por favor, ingrese su apellido."
+            camposValidos = false
+        } else if (validarIngresoVacio(dni)) {
+            _toastMessage.value = "Por favor, ingrese su dni."
+            camposValidos = false
+        } else if (validarIngresoVacio(domicilio)) {
+            _toastMessage.value = "Por favor, ingrese su domicilio."
+            camposValidos = false
+        } else if (validarIngresoVacio(telefono)) {
+            _toastMessage.value = "Por favor, ingrese su teléfono."
+            camposValidos = false
+        }
+
+        return camposValidos
+    }
+
+    private fun validarIngresoVacio(editText: TextView): Boolean {
+        return editText.text.toString().isEmpty()
     }
 }

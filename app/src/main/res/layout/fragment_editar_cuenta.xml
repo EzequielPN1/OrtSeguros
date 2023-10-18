@@ -12,131 +12,144 @@
 
     <TextView
         android:id="@+id/txtTitleNombre"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:labelFor="@id/inputNombre"
         android:text="@string/Nombre"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_margin="12dp"/>
 
     <EditText
         android:id="@+id/inputNombre"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:autofillHints="@string/Nombre"
         android:inputType="text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleNombre"
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"/>
 
     <!-- Apellido -->
     <TextView
         android:id="@+id/txtTitleApellido"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:labelFor="@id/inputApellido"
         android:text="@string/Apellido"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/inputNombre"
+        android:layout_marginTop="16dp"
+        android:layout_margin="12dp"/>
 
     <EditText
         android:id="@+id/inputApellido"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:autofillHints="@string/Apellido"
         android:inputType="text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleApellido"
-        tools:ignore="VisualLintTextFieldSize" />
+        tools:ignore="VisualLintTextFieldSize"
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"/>
 
     <!-- DNI -->
     <TextView
         android:id="@+id/txtTitleDni"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:labelFor="@id/inputDni"
         android:text="@string/Dni"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputApellido" />
+        app:layout_constraintTop_toBottomOf="@+id/inputApellido"
+        android:layout_marginTop="16dp"
+        android:layout_margin="12dp"/>
 
     <EditText
         android:id="@+id/inputDni"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:autofillHints="@string/Dni"
         android:inputType="text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleDni" />
-
-    <!-- Email -->
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleDni"
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"/>
 
     <!-- Domicilio -->
 
     <TextView
         android:id="@+id/txtTitleDomicilio"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:labelFor="@id/inputDomicilio"
         android:text="@string/Domicilio"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputDni" />
+        app:layout_constraintTop_toBottomOf="@+id/inputDni"
+        android:layout_marginTop="16dp"
+        android:layout_margin="12dp"/>
 
     <EditText
         android:id="@+id/inputDomicilio"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:autofillHints="@string/Domicilio"
         android:inputType="text"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleDomicilio" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleDomicilio"
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"/>
 
     <!-- Teléfono -->
     <TextView
         android:id="@+id/txtTitleTelefono"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:labelFor="@id/inputTelefono"
         android:text="@string/Telefono"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputDomicilio" />
+        app:layout_constraintTop_toBottomOf="@+id/inputDomicilio"
+        android:layout_marginTop="16dp"
+        android:layout_margin="12dp"/>
 
     <EditText
         android:id="@+id/inputTelefono"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:layout_marginTop="8dp"
         android:autofillHints="@string/Telefono"
+        android:background="@drawable/rounded_backgrund"
         android:inputType="text"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:padding="8dp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitleTelefono"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitleTelefono" />
 
     <Button
         android:id="@+id/btnAplicarCambios"

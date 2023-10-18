@@ -8,161 +8,167 @@
     android:layout_height="match_parent"
     tools:context=".fragments.home.cuenta.CuentaFragment">
 
-    <!-- Título "Cuenta" -->
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Cuenta"
-        android:textSize="32sp"
+        android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.05" />
 
-    <!-- Nombre -->
+   <!-- Nombre -->
     <TextView
         android:id="@+id/txtTitleNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="@string/Nombre"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:layout_marginTop="16dp"
+        android:layout_margin="12dp"/>
+
 
     <TextView
         android:id="@+id/txtNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleNombre"
-        app:layout_constraintBottom_toTopOf="@+id/txtTitleApellido"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"
+    />
+
 
     <!-- Apellido -->
     <TextView
         android:id="@+id/txtTitleApellido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="@string/Apellido"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombre"
+        android:layout_margin="12dp"/>
 
     <TextView
         android:id="@+id/txtApellido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleApellido"
         app:layout_constraintBottom_toTopOf="@+id/txtTitleDni"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"/>
 
     <!-- DNI -->
     <TextView
         android:id="@+id/txtTitleDni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="@string/Dni"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtApellido" />
+        app:layout_constraintTop_toBottomOf="@+id/txtApellido"
+        android:layout_margin="12dp"/>
 
     <TextView
         android:id="@+id/txtDni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleDni"
         app:layout_constraintBottom_toTopOf="@+id/txtTitleEmail"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"/>
 
     <!-- Email -->
     <TextView
         android:id="@+id/txtTitleEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="@string/Email"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDni" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDni"
+        android:layout_margin="12dp"/>
 
     <TextView
         android:id="@+id/txtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleEmail"
         app:layout_constraintBottom_toTopOf="@+id/txtTitleDomicilio"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"/>
 
     <!-- Domicilio -->
     <TextView
         android:id="@+id/txtTitleDomicilio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="@string/Domicilio"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        android:layout_margin="12dp"/>
 
     <TextView
         android:id="@+id/txtDomicilio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleDomicilio"
         app:layout_constraintBottom_toTopOf="@+id/txtTitleTelefono"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"/>
 
     <!-- Teléfono -->
     <TextView
         android:id="@+id/txtTitleTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="@string/Telefono"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDomicilio" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDomicilio"
+        android:layout_margin="12dp"/>
 
     <TextView
         android:id="@+id/txtTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTitleTelefono"
         app:layout_constraintBottom_toTopOf="@+id/btnConfig"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:background="@drawable/rounded_backgrund"
+        android:padding="8dp"
+        android:layout_margin="12dp"/>
 
     <!-- Botón Configuración -->
     <Button
@@ -179,7 +185,7 @@
     <TextView
         android:id="@+id/btnTxtCerrarSesion"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:clickable="true"
         android:text="@string/CerrarSession"
         android:textColor="#0A62A8"
