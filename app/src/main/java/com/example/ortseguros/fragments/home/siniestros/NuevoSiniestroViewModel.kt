@@ -96,7 +96,7 @@ class NuevoSiniestroViewModel : ViewModel() {
         hora: String,
         ubicacion: String,
         tipoSiniestro: String,
-        callback: (Boolean, String?, String?) -> Unit // Agrega un parámetro para el ID generado
+        callback: (Boolean, String?) -> Unit // Agrega un parámetro para el ID generado
     ) {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
@@ -139,21 +139,21 @@ class NuevoSiniestroViewModel : ViewModel() {
                                         .document(idGenerado)
                                         .update("id", idGenerado)
                                         .addOnSuccessListener {
-                                            callback(true, null, idGenerado)
+                                            callback(true, null)
                                         }
                                         .addOnFailureListener { e ->
-                                            callback(false, e.message, null)
+                                            callback(false, e.message)
                                         }
                                 }
                                 .addOnFailureListener { e ->
-                                    callback(false, e.message, null)
+                                    callback(false, e.message)
                                 }
                         } else {
-                            callback(false, "Error al obtener el último número de siniestro: ${queryTask.exception}", null)
+                            callback(false, "Error al obtener el último número de siniestro: ${queryTask.exception}")
                         }
                     }
             } else {
-                callback(false, "Póliza no encontrada", null)
+                callback(false, "Póliza no encontrada")
             }
         }
     }

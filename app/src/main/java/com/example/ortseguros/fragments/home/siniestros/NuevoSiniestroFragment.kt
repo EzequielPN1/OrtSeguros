@@ -141,7 +141,7 @@ class NuevoSiniestroFragment : Fragment() {
                             hora,
                             ubicacion,
                             tipoSiniestro
-                        ) { exito, mensajeError, idGenerado ->
+                        ) { exito, mensajeError ->
                             if (exito) {
                                 Toast.makeText(
                                     requireContext(),
