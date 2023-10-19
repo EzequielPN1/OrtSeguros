@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,12 @@ class RealizarPagoFragment : Fragment() {
     private lateinit var v: View
     private lateinit var btnRealizarPago : Button
     private lateinit var txtPrecioRealizarPago:TextView
+
+    private lateinit var inputNumeroDeTarjeta: EditText
+    private lateinit var inputFechaDeCaducidad: EditText
+    private lateinit var inputTitular: EditText
+    private lateinit var inputDniRealizarPago: EditText
+    private lateinit var inputCodigoDeSeguridad: EditText
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +34,11 @@ class RealizarPagoFragment : Fragment() {
         viewModelRealizarPago = ViewModelProvider(this)[RealizarPagoViewModel::class.java]
         btnRealizarPago = v.findViewById(R.id.btnRealizarPago)
         txtPrecioRealizarPago = v.findViewById(R.id.txtPrecioRealizarPago)
-
+        inputNumeroDeTarjeta = v.findViewById(R.id.inputNumeroDeTarjeta)
+        inputFechaDeCaducidad = v.findViewById(R.id.inputFechaDeCaducidad)
+        inputTitular = v.findViewById(R.id.inputTitular)
+        inputDniRealizarPago = v.findViewById(R.id.inputDniRealizarPago)
+        inputCodigoDeSeguridad = v.findViewById(R.id.inputCodigoDeSeguridad)
 
         viewModelRealizarPago.toastMessage.observe(viewLifecycleOwner) { message ->
             if (!message.isNullOrEmpty()) {
@@ -49,20 +60,46 @@ class RealizarPagoFragment : Fragment() {
         val poliza = RealizarPagoFragmentArgs.fromBundle(requireArguments()).poliza
         txtPrecioRealizarPago.text = "El monto a abonar es de: ${pago.precio}"
 
-
-
-
-        btnRealizarPago.setOnClickListener {
-            viewModelRealizarPago.realizarPago(pago, poliza) { exito ->
-                if (exito) {
-                 findNavController().navigateUp()
-                }
+        // Obtener los datos de la tarjeta de crédito del ViewModel
+        viewModelRealizarPago.obtenerTarjetaDeCreditoUsuario { tarjetaDeCredito ->
+            if (tarjetaDeCredito != null) {
+                // Si se encontró la tarjeta de crédito, establecer los datos en los EditText
+                inputNumeroDeTarjeta.setText(tarjetaDeCredito.numeroDeTarjeta)
+                inputFechaDeCaducidad.setText(tarjetaDeCredito.fechaCaducidad)
+                inputTitular.setText(tarjetaDeCredito.titular)
+                inputDniRealizarPago.setText(tarjetaDeCredito.dni)
+                inputCodigoDeSeguridad.setText(tarjetaDeCredito.codigoSeguridad)
             }
         }
 
+        btnRealizarPago.setOnClickListener {
+            val numeroDeTarjetaTexto = inputNumeroDeTarjeta.text.toString()
+            val fechaDeCaducidadTexto = inputFechaDeCaducidad.text.toString()
+            val titularTexto = inputTitular.text.toString()
+            val dniRealizarPagoTexto = inputDniRealizarPago.text.toString()
+            val codigoDeSeguridadTexto = inputCodigoDeSeguridad.text.toString()
 
-
+            if (viewModelRealizarPago.validarCampos(
+                    numeroDeTarjetaTexto,
+                    fechaDeCaducidadTexto,
+                    titularTexto,
+                    dniRealizarPagoTexto,
+                    codigoDeSeguridadTexto
+                )
+            ) {
+                viewModelRealizarPago.realizarPago(pago, poliza) { exito ->
+                    if (exito) {
+                        findNavController().navigateUp()
+                    }
+                }
+            }
+        }
     }
+
+
+
+
+
 
 
 

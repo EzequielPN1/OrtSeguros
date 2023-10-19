@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ortseguros.entities.Pago
 import com.example.ortseguros.entities.Poliza
+import com.example.ortseguros.entities.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -72,13 +73,6 @@ class RealizarPagoViewModel : ViewModel() {
 
 
 
-
-
-
-
-
-
-
     private fun obtenerFechaActual(): String {
     val timeZone = TimeZone.getTimeZone("America/Argentina/Buenos_Aires")
     val calendar = Calendar.getInstance(timeZone)
@@ -91,10 +85,50 @@ class RealizarPagoViewModel : ViewModel() {
 
 
 
+    fun validarCampos(
+        numeroDeTarjeta: String,
+        fechaDeCaducidad: String,
+        titular: String,
+        dniRealizarPago: String,
+        codigoDeSeguridad: String
+    ): Boolean {
+        val isValid = numeroDeTarjeta.isNotBlank() &&
+                fechaDeCaducidad.isNotBlank() &&
+                titular.isNotBlank() &&
+                dniRealizarPago.isNotBlank() &&
+                codigoDeSeguridad.isNotBlank()
+
+        if (!isValid) {
+            _toastMessage.value  = "Todos los campos deben estar completos."
+        }
+
+        return isValid
+    }
 
 
+    fun obtenerTarjetaDeCreditoUsuario(callback: (Usuario.TarjetaDeCredito?) -> Unit) {
+        firebaseAuth = Firebase.auth
+        val user = firebaseAuth.currentUser
+        val userId = user?.uid.toString()
 
+        val usuariosRef = db.collection("usuarios").document(userId)
 
+        usuariosRef.get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val userData = documentSnapshot.toObject(Usuario::class.java)
+                    val tarjetaCredito = userData?.tarjetaDeCredito
+                    callback(tarjetaCredito)
+                } else {
+                    // El documento del usuario no existe, manejarlo según tus necesidades
+                    callback(null)
+                }
+            }
+            .addOnFailureListener {
+                // Manejar el error según tus necesidades
+                callback(null)
+            }
+    }
 
 
 

@@ -6,7 +6,6 @@
     <string name="roboparcial2">robo parcial</string>
     <string name="robototal2">robo total</string>
 
-
     <string name="app_name">OrtSeguros</string>
     <string name="stringCrear_Cuenta"><u>Crear Cuenta</u></string>
     <string name="stringOlvidar"><u>Olvido su Contraseña?</u></string>
@@ -34,7 +33,6 @@
     <string name="NuevoSiniestro">Nuevo siniestro</string>
 
 
-
     <string name="Nombre">Nombre</string>
     <string name="Apellido">Apellido</string>
     <string name="FechaNac">Fecha de nacimiento</string>
@@ -55,7 +53,6 @@
     <string name="txtContacto">Contacto</string>
     <string name="btnAplicarCambios">Aplicar cambios</string>
 
-
     <string name="marcaModelo">Marca modelo:</string>
     <string name="danioTotal">Daño total</string>
     <string name="fechaInicioPoliza">Fecha inicio</string>
@@ -72,5 +69,12 @@
     <string name="ImagenMensaje">Ingresar fotos del Vehiculo: frontal, lat izquierdo, lat derecho y posterior</string>
 
     <string name="BajaPoliza">Baja de poliza</string>
+
+
+    <string name="numeroDeTarjeta">Nro de tarjeta</string>
+    <string name="fechaCaducidad">Fecha de caducidad</string>
+    <string name="titular">Titular</string>
+    <string name="codigoSeguridad">Codigo de seguridad</string>
+
 
 </resources>
