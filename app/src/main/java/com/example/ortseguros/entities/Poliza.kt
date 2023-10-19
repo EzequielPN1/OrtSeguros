@@ -26,4 +26,5 @@ data class Poliza (
     var uriImageLatIzq:String = "",
     var uriImagePosterior:String = "",
     var activa:Boolean = true,
+    var eliminada:Boolean = false,
 ) : Parcelable

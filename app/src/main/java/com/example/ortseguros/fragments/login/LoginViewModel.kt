@@ -93,8 +93,7 @@ class LoginViewModel : ViewModel() {
 
     private fun validarEmail(inputUsuario: TextView): Boolean {
         val ingresoUsuario = inputUsuario.text.toString()
-        val usuarioValido = ingresoUsuario.matches(Regex("^[a-zA-Z0-9._%+-]+@(hotmail\\.com|gmail\\.com)$"))
-        return usuarioValido
+        return ingresoUsuario.matches(Regex("^[a-zA-Z0-9._%+-]+@(hotmail\\.com|gmail\\.com)$"))
     }
 
     fun validarOlvideEmail(inputUsuario: TextView): Boolean {

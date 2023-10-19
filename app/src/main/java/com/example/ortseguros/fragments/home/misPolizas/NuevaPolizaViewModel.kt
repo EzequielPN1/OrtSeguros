@@ -193,7 +193,7 @@ class NuevaPolizaViewModel : ViewModel() {
     fun obtenerMarcasModelos(callback: (List<String>?, String?) -> Unit) {
         val marcasModelosList = ArrayList<String>()
 
-        db.collection("Vehiculos")
+        db.collection("vehiculos")
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -224,7 +224,7 @@ class NuevaPolizaViewModel : ViewModel() {
     }
 
     private fun obtenerValorVehiculo(marcaModeloParam: String, callback: (String?) -> Unit) {
-        db.collection("Vehiculos")
+        db.collection("vehiculos")
             .whereEqualTo("marcaModelo", marcaModeloParam)
             .get()
             .addOnCompleteListener { task ->
@@ -386,6 +386,7 @@ class NuevaPolizaViewModel : ViewModel() {
 
         // Validación de fecha y patente
         val camposNoVacios = listOf(fechaAltaVehiculo, patente).all { it.isNotBlank() }
+
         if (!camposNoVacios) {
             _toastMessage.value = "Los campos fecha de alta y patente no pueden estar vacíos."
             camposValidosLiveData.value = false
@@ -398,16 +399,25 @@ class NuevaPolizaViewModel : ViewModel() {
                 _toastMessage.value = "Tiene que seleccionar por lo menos una cobertura."
                 camposValidosLiveData.value = false
             } else {
-                verificarPatenteUnica(patente) { esUnica ->
+                verificarPatenteUnicaActiva(patente) { esUnica ->
                     if (!esUnica) {
                         _toastMessage.value =
                             "La patente ingresada ya está registrada en otra póliza."
                         camposValidosLiveData.value = false
                     } else {
-                        camposValidosLiveData.value = true
+                        verificarPatenteUnicaInactiva(patente) { esUnica ->
+                            if (!esUnica) {
+                                _toastMessage.value = "Patente a la espera de revision."
+                                camposValidosLiveData.value = false
+                            }else{
+                                camposValidosLiveData.value = true
+                            }
+
+                        }
                     }
                 }
             }
+
         }
 
         return camposValidosLiveData
@@ -422,20 +432,37 @@ class NuevaPolizaViewModel : ViewModel() {
         return !fechaAltaDate.after(fechaActualDate)
     }
 
-    private fun verificarPatenteUnica(patente: String, callback: (Boolean) -> Unit) {
+    private fun verificarPatenteUnicaActiva(patente: String, callback: (Boolean) -> Unit) {
         db.collection("polizas")
             .whereEqualTo("patente", patente)
+            .whereEqualTo("activa", true)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val esUnica = task.result?.isEmpty ?: true
                     callback(esUnica)
                 } else {
-
                     callback(false)
                 }
             }
     }
+
+    private fun verificarPatenteUnicaInactiva(patente: String, callback: (Boolean) -> Unit) {
+        db.collection("polizas")
+            .whereEqualTo("patente", patente)
+            .whereEqualTo("activa", false)
+            .whereEqualTo("eliminada", false)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val esUnica = task.result?.isEmpty ?: true
+                    callback(esUnica)
+                } else {
+                    callback(false)
+                }
+            }
+    }
+
 
 
     private fun generarPagos(precio: String): List<Pago> {

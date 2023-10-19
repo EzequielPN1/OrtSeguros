@@ -51,6 +51,7 @@ class NuevoSiniestroViewModel : ViewModel() {
         val patentesList = ArrayList<String>()
 
         db.collection("polizas")  .whereEqualTo("idUsuario", user?.uid.toString())
+            .whereEqualTo("activa", true)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -68,22 +69,23 @@ class NuevoSiniestroViewModel : ViewModel() {
     }
 
 
-    fun obtenerCoberturasFirestore(callback: (List<String>?, String?) -> Unit) {
+    fun obtenerCoberturasFirestore(callback: (List<Pair<String, String>>?, String?) -> Unit) {
         db.collection("coberturas")
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val nombresArray = mutableListOf<String>() // Crear una lista para almacenar los nombres
+                    val coberturasList = mutableListOf<Pair<String, String>>() // Lista de pares (nombre, tituloSpinner)
 
                     for (document in task.result!!) {
                         val nombre = document.get("nombre") as? String
-                        if (nombre != null) {
-                            nombresArray.add(nombre)
+                        val titulo = document.get("tituloSpinner") as? String
+                        if (nombre != null && titulo != null) {
+                            coberturasList.add(Pair(nombre, titulo))
                         }
                     }
-                    callback(nombresArray, null)
+                    callback(coberturasList, null)
                 } else {
-                    callback(null, "Error al obtener los nombres")
+                    callback(null, "Error al obtener las coberturas")
                 }
             }
     }

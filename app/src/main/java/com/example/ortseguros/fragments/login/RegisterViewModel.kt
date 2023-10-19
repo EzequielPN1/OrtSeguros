@@ -91,8 +91,7 @@ class RegisterViewModel : ViewModel() {
                                     inputDni.text.toString(),
                                     inputDomicilio.text.toString(),
                                     user?.email.toString(),
-                                    inputTelefono.text.toString(),
-
+                                    inputTelefono.text.toString()
                                 )
 
                                 db.collection("usuarios").document(user?.uid.toString()).set(usuario)

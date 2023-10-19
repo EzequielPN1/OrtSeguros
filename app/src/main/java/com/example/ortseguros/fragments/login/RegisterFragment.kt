@@ -108,7 +108,7 @@ class RegisterFragment : Fragment() {
                     inputFechaNac,
                     inputDni,
                     inputDomicilio,
-                    inputContrasenia
+                    inputTelefono
                 )
 
                 viewModelRegister.createAccountSuccess.observe(viewLifecycleOwner) { success ->

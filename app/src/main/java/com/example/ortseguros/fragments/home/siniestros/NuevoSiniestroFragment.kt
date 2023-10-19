@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -28,6 +29,8 @@ class NuevoSiniestroFragment : Fragment() {
     private lateinit var inputUbicacion :EditText
     private lateinit var inputDescripcion : EditText
     private lateinit var btnNuevoSniestro : Button
+
+    private var nombreCobertura: String? = null
 
 
     override fun onCreateView(
@@ -81,15 +84,27 @@ class NuevoSiniestroFragment : Fragment() {
         }
 
 
-        viewModelNuevoSiniestro.obtenerCoberturasFirestore() { siniestros, error ->
-            if (error == null && siniestros != null) {
-                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, siniestros)
+        viewModelNuevoSiniestro.obtenerCoberturasFirestore() { coberturas, error ->
+            if (error == null && coberturas != null) {
+                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, coberturas.map { it.second })
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinnerSiniestros.adapter = adapter
+
+                spinnerSiniestros.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        val selectedCobertura = coberturas[position]
+                        nombreCobertura = selectedCobertura.first
+                    }
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        // Manejar caso en el que no se selecciona ningún elemento
+                    }
+                }
+
             } else {
                 Toast.makeText(requireContext(), error ?: "Error desconocido", Toast.LENGTH_SHORT).show()
             }
         }
+
 
 
 
@@ -128,7 +143,8 @@ class NuevoSiniestroFragment : Fragment() {
             val hora = inputHora.text.toString()
             val ubicacion = inputUbicacion.text.toString()
             val descripcion = inputDescripcion.text.toString()
-            val tipoSiniestro = spinnerSiniestros.selectedItem.toString()
+            val tipoSiniestro = nombreCobertura.toString()
+
 
             viewModelNuevoSiniestro.validarCampos(fecha, hora, ubicacion,patente,tipoSiniestro)
                 .observe(viewLifecycleOwner) { camposValidos ->
