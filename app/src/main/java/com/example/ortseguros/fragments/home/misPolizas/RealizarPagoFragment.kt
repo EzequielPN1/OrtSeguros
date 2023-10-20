@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
+import com.example.ortseguros.entities.Usuario
 
 class RealizarPagoFragment : Fragment() {
 
@@ -87,9 +88,23 @@ class RealizarPagoFragment : Fragment() {
                     codigoDeSeguridadTexto
                 )
             ) {
-                viewModelRealizarPago.realizarPago(pago, poliza) { exito ->
+
+                val tarjetaDeCredito = Usuario.TarjetaDeCredito(
+                    numeroDeTarjetaTexto,
+                    fechaDeCaducidadTexto,
+                    titularTexto,
+                    dniRealizarPagoTexto,
+                    codigoDeSeguridadTexto
+                )
+
+
+                viewModelRealizarPago.guardarTarjetaDeCreditoUsuario(tarjetaDeCredito) { exito ->
                     if (exito) {
-                        findNavController().navigateUp()
+                        viewModelRealizarPago.realizarPago(pago, poliza) { exitoPago ->
+                            if (exitoPago) {
+                                findNavController().navigateUp()
+                            }
+                        }
                     }
                 }
             }

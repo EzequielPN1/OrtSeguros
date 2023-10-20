@@ -131,6 +131,44 @@ class RealizarPagoViewModel : ViewModel() {
     }
 
 
+    fun guardarTarjetaDeCreditoUsuario(tarjetaDeCredito: Usuario.TarjetaDeCredito, callback: (Boolean) -> Unit) {
+        firebaseAuth = Firebase.auth
+        val user = firebaseAuth.currentUser
+        val userId = user?.uid.toString()
 
+        val usuariosRef = db.collection("usuarios").document(userId)
+
+        // Primero, obtén los datos actuales del usuario
+        usuariosRef.get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val userData = documentSnapshot.toObject(Usuario::class.java)
+
+                    // Actualiza los datos de la tarjeta de crédito en el usuario
+                    userData?.tarjetaDeCredito = tarjetaDeCredito
+
+                    // Luego, guarda los datos actualizados en Firebase
+                    if (userData != null) {
+                        usuariosRef.set(userData)
+                            .addOnSuccessListener {
+                                callback(true) // Éxito al guardar
+                            }
+                            .addOnFailureListener { exception ->
+                                // Manejar el error según tus necesidades
+                                exception.printStackTrace()
+                                callback(false)
+                            }
+                    }
+                } else {
+                    // El documento del usuario no existe, manejarlo según tus necesidades
+                    callback(false)
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Manejar el error según tus necesidades
+                exception.printStackTrace()
+                callback(false)
+            }
+    }
 
 }
