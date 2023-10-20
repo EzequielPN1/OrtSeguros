@@ -28,20 +28,14 @@ class DetallePolizaFragment : Fragment() {
     private lateinit var inputMarcaModelo: TextView
     private lateinit var inputPatentePoliza: TextView
     private lateinit var inputFechaInicio: TextView
-    private lateinit var inputDanioTotal: TextView
-    private lateinit var inputRespCivil: TextView
-    private lateinit var inputGranizo: TextView
-    private lateinit var inputRoboParcial: TextView
-    private lateinit var inputRoboTotal: TextView
+    private lateinit var imageDanioTotal : ImageView
+    private lateinit var imageRespCivil : ImageView
+    private lateinit var imageGranizo : ImageView
+    private lateinit var imageRoboParcial : ImageView
+    private lateinit var imageRoboTotal : ImageView
     private lateinit var inputSumaAsegurada: TextView
     private lateinit var inputValorCuota: TextView
     private lateinit var btnPagos: Button
-
-    private lateinit var imageFrente: ImageView
-    private lateinit var imageLatIzq: ImageView
-    private lateinit var imageLatDer: ImageView
-    private lateinit var imagePosterior: ImageView
-
     private lateinit var btnBajaPoliza: TextView
 
     override fun onCreateView(
@@ -55,20 +49,14 @@ class DetallePolizaFragment : Fragment() {
         inputMarcaModelo=v.findViewById(R.id.inputMarcaModelo)
         inputPatentePoliza=v.findViewById(R.id.inputPatentePoliza)
         inputFechaInicio=v.findViewById(R.id.inputFechaInicio)
-        inputDanioTotal=v.findViewById(R.id.inputDanioTotal)
-        inputRespCivil=v.findViewById(R.id.inputRespCivil)
-        inputGranizo=v.findViewById(R.id.inputGranizo)
-        inputRoboParcial=v.findViewById(R.id.inputRoboParcial)
-        inputRoboTotal=v.findViewById(R.id.inputRoboTotal)
+        imageDanioTotal =v.findViewById(R.id.imageDanioTotal)
+        imageRespCivil = v.findViewById(R.id.imageRespCivil)
+        imageGranizo=v.findViewById(R.id.imageGranizo)
         inputSumaAsegurada=v.findViewById(R.id.inputSumaAsegurada)
         inputValorCuota=v.findViewById(R.id.inputValorCuota)
         btnPagos =v.findViewById(R.id.btnPagos)
-
-        imageFrente = v.findViewById(R.id.imageFrenteDetalle)
-        imageLatIzq = v.findViewById(R.id.imageLatIzqDetalle)
-        imageLatDer = v.findViewById(R.id.imageLatDerDetalle)
-        imagePosterior = v.findViewById(R.id.imagePosteriorDetalle)
-
+        imageRoboParcial = v.findViewById(R.id.imageRoboParcial)
+        imageRoboTotal =v.findViewById(R.id.imageRoboTotal)
         btnBajaPoliza = v.findViewById(R.id.btnBajaPoliza)
 
 
@@ -89,20 +77,24 @@ class DetallePolizaFragment : Fragment() {
 
         val poliza = DetallePolizaFragmentArgs.fromBundle(requireArguments()).Poliza
 
-        inputMarcaModelo.text = poliza.marcaModelo
-        inputPatentePoliza.text = poliza.patente
-        inputFechaInicio.text = poliza.fechaInicioPoliza
-        inputDanioTotal.text = if (poliza.danioTotal) "contratado" else "no"
-        inputRespCivil.text = if (poliza.respCivil) "contratado" else "no"
-        inputGranizo.text = if (poliza.granizo) "contratado" else "no"
-        inputRoboParcial.text = if (poliza.roboParcial) "contratado" else "no"
-        inputRoboTotal.text = if (poliza.roboTotal) "contratado" else "no"
-        inputSumaAsegurada.text = "${poliza.sumaAsegurada} pesos"
-        inputValorCuota.text = "${poliza.valorCuota} pesos"
-        viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImageFrente, imageFrente)
-        viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImageLatIzq, imageLatIzq)
-        viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImageLatDer, imageLatDer)
-        viewModelDetallePoliza.cargarImagenDesdeFirebase(poliza.uriImagePosterior, imagePosterior)
+        inputMarcaModelo.text = "Marca: ${poliza.marcaModelo}"
+        inputPatentePoliza.text = "Patente: ${poliza.patente}"
+        inputFechaInicio.text = "Inicio de la poliza: ${poliza.fechaInicioPoliza}"
+
+        val imageViews = mapOf(
+            "danioTotal" to imageDanioTotal,
+            "respCivil" to imageRespCivil,
+            "granizo" to imageGranizo,
+            "roboParcial" to imageRoboParcial,
+            "roboTotal" to imageRoboTotal
+        )
+
+        viewModelDetallePoliza.determinarImagenesDeCobertura(poliza, imageViews)
+
+
+        inputSumaAsegurada.text = "Suma asegurada: ${poliza.sumaAsegurada} pesos"
+        inputValorCuota.text = "Valor de cuota: ${poliza.valorCuota} pesos"
+
 
         btnPagos.setOnClickListener{
 
@@ -125,7 +117,7 @@ class DetallePolizaFragment : Fragment() {
                 }
                 dialog.dismiss()
             }
-            builder.setNegativeButton("No") { dialog, which ->
+            builder.setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
             }
             val alertDialog = builder.create()

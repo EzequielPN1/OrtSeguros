@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.ortseguros.R
 import com.example.ortseguros.entities.Poliza
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -24,27 +25,6 @@ class DetallePolizaViewModel : ViewModel() {
         _toastMessage.value = message
     }
 
-    fun cargarImagenDesdeFirebase(uriImage: String, image: ImageView) {
-        val storage = Firebase.storage
-        val storageRef = storage.reference
-
-        val imageRef = storageRef.child(uriImage)
-
-        imageRef.downloadUrl.addOnSuccessListener { uri ->
-
-            val imageUrl = uri.toString()
-            // Cargar la imagen con Glide
-
-            Glide.with(image.context)
-                .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(image)
-            Log.e("MiApp", "Ok")
-        }.addOnFailureListener { exception ->
-            // Maneja cualquier error que ocurra al obtener la URL de descarga
-            Log.e("MiApp", "Error al obtener la URL de descarga de la imagen: $exception")
-        }
-    }
 
     fun darBajaPoliza(poliza: Poliza, callback: (Boolean) -> Unit) {
         val polizaRef = db.collection("polizas").document(poliza.id)
@@ -59,6 +39,31 @@ class DetallePolizaViewModel : ViewModel() {
                 e.printStackTrace()
                 callback(false)
             }
+    }
+
+    fun determinarImagenesDeCobertura(poliza: Poliza, imageViews: Map<String, ImageView>) {
+        val coberturas = mapOf(
+            "danioTotal" to R.drawable.icon_danio_total,
+            "respCivil" to R.drawable.icon_resp_civil,
+            "granizo" to R.drawable.icon_granizo,
+            "roboParcial" to R.drawable.icon_robo_parcial,
+            "roboTotal" to R.drawable.icon_robo_total
+        )
+
+        for ((cobertura, imagenId) in coberturas) {
+            val tieneCobertura = when (cobertura) {
+                "danioTotal" -> poliza.danioTotal
+                "respCivil" -> poliza.respCivil
+                "granizo" -> poliza.granizo
+                "roboParcial" -> poliza.roboParcial
+                "roboTotal" -> poliza.roboTotal
+                else -> false
+            }
+
+            if (tieneCobertura) {
+                imageViews[cobertura]?.setImageResource(imagenId)
+            }
+        }
     }
 
 

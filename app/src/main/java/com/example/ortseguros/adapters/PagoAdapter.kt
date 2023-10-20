@@ -3,6 +3,7 @@ package com.example.ortseguros.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -21,7 +22,7 @@ class PagoAdapter (private var pagoList: MutableList<Pago>,
 
         fun setNumeroPago(numPago: String) {
             val txtNumPago : TextView = view.findViewById(R.id.txtNumPago)
-            val mensaje="Numero: "
+            val mensaje="Numero de pago: "
             txtNumPago.text = "$mensaje $numPago"
         }
 
@@ -31,26 +32,29 @@ class PagoAdapter (private var pagoList: MutableList<Pago>,
                 txtFechaVencimiento.text = "$mensaje $fechaVencimiento"
         }
 
-        fun setFechaPago(fechaPago: String) {
-                val txtfechaPago : TextView = view.findViewById(R.id.txtFechaPagoCardView)
-                val mensaje="Fecha de pago: "
-                txtfechaPago.text = "$mensaje $fechaPago"
+        fun setFechaPago(fechaPago: String, abonado: Boolean) {
+            val txtFechaPago: TextView = view.findViewById(R.id.txtFechaPagoCardView)
+            val mensaje = if (abonado) {
+                txtFechaPago.visibility = View.VISIBLE // Mostrar la fecha de pago
+                "Fecha de pago: $fechaPago"
+            } else {
+                txtFechaPago.visibility = View.GONE // Ocultar la fecha de pago
+                ""
+            }
+            txtFechaPago.text = mensaje
         }
 
 
         fun setAbonado(abonado: Boolean) {
-            val txtAbonado: TextView = view.findViewById(R.id.txtAbonadoCardView)
-            val mensaje = if (abonado) {
-                txtAbonado.setTextColor(ContextCompat.getColor(txtAbonado.context, R.color.colorAbonado))
-                "Abonado"
+            val imagePago: ImageView = view.findViewById(R.id.imagePago)
+
+            if (abonado) {
+                imagePago.visibility = View.VISIBLE
+                imagePago.setImageResource(R.drawable.icon_pagado)
             } else {
-                txtAbonado.setTextColor(ContextCompat.getColor(txtAbonado.context, R.color.colorImpago))
-                "Impago"
+                imagePago.visibility = View.GONE
             }
-            txtAbonado.text = mensaje
         }
-
-
 
 
 
@@ -72,16 +76,16 @@ class PagoAdapter (private var pagoList: MutableList<Pago>,
     override fun onBindViewHolder(holder: PagoHolder, position: Int) {
         val pago = pagoList[position]
 
-         holder.setNumeroPago(pago.numeroPago)
-         holder.setFechaVencimiento(pago.fechaVencimiento)
-         holder.setFechaPago(pago.fechaPago)
-         holder.setAbonado(pago.abonado)
-
+        holder.setNumeroPago(pago.numeroPago)
+        holder.setFechaVencimiento(pago.fechaVencimiento)
+        holder.setFechaPago(pago.fechaPago, pago.abonado)
+        holder.setAbonado(pago.abonado)
 
         holder.getCard().setOnClickListener {
             onClick(position)
         }
     }
+
 
 
 }

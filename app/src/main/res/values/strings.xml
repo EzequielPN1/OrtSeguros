@@ -63,7 +63,7 @@
     <string name="roboTotal">Robo total:</string>
     <string name="SumaAsegurada">Suma asegurada:</string>
     <string name="ValorCuota">Valor de cuota:</string>
-    <string name="Pagos">Pagos</string>
+    <string name="Pagos">Ver pagos</string>
     <string name="RealizarPago">Realizar pago</string>
 
     <string name="ImagenMensaje">Ingresar fotos del Vehiculo: frontal, lat izquierdo, lat derecho y posterior</string>
@@ -76,5 +76,10 @@
     <string name="titular">Titular</string>
     <string name="codigoSeguridad">Codigo de seguridad</string>
 
+
+    <string name="TipoSiniestro">Tipo siniestro</string>
+    <string name="NumSiniestro">Nro de siniestro</string>
+    <string name="CoberturasContratadas">Coberturas contratadas</string>
+    <string name="numPoliza">Nro de poliza</string>
 
 </resources>

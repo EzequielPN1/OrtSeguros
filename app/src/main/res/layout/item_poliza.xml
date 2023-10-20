@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/idCardViewPoliza"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,27 +15,27 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/txtFechaVencimientoCardView"
+            android:id="@+id/txtMarcaModeloCardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/marcaModelo"
+            android:textColor="@color/bordo"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:textColor="@color/bordo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ImagePoliza"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/ImagePoliza"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ImagePoliza"
             android:layout_width="136dp"
             android:layout_height="127dp"
             android:contentDescription="@string/Descripcion"
-            app:layout_constraintTop_toBottomOf="@+id/txtFechaVencimientoCardView"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/txtPatente"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/txtPatente"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtMarcaModeloCardView" />
 
         <TextView
             android:id="@+id/txtPatente"
@@ -45,6 +46,18 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtNumPoliza"
+            app:layout_constraintTop_toBottomOf="@+id/ImagePoliza" />
+
+        <TextView
+            android:id="@+id/txtNumPoliza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numPoliza"
+            android:textColor="@color/bordo"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtPatente"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ImagePoliza" />
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/idCardViewPago"
@@ -9,34 +10,48 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imageViewTipoSiniestro"
+            android:layout_width="131dp"
+            android:layout_height="103dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="18dp"
+
+           />
+
+        <TextView
+            android:id="@+id/txtTipoSiniestro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/TipoSiniestro"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtNumSiniestro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTipoSiniestro"
+            android:text="@string/NumSiniestro" />
 
         <TextView
             android:id="@+id/txtFechaVencimientoCardView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fecha"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtFechaPagoCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hora"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_below="@+id/txtNumSiniestro"
+            android:text="fecha"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/txtAbonadoCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/txtFechaVencimientoCardView"
             android:text="patente" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

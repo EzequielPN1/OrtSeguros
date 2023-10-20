@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardViewPago"
@@ -9,43 +8,59 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/txtNumPago"
-            android:layout_width="360dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Numero de pago"
             android:textSize="16sp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/imagePago"
+            android:layout_toLeftOf="@+id/imagePago"
             />
 
         <TextView
             android:id="@+id/txtFechaVencimientoCardView"
-            android:layout_width="360dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fecha de vencimiento"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_alignStart="@id/txtNumPago"
+            android:layout_below="@id/txtNumPago"
+            android:layout_alignLeft="@id/txtNumPago"
+            android:layout_toStartOf="@+id/imagePago"
+            android:layout_toLeftOf="@+id/imagePago"
+            />
 
         <TextView
             android:id="@+id/txtFechaPagoCardView"
-            android:layout_width="361dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fecha de pago"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_alignStart="@id/txtFechaVencimientoCardView"
+            android:layout_below="@id/txtFechaVencimientoCardView"
+            android:layout_alignLeft="@id/txtFechaVencimientoCardView"
+            android:layout_toStartOf="@+id/imagePago"
+            android:layout_toLeftOf="@+id/imagePago"
+            />
 
-        <TextView
-            android:id="@+id/txtAbonadoCardView"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:text="abonado"
-            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/imagePago"
+            android:layout_width="83dp"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
 
-    </LinearLayout>
-
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

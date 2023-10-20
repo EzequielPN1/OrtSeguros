@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ortseguros.entities.Siniestro
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.example.ortseguros.R
@@ -17,20 +18,54 @@ class SiniestroAdapter(
     class SiniestroHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
 
+
+        fun tipoSiniestro(tipoSiniestro: String) {
+            val txtTipoSiniestro: TextView = view.findViewById(R.id.txtTipoSiniestro)
+
+            val textoMostrado = when (tipoSiniestro) {
+                "granizo" -> "Tipo: Granizo"
+                "danioTotal" -> "Tipo: Daño total"
+                "respCivil" -> "Tipo: Responsabilidad civil"
+                "roboParcial" -> "Tipo: Robo parcial"
+                "danioTotal" -> "Tipo: Daño total"
+                else -> tipoSiniestro
+            }
+            txtTipoSiniestro.text = textoMostrado
+        }
+
+
+        fun setImageTipoSiniestro(tipoSiniestro: String) {
+            val imageViewTipoSiniestro: ImageView = view.findViewById(R.id.imageViewTipoSiniestro)
+
+            val imagenId = when (tipoSiniestro) {
+                "granizo" -> R.drawable.icon_granizo
+                "danioTotal" -> R.drawable.icon_danio_total
+                "respCivil" -> R.drawable.icon_resp_civil
+                "roboParcial" -> R.drawable.icon_robo_parcial
+                "roboTotal"-> R.drawable.icon_robo_total
+                else -> R.drawable.car_frontal
+            }
+
+            imageViewTipoSiniestro.setImageResource(imagenId)
+        }
+
+
+        fun setNumSiniestro(numSiniestro:String){
+            val txtNumSiniestro: TextView = view.findViewById(R.id.txtNumSiniestro)
+            txtNumSiniestro.text = "Número: $numSiniestro"
+        }
+
        fun setFecha(fecha:String){
            val txtFecha: TextView = view.findViewById(R.id.txtFechaVencimientoCardView)
-           txtFecha.text = fecha
+           txtFecha.text = "Fecha: $fecha"
        }
 
-        fun setHora(hora:String){
-            val txtHora: TextView = view.findViewById(R.id.txtFechaPagoCardView)
-            txtHora.text = hora
-        }
 
         fun setPatente(patente:String){
             val txtPatente: TextView = view.findViewById(R.id.txtAbonadoCardView)
-            txtPatente.text = patente
+            txtPatente.text = "Patente: $patente"
         }
+
 
         fun getCard():CardView{
             return view.findViewById(R.id.idCardViewPago)
@@ -46,9 +81,13 @@ class SiniestroAdapter(
     override fun onBindViewHolder(holder: SiniestroHolder, position: Int) {
         val siniestro = siniestroList[position]
 
+
+        holder.tipoSiniestro(siniestro.tipoSiniestro)
+        holder.setNumSiniestro(siniestro.numSiniestro)
         holder.setFecha(siniestro.fecha)
-        holder.setHora(siniestro.hora)
         holder.setPatente(siniestro.patente)
+        holder.setImageTipoSiniestro(siniestro.tipoSiniestro)
+
         holder.getCard().setOnClickListener {
             onClick(position)
         }

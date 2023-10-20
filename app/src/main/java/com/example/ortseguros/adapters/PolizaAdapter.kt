@@ -25,21 +25,25 @@ class PolizaAdapter(
     class PolizaHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
         var imagePoliza: ImageView = v.findViewById(R.id.ImagePoliza)
+
+
         fun setMarca(marca: String) {
 
-            val txtMarca : TextView = view.findViewById(R.id.txtFechaVencimientoCardView)
+            val txtMarca : TextView = view.findViewById(R.id.txtMarcaModeloCardView)
             txtMarca.text = marca
         }
 
         fun setPatente(patente: String) {
 
             val txtPatente : TextView = view.findViewById(R.id.txtPatente)
-            txtPatente.text = patente
+            txtPatente.text = "Patente: $patente"
         }
 
-        fun setImage(imageUri: Uri) {
-            imagePoliza.setImageURI(imageUri)
+        fun setNroPoliza(nroPoliza: String){
+            val txtNroPoliza : TextView = view.findViewById(R.id.txtNumPoliza)
+            txtNroPoliza.text = "Nro de poliza: $nroPoliza"
         }
+
 
 
 
@@ -88,6 +92,8 @@ class PolizaAdapter(
             // Maneja cualquier error que ocurra al obtener la URL de descarga
             Log.e("MiApp", "Error al obtener la URL de descarga de la imagen: $exception")
         }
+
+        holder.setNroPoliza(poliza.numPoliza)
 
         holder.getCard().setOnClickListener {
             onClick(position)
