@@ -7,6 +7,27 @@
     android:layout_height="match_parent"
     tools:context=".fragments.home.siniestros.SiniestrosFragment">
 
+    <Spinner
+        android:id="@+id/spinnerEstadoSiniestro"
+        android:layout_width="189dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/recSiniestro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPatentesSiniestros"
+        />
+
+    <Spinner
+        android:id="@+id/spinnerPatentesSiniestros"
+        android:layout_width="189dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSiniestros" />
+
     <Button
         android:id="@+id/btnNuevoSiniestro"
         android:layout_width="wrap_content"
@@ -24,17 +45,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recSiniestro"
-        android:layout_width="397dp"
-        android:layout_height="504dp"
+        android:layout_width="384dp"
+        android:layout_height="420dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnNuevoSiniestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtSiniestros" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPatentesSiniestros" />
 
     <TextView
         android:id="@+id/txtSiniestros"
@@ -43,11 +64,9 @@
         android:layout_marginStart="170dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="170dp"
-        android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/Siniestros"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/recSiniestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"

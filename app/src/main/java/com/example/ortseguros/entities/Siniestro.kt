@@ -16,4 +16,5 @@ class Siniestro (
     var descripcion: String = "",
     var patente: String = "",
     var tipoSiniestro: String = "",
+    var finalizado: Boolean= false,
 ): Parcelable
