@@ -11,12 +11,12 @@ import com.example.ortseguros.R
 
 class DetalleSiniestroFragment : Fragment() {
 
-    private lateinit var viewModel: DetalleSiniestroViewModel
+    private lateinit var viewModelDetalleSiniestro: DetalleSiniestroViewModel
     private lateinit var v : View
-    private lateinit var fecha : TextView
-    private lateinit var hora : TextView
-    private lateinit var ubicacion : TextView
-    private lateinit var descripcion : TextView
+    private lateinit var txtTituloMensaje: TextView
+    private lateinit var txtMensajeDetalleSiniestro: TextView
+
+
 
 
     override fun onCreateView(
@@ -24,11 +24,10 @@ class DetalleSiniestroFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         v = inflater.inflate(R.layout.fragment_detalle_siniestro, container, false)
-        viewModel = ViewModelProvider(this)[DetalleSiniestroViewModel::class.java]
-        fecha = v.findViewById(R.id.txtFechaSiniestro)
-        hora = v.findViewById(R.id.txtHoraSiniestro)
-        ubicacion = v.findViewById(R.id.txtUbicacionSiniestro)
-        descripcion = v.findViewById(R.id.txtDescripcionSiniestro)
+        viewModelDetalleSiniestro = ViewModelProvider(this)[DetalleSiniestroViewModel::class.java]
+        txtTituloMensaje = v.findViewById(R.id.txtTituloMensaje)
+        txtMensajeDetalleSiniestro = v.findViewById(R.id.txtMensajeDetalleSiniestro)
+
         return v
     }
 
@@ -37,10 +36,21 @@ class DetalleSiniestroFragment : Fragment() {
         super.onStart()
 
         val siniestro = DetalleSiniestroFragmentArgs.fromBundle(requireArguments()).siniestro
-        fecha.text = siniestro.fecha
-        hora.text = siniestro.hora
-        ubicacion.text = siniestro.ubicacion
-        descripcion.text = siniestro.descripcion
+
+        viewModelDetalleSiniestro.mostrarTituloMesnaje() { mensajeEncontrado, mensaje ->
+            if (mensajeEncontrado) {
+                txtTituloMensaje.text = mensaje
+            }
+        }
+
+        viewModelDetalleSiniestro.mostrarMensaje(siniestro) { mensajeEncontrado, mensaje ->
+            if (mensajeEncontrado) {
+                txtMensajeDetalleSiniestro.text = mensaje
+            }
+        }
+
+
+
 
     }
 

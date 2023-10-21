@@ -81,5 +81,6 @@
     <string name="NumSiniestro">Nro de siniestro</string>
     <string name="CoberturasContratadas">Coberturas contratadas</string>
     <string name="numPoliza">Nro de poliza</string>
+    <string name="mensaje">mensaje</string>
 
 </resources>
