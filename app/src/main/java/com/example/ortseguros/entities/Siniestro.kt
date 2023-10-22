@@ -17,5 +17,5 @@ class Siniestro (
     var patente: String = "",
     var tipoSiniestro: String = "",
     var finalizado: Boolean= false,
-    var mensaje: String= "",
+    var mensajes: List<Mensaje> = mutableListOf()
 ): Parcelable

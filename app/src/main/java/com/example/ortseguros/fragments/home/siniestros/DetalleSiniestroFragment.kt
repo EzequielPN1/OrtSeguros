@@ -15,7 +15,7 @@ class DetalleSiniestroFragment : Fragment() {
     private lateinit var v : View
     private lateinit var txtTituloMensaje: TextView
     private lateinit var txtMensajeDetalleSiniestro: TextView
-
+    private lateinit var txtNomEmpladoEmpresa: TextView
 
 
 
@@ -27,7 +27,7 @@ class DetalleSiniestroFragment : Fragment() {
         viewModelDetalleSiniestro = ViewModelProvider(this)[DetalleSiniestroViewModel::class.java]
         txtTituloMensaje = v.findViewById(R.id.txtTituloMensaje)
         txtMensajeDetalleSiniestro = v.findViewById(R.id.txtMensajeDetalleSiniestro)
-
+        txtNomEmpladoEmpresa = v.findViewById(R.id.txtNomEmpladoEmpresa)
         return v
     }
 
@@ -43,9 +43,10 @@ class DetalleSiniestroFragment : Fragment() {
             }
         }
 
-        viewModelDetalleSiniestro.mostrarMensaje(siniestro) { mensajeEncontrado, mensaje ->
+        viewModelDetalleSiniestro.mostrarMensaje(siniestro) { mensajeEncontrado,mensaje,nombreEmpleado ->
             if (mensajeEncontrado) {
                 txtMensajeDetalleSiniestro.text = mensaje
+                txtNomEmpladoEmpresa.text = nombreEmpleado
             }
         }
 

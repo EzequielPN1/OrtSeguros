@@ -1,7 +1,9 @@
 package com.example.ortseguros.fragments.home.siniestros
 
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.ortseguros.entities.Mensaje
 import com.example.ortseguros.entities.Siniestro
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -45,17 +47,32 @@ class DetalleSiniestroViewModel : ViewModel() {
 
 
 
+    fun mostrarMensaje(siniestro: Siniestro, callback: (Boolean, String,String) -> Unit) {
+        if (siniestro.mensajes.isNotEmpty()) {
+            // Filtra los mensajes con estado false
+            val mensajesNoLeidos = siniestro.mensajes.filter { !it.estado }
 
+            if (mensajesNoLeidos.isNotEmpty()) {
+                // Encuentra el mensaje con el número más alto (considerando números en cadena)
+                val mensajeNoLeido = mensajesNoLeidos.maxByOrNull { it.numero }
 
+                if (mensajeNoLeido != null) {
+                    // Actualiza el estado en Firebase
+                    actualizarEstadoMensajeEnFirebase(siniestro, mensajeNoLeido)
 
+                    // Se encontró un mensaje no leído
+                    callback(true, mensajeNoLeido.notificacion,mensajeNoLeido.usuarioEmpresa)
+                    return
+                }
+            }
+        }
 
-
-    fun mostrarMensaje(siniestro: Siniestro, callback: (Boolean, String) -> Unit) {
-        if (siniestro.mensaje.isNotEmpty()) {
-            // El siniestro tiene un mensaje definido
-            callback(true, siniestro.mensaje)
+        // Si no hay mensajes no leídos o no se encontraron, devuelve el último mensaje (el mayor número en cadena)
+        val mensajeUltimo = siniestro.mensajes.maxByOrNull { it.numero }
+        if (mensajeUltimo != null) {
+            callback(true, mensajeUltimo.notificacion,mensajeUltimo.usuarioEmpresa)
         } else {
-            // Consultar la colección "coberturas" para obtener el mensaje predeterminado
+            // Si no hay mensajes en absoluto, consulta la colección "coberturas" para obtener el mensaje predeterminado
             val mensaje = StringBuilder()
 
             db.collection("coberturas")
@@ -71,10 +88,25 @@ class DetalleSiniestroViewModel : ViewModel() {
                             }
                         }
                         val mensajeEncontrado = mensaje.isNotEmpty()
-                        callback(mensajeEncontrado, mensaje.toString())
-                    } else {
-                        callback(false, "Error: No se pudo obtener el mensaje")
+                        callback(mensajeEncontrado," Atentamente, La Empresa Seguros", mensaje.toString())
                     }
+                }
+        }
+    }
+
+
+    private fun actualizarEstadoMensajeEnFirebase(siniestro: Siniestro, mensaje: Mensaje) {
+        val siniestroRef = db.collection("siniestros").document(siniestro.id)
+        val mensajesArray = siniestro.mensajes
+        val mensajeEncontrado = mensajesArray.find { it.numero == mensaje.numero }
+
+        if (mensajeEncontrado != null) {
+            mensajeEncontrado.estado = true
+            siniestroRef.update("mensajes", mensajesArray)
+                .addOnSuccessListener {
+                }
+                .addOnFailureListener { e ->
+                    Log.e("FirebaseError", "Error al actualizar el estado: $e")
                 }
         }
     }
