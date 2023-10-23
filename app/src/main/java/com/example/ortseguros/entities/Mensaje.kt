@@ -9,5 +9,6 @@ data class Mensaje (
     var fecha: String = "",
     var notificacion: String = "",
     var numero: String = "",
-    var usuarioEmpresa: String = ""
+    var usuarioEmpresa: String = "",
+    var imagenURL:String= ""
 ): Parcelable

@@ -47,7 +47,7 @@ class DetalleSiniestroViewModel : ViewModel() {
 
 
 
-    fun mostrarMensaje(siniestro: Siniestro, callback: (Boolean, String,String) -> Unit) {
+    fun mostrarMensaje(siniestro: Siniestro, callback: (Boolean, String, String, String) -> Unit) {
         if (siniestro.mensajes.isNotEmpty()) {
             // Filtra los mensajes con estado false
             val mensajesNoLeidos = siniestro.mensajes.filter { !it.estado }
@@ -61,7 +61,7 @@ class DetalleSiniestroViewModel : ViewModel() {
                     actualizarEstadoMensajeEnFirebase(siniestro, mensajeNoLeido)
 
                     // Se encontró un mensaje no leído
-                    callback(true, mensajeNoLeido.notificacion,mensajeNoLeido.usuarioEmpresa)
+                    callback(true, mensajeNoLeido.notificacion , "Asesor: ${mensajeNoLeido.usuarioEmpresa}",mensajeNoLeido.imagenURL)
                     return
                 }
             }
@@ -70,7 +70,7 @@ class DetalleSiniestroViewModel : ViewModel() {
         // Si no hay mensajes no leídos o no se encontraron, devuelve el último mensaje (el mayor número en cadena)
         val mensajeUltimo = siniestro.mensajes.maxByOrNull { it.numero }
         if (mensajeUltimo != null) {
-            callback(true, mensajeUltimo.notificacion,mensajeUltimo.usuarioEmpresa)
+            callback(true, mensajeUltimo.notificacion, mensajeUltimo.usuarioEmpresa, mensajeUltimo.imagenURL)
         } else {
             // Si no hay mensajes en absoluto, consulta la colección "coberturas" para obtener el mensaje predeterminado
             val mensaje = StringBuilder()
@@ -88,7 +88,7 @@ class DetalleSiniestroViewModel : ViewModel() {
                             }
                         }
                         val mensajeEncontrado = mensaje.isNotEmpty()
-                        callback(mensajeEncontrado," Atentamente, La Empresa Seguros", mensaje.toString())
+                        callback(mensajeEncontrado, mensaje.toString()," Atentamente, La Empresa Seguros", "")
                     }
                 }
         }

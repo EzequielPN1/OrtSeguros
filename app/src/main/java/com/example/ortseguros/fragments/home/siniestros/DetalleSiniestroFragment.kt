@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.ortseguros.R
 
 class DetalleSiniestroFragment : Fragment() {
@@ -16,6 +18,7 @@ class DetalleSiniestroFragment : Fragment() {
     private lateinit var txtTituloMensaje: TextView
     private lateinit var txtMensajeDetalleSiniestro: TextView
     private lateinit var txtNomEmpladoEmpresa: TextView
+    private lateinit var imagePerfil: ImageView
 
 
 
@@ -28,6 +31,7 @@ class DetalleSiniestroFragment : Fragment() {
         txtTituloMensaje = v.findViewById(R.id.txtTituloMensaje)
         txtMensajeDetalleSiniestro = v.findViewById(R.id.txtMensajeDetalleSiniestro)
         txtNomEmpladoEmpresa = v.findViewById(R.id.txtNomEmpladoEmpresa)
+        imagePerfil = v.findViewById(R.id.imagePerfil)
         return v
     }
 
@@ -43,12 +47,24 @@ class DetalleSiniestroFragment : Fragment() {
             }
         }
 
-        viewModelDetalleSiniestro.mostrarMensaje(siniestro) { mensajeEncontrado,mensaje,nombreEmpleado ->
+        viewModelDetalleSiniestro.mostrarMensaje(siniestro) { mensajeEncontrado, mensaje ,nombreEmpleado, imagenURL ->
             if (mensajeEncontrado) {
+
                 txtMensajeDetalleSiniestro.text = mensaje
                 txtNomEmpladoEmpresa.text = nombreEmpleado
+
+
+
+                if (imagenURL.isNotEmpty()) {
+                    Glide.with(this)
+                        .load(imagenURL)
+                        .into(imagePerfil)
+                }
             }
         }
+
+
+
 
 
 
