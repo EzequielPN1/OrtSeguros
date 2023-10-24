@@ -143,6 +143,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
         android:text="@string/Pagos"
+        android:backgroundTint="@color/bordo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"

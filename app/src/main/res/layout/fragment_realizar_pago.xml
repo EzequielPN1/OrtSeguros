@@ -120,6 +120,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="50dp"
         android:text="@string/RealizarPago"
+        android:backgroundTint="@color/bordo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"

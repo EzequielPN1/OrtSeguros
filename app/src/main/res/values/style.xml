@@ -2,11 +2,11 @@
 <resources>
     <style name="switchStyle">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/bordo</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:thumbTint">@color/bordo</item>
+
     </style>
+
 
     <style name="btnStyle">
         <item name="android:textSize">20sp</item>

@@ -19,7 +19,7 @@
     <string name="Ubicacion">Ubicacion</string>
     <string name="Descripcion">Descripcion</string>
     <string name="MisPolizas">Mis Polizas</string>
-    <string name="AgregarPoliza">Agregar poliza</string>
+    <string name="CrearPoliza">Crear poliza</string>
 
     <string name="Login"><B>Log In</B></string>
     <string name="Entrar">Entrar</string>
@@ -82,5 +82,6 @@
     <string name="CoberturasContratadas">Coberturas contratadas</string>
     <string name="numPoliza">Nro de poliza</string>
     <string name="mensaje">mensaje</string>
+    <string name="NuevaPoliza">Nueva poliza</string>
 
 </resources>

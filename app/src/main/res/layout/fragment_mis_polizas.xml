@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/bordo"
-        android:text="@string/AgregarPoliza"
+        android:text="@string/NuevaPoliza"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/recPoliza"
         app:layout_constraintStart_toStartOf="parent"
