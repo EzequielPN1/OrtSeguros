@@ -8,9 +8,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class LoginViewModel : ViewModel() {
+
+    private val db = Firebase.firestore
 
     private val _toastMessage = MutableLiveData<String>()
     val toastMessage: LiveData<String>
@@ -34,15 +37,32 @@ class LoginViewModel : ViewModel() {
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
                     val user = firebaseAuth.currentUser
-                    val verifica = user?.isEmailVerified
 
-                    if (verifica == true) {
-                        val sharedPrefs = activity.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-                        sharedPrefs.edit().putBoolean("isLoggedIn", true).apply()
-                        _signInSuccess.value = true
-                    } else {
-                        _toastMessage.value = "Usuario no verificado"
-                        _signInSuccess.value = false
+                    val usuariosEmpresaRef = db.collection("usuariosEmpresa")
+                    val uid = user?.uid
+
+                    if (uid != null) {
+                        usuariosEmpresaRef.document(uid).get()
+                            .addOnSuccessListener { documentSnapshot ->
+                                if (documentSnapshot.exists()) {
+                                    _toastMessage.value = "Usuario no válido"
+                                    _signInSuccess.value = false
+
+                                } else {
+
+                                    val verifica = user?.isEmailVerified
+                                    if (verifica == true) {
+                                        val sharedPrefs = activity.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+                                        sharedPrefs.edit().putBoolean("isLoggedIn", true).apply()
+                                        _signInSuccess.value = true
+                                    } else {
+                                        _toastMessage.value = "Usuario no verificado"
+                                        _signInSuccess.value = false
+                                    }
+
+                                }
+
+                            }
                     }
                 } else {
                     _toastMessage.value = "Error de email y/0 contraseña"
@@ -80,8 +100,8 @@ class LoginViewModel : ViewModel() {
             _toastMessage.value = "Por favor, ingrese su email."
             camposValidos = false
         }else if (!validarEmail(inputUsuario)) {
-                _toastMessage.value = "Por favor, ingrese un email correcto."
-                camposValidos = false
+            _toastMessage.value = "Por favor, ingrese un email correcto."
+            camposValidos = false
         } else if (ingresoContrasenia.isEmpty()) {
             _toastMessage.value = "Por favor, ingrese su contraseña."
             camposValidos = false
