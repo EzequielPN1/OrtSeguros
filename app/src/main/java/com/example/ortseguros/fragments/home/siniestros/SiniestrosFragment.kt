@@ -1,5 +1,6 @@
 package com.example.ortseguros.fragments.home.siniestros
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +12,6 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
-
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -67,17 +67,22 @@ class SiniestrosFragment : Fragment() {
                 val estadoSeleccionado = spinnerEstadoSiniestro?.selectedItem?.toString()
                 if (!patenteSeleccionada.isNullOrEmpty()) {
                     siniestroViewModel.obtenerSiniestrosFiltrados(patenteSeleccionada, estadoSeleccionado)
+
+                    // Guarda la selección en SharedPreferences
+                    val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                    sharedPrefs.edit().putString("selectedPatente", patenteSeleccionada).apply()
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+
         spinnerEstadoSiniestro.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val patenteSeleccionada = spinnerPatentesSiniestros?.selectedItem?.toString()
                 val estadoSeleccionado = spinnerEstadoSiniestro?.selectedItem?.toString()
-                if (!patenteSeleccionada.isNullOrEmpty() && !estadoSeleccionado.isNullOrEmpty()) {
+                if (!patenteSeleccionada.isNullOrEmpty() ) {
                     siniestroViewModel.obtenerSiniestrosFiltrados(patenteSeleccionada, estadoSeleccionado)
                 }
             }
@@ -88,9 +93,25 @@ class SiniestrosFragment : Fragment() {
 
 
 
+        val sharedPrefs = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val selectedPatente = sharedPrefs.getString("selectedPatente", null)
 
+        siniestroViewModel.obtenerPatentesDesdeFirestore { patentes, error ->
+            if (error == null && patentes != null) {
+                val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, patentes)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerPatentesSiniestros.adapter = adapter
 
-
+                if (selectedPatente != null) {
+                    val selectionIndex = patentes.indexOf(selectedPatente)
+                    if (selectionIndex >= 0) {
+                        spinnerPatentesSiniestros.setSelection(selectionIndex)
+                    }
+                }
+            } else {
+                Toast.makeText(requireContext(), error ?: "Error desconocido", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         return v
     }
