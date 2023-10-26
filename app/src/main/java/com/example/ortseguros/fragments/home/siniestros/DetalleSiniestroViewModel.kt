@@ -71,26 +71,6 @@ class DetalleSiniestroViewModel : ViewModel() {
         val mensajeUltimo = siniestro.mensajes.maxByOrNull { it.numero }
         if (mensajeUltimo != null) {
             callback(true, mensajeUltimo.notificacion, mensajeUltimo.usuarioEmpresa, mensajeUltimo.imagenURL)
-        } else {
-            // Si no hay mensajes en absoluto, consulta la colección "coberturas" para obtener el mensaje predeterminado
-            val mensaje = StringBuilder()
-
-            db.collection("coberturas")
-                .whereEqualTo("nombre", siniestro.tipoSiniestro)
-                .get()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        for (document in task.result) {
-                            // Supongamos que hay un campo "descripcion" en el documento
-                            val descripcion = document.getString("mensajeDefault")
-                            if (descripcion != null) {
-                                mensaje.append(descripcion)
-                            }
-                        }
-                        val mensajeEncontrado = mensaje.isNotEmpty()
-                        callback(mensajeEncontrado, mensaje.toString()," Atentamente, La Empresa Seguros", "")
-                    }
-                }
         }
     }
 

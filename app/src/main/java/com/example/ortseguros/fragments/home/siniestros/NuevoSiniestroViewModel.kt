@@ -4,6 +4,7 @@ import android.text.Editable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.ortseguros.entities.Mensaje
 import com.example.ortseguros.entities.Siniestro
 import com.google.firebase.firestore.Query
 import com.google.firebase.auth.FirebaseAuth
@@ -98,68 +99,95 @@ class NuevoSiniestroViewModel : ViewModel() {
         hora: String,
         ubicacion: String,
         tipoSiniestro: String,
-        callback: (Boolean, String?) -> Unit // Agrega un parámetro para el ID generado
+        callback: (Boolean, String?) -> Unit
     ) {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
 
         buscarIdPoliza(patente) { idPoliza ->
             if (idPoliza != null) {
-                // Obtener el número del último siniestro
-                db.collection("siniestros")
-                    .orderBy("numSiniestro", Query.Direction.DESCENDING)
-                    .limit(1)
-                    .get()
-                    .addOnCompleteListener { queryTask ->
-                        if (queryTask.isSuccessful) {
-                            val lastSiniestro = queryTask.result?.documents?.firstOrNull()
-                            val numSiniestroString = lastSiniestro?.get("numSiniestro") as? String
+                obtenerMensajePredeterminado(tipoSiniestro) { mensajePredeterminado ->
+                    if (mensajePredeterminado != null) {
+                        // Obtener el número del último siniestro
+                        db.collection("siniestros")
+                            .orderBy("numSiniestro", Query.Direction.DESCENDING)
+                            .limit(1)
+                            .get()
+                            .addOnCompleteListener { queryTask ->
+                                if (queryTask.isSuccessful) {
+                                    val lastSiniestro = queryTask.result?.documents?.firstOrNull()
+                                    val numSiniestroString = lastSiniestro?.get("numSiniestro") as? String
 
-                            val numSiniestro = (numSiniestroString?.toInt() ?: 0) + 1
+                                    val numSiniestro = (numSiniestroString?.toInt() ?: 0) + 1
 
-                            val nuevoSiniestro = Siniestro(
-                                numSiniestro = numSiniestro.toString(),
-                                // No incluyas el campo 'id' aquí para que Firebase Firestore genere el ID automáticamente
-                                idUsuario = user?.uid.toString(),
-                                idPoliza = idPoliza,
-                                fecha = fecha,
-                                hora = hora,
-                                ubicacion = ubicacion,
-                                descripcion = descripcion,
-                                patente = patente,
-                                tipoSiniestro = tipoSiniestro,
-                            )
+                                    val nuevoSiniestro = Siniestro(
+                                        numSiniestro = numSiniestro.toString(),
+                                        idUsuario = user?.uid.toString(),
+                                        idPoliza = idPoliza,
+                                        fecha = fecha,
+                                        hora = hora,
+                                        ubicacion = ubicacion,
+                                        descripcion = descripcion,
+                                        patente = patente,
+                                        tipoSiniestro = tipoSiniestro,
+                                        mensajes = listOf(Mensaje(
+                                            estado = false,
+                                            fecha = obtenerFechaActual(),
+                                            notificacion = mensajePredeterminado,
+                                            numero = "1",
+                                            usuarioEmpresa = ""
+                                        ))
+                                    )
 
-                            db.collection("siniestros")
-                                .add(nuevoSiniestro)
-                                .addOnSuccessListener { documentReference ->
-                                    // Aquí obtienes el ID generado automáticamente por Firebase Firestore
-                                    val idGenerado = documentReference.id
-
-                                    // Asigna el ID generado al campo 'id' del siniestro
                                     db.collection("siniestros")
-                                        .document(idGenerado)
-                                        .update("id", idGenerado)
-                                        .addOnSuccessListener {
-                                            callback(true, null)
+                                        .add(nuevoSiniestro)
+                                        .addOnSuccessListener { documentReference ->
+                                            val idGenerado = documentReference.id
+                                            db.collection("siniestros")
+                                                .document(idGenerado)
+                                                .update("id", idGenerado)
+                                                .addOnSuccessListener {
+                                                    callback(true, null)
+                                                }
+                                                .addOnFailureListener { e ->
+                                                    callback(false, e.message)
+                                                }
                                         }
                                         .addOnFailureListener { e ->
                                             callback(false, e.message)
                                         }
+                                } else {
+                                    callback(false, "Error al obtener el último número de siniestro: ${queryTask.exception}")
                                 }
-                                .addOnFailureListener { e ->
-                                    callback(false, e.message)
-                                }
-                        } else {
-                            callback(false, "Error al obtener el último número de siniestro: ${queryTask.exception}")
-                        }
+                            }
+                    } else {
+                        callback(false, "No se pudo obtener el mensaje predeterminado")
                     }
+                }
             } else {
                 callback(false, "Póliza no encontrada")
             }
         }
     }
 
+
+    private fun obtenerMensajePredeterminado(tipoSiniestro: String, callback: (String?) -> Unit) {
+        db.collection("coberturas")
+            .whereEqualTo("nombre", tipoSiniestro)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (!querySnapshot.isEmpty) {
+                    val documentoSiniestro = querySnapshot.documents.first() // Suponemos que solo hay uno con el mismo tipoSiniestro
+                    val mensajePredeterminado = documentoSiniestro.getString("mensajeDefault")
+                    callback(mensajePredeterminado)
+                } else {
+                    callback(null) // No se encontró un siniestro con el tipoSiniestro proporcionado
+                }
+            }
+            .addOnFailureListener {
+                callback(null)
+            }
+    }
 
 
     private fun buscarIdPoliza(patente: String, callback: (String?) -> Unit) {
