@@ -12,16 +12,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="132dp"
         android:padding="16dp">
 
         <ImageView
             android:id="@+id/imageViewMensaje"
             android:layout_width="44dp"
             android:layout_height="35dp"
-            android:src="@drawable/icon_email"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="181dp" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="150dp"
+            android:layout_marginBottom="0dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/icon_email"
+            tools:ignore="ImageContrastCheck" />
 
         <ImageView
             android:id="@+id/imageViewTipoSiniestro"
@@ -30,7 +34,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="18dp"
 
-           />
+            android:importantForAccessibility="no" />
 
         <TextView
             android:id="@+id/txtTipoSiniestro"
@@ -53,14 +57,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtNumSiniestro"
             android:text="fecha"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/txtAbonadoCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtFechaVencimientoCardView"
-            android:text="patente" />
+            android:text="patente"
+            tools:ignore="HardcodedText" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

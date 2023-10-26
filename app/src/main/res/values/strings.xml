@@ -83,5 +83,7 @@
     <string name="numPoliza">Nro de poliza</string>
     <string name="mensaje">mensaje</string>
     <string name="NuevaPoliza">Nueva poliza</string>
+    <string name="Anterior">Anterior</string>
+    <string name="Posterior">Posterior</string>
 
 </resources>

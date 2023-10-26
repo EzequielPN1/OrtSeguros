@@ -135,7 +135,7 @@ class NuevoSiniestroViewModel : ViewModel() {
                                             fecha = obtenerFechaActual(),
                                             notificacion = mensajePredeterminado,
                                             numero = "1",
-                                            usuarioEmpresa = ""
+                                            usuarioEmpresa = "Atentamente la Empresa"
                                         ))
                                     )
 

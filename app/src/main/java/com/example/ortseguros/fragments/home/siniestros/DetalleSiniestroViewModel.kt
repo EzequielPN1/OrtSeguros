@@ -2,6 +2,8 @@ package com.example.ortseguros.fragments.home.siniestros
 
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ortseguros.entities.Mensaje
 import com.example.ortseguros.entities.Siniestro
@@ -14,6 +16,7 @@ class DetalleSiniestroViewModel : ViewModel() {
 
     private val db = Firebase.firestore
     private lateinit var firebaseAuth: FirebaseAuth
+    private var numMensaje=0
 
     fun mostrarTituloMensaje(callback: (Boolean, String) -> Unit) {
         firebaseAuth = Firebase.auth
@@ -90,12 +93,6 @@ class DetalleSiniestroViewModel : ViewModel() {
                 }
         }
     }
-
-
-
-
-
-
 
 
 
