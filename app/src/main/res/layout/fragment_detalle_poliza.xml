@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.home.misPolizas.DetallePolizaFragment"
     tools:layout_editor_absoluteX="-1dp"
-    tools:layout_editor_absoluteY="-53dp">
+    tools:layout_editor_absoluteY="-78dp">
 
     <ImageView
         android:id="@+id/imageGranizo"
@@ -19,19 +19,22 @@
         app:layout_constraintEnd_toStartOf="@+id/imageRoboParcial"
         app:layout_constraintStart_toEndOf="@+id/imageRespCivil"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.186"
+        android:importantForAccessibility="no" />
 
-    <ImageView
-        android:id="@+id/imageRoboTotal"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="20dp"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginEnd="150dp"
+        android:text="@string/CoberturasContratadas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageRoboParcial"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.102" />
 
     <ImageView
         android:id="@+id/imageDanioTotal"
@@ -43,19 +46,8 @@
         app:layout_constraintEnd_toStartOf="@+id/imageRespCivil"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
-
-    <ImageView
-        android:id="@+id/imageRoboParcial"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageRoboTotal"
-        app:layout_constraintStart_toEndOf="@+id/imageGranizo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.186"
+        android:importantForAccessibility="no" />
 
     <ImageView
         android:id="@+id/imageRespCivil"
@@ -67,7 +59,34 @@
         app:layout_constraintEnd_toStartOf="@+id/imageGranizo"
         app:layout_constraintStart_toEndOf="@+id/imageDanioTotal"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.186"
+        android:importantForAccessibility="no" />
+
+    <ImageView
+        android:id="@+id/imageRoboParcial"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageRoboTotal"
+        app:layout_constraintStart_toEndOf="@+id/imageGranizo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.186"
+        android:importantForAccessibility="no" />
+
+    <ImageView
+        android:id="@+id/imageRoboTotal"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageRoboParcial"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.186"
+        android:importantForAccessibility="no" />
 
     <TextView
         android:id="@+id/btnBajaPoliza"
@@ -84,42 +103,19 @@
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.939" />
+        app:layout_constraintVertical_bias="0.939"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/inputMarcaModelo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="10dp"
-        android:text="TextView"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputFechaInicio"
         app:layout_constraintEnd_toStartOf="@+id/inputPatentePoliza"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/inputPatentePoliza"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="50dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/inputMarcaModelo"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/inputFechaInicio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="50dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -128,13 +124,49 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="50dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputSumaAsegurada" />
+
+    <TextView
+        android:id="@+id/inputFechaInicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/inputSumaAsegurada"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputFechaInicio" />
+
+    <TextView
+        android:id="@+id/inputPatentePoliza"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputFechaInicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/inputMarcaModelo"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnPagos"
@@ -142,40 +174,13 @@
         android:layout_height="49dp"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
-        android:text="@string/Pagos"
         android:backgroundTint="@color/bordo"
+        android:text="@string/Pagos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.812" />
-
-    <TextView
-        android:id="@+id/inputSumaAsegurada"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputFechaInicio" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginEnd="150dp"
-        android:text="@string/CoberturasContratadas"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.317" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
