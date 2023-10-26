@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.example.ortseguros.R
+import com.example.ortseguros.entities.Mensaje
 
 class SiniestroAdapter(
     private var siniestroList: MutableList<Siniestro>,
@@ -66,6 +67,19 @@ class SiniestroAdapter(
             txtPatente.text = "Patente: $patente"
         }
 
+        fun setNotificacion(mensajes: List<Mensaje>) {
+            val notificacionImageView: ImageView = view.findViewById(R.id.imageViewMensaje)
+
+            val mensajesNoLeidos = mensajes.filter { !it.estado }
+
+            if (mensajesNoLeidos.isNotEmpty()) {
+                notificacionImageView.visibility = View.VISIBLE
+            } else {
+                notificacionImageView.visibility = View.GONE
+            }
+        }
+
+
 
         fun getCard():CardView{
             return view.findViewById(R.id.idCardViewPago)
@@ -87,6 +101,10 @@ class SiniestroAdapter(
         holder.setFecha(siniestro.fecha)
         holder.setPatente(siniestro.patente)
         holder.setImageTipoSiniestro(siniestro.tipoSiniestro)
+        holder.setNotificacion(siniestro.mensajes)
+
+
+
 
         holder.getCard().setOnClickListener {
             onClick(position)

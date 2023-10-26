@@ -126,6 +126,16 @@ class SiniestrosFragment : Fragment() {
 
         recyclerSiniestro.layoutManager = LinearLayoutManager(context)
 
+
+        // Obtener las opciones seleccionadas actualmente en los spinners
+        val patenteSeleccionada = spinnerPatentesSiniestros?.selectedItem?.toString()
+        val estadoSeleccionado = spinnerEstadoSiniestro?.selectedItem?.toString()
+
+        // Actualizar los siniestros con las opciones seleccionadas
+        if (!patenteSeleccionada.isNullOrEmpty()) {
+            siniestroViewModel.obtenerSiniestrosFiltrados(patenteSeleccionada, estadoSeleccionado)
+        }
+
         siniestroViewModel.siniestrosLiveData.observe(viewLifecycleOwner) { siniestros ->
             val siniestrosMutableList = siniestros.toMutableList()
 
@@ -135,9 +145,8 @@ class SiniestrosFragment : Fragment() {
             }
             recyclerSiniestro.adapter = siniestroAdapter
         }
-
-
     }
+
 
 
 

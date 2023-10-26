@@ -15,7 +15,7 @@ class DetalleSiniestroViewModel : ViewModel() {
     private val db = Firebase.firestore
     private lateinit var firebaseAuth: FirebaseAuth
 
-    fun mostrarTituloMesnaje(callback: (Boolean, String) -> Unit) {
+    fun mostrarTituloMensaje(callback: (Boolean, String) -> Unit) {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser
 
@@ -47,14 +47,14 @@ class DetalleSiniestroViewModel : ViewModel() {
 
 
 
-    fun mostrarMensaje(siniestro: Siniestro, callback: (Boolean, String, String, String) -> Unit) {
+    fun mostrarMensajeActual(siniestro: Siniestro, callback: (Boolean, String, String, String) -> Unit) {
         if (siniestro.mensajes.isNotEmpty()) {
             // Filtra los mensajes con estado false
             val mensajesNoLeidos = siniestro.mensajes.filter { !it.estado }
 
             if (mensajesNoLeidos.isNotEmpty()) {
-                // Encuentra el mensaje con el número más alto (considerando números en cadena)
-                val mensajeNoLeido = mensajesNoLeidos.maxByOrNull { it.numero }
+
+                val mensajeNoLeido = mensajesNoLeidos.minByOrNull { it.numero }
 
                 if (mensajeNoLeido != null) {
                     // Actualiza el estado en Firebase

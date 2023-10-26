@@ -21,6 +21,13 @@ class SiniestrosViewModel : ViewModel() {
 
 
 
+
+
+
+
+
+
+
     fun obtenerPatentesDesdeFirestore(callback: (List<String>?, String?) -> Unit) {
         firebaseAuth = Firebase.auth
         val user = firebaseAuth.currentUser

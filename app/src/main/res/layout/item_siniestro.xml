@@ -16,6 +16,14 @@
         android:padding="16dp">
 
         <ImageView
+            android:id="@+id/imageViewMensaje"
+            android:layout_width="44dp"
+            android:layout_height="35dp"
+            android:src="@drawable/icon_email"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="181dp" />
+
+        <ImageView
             android:id="@+id/imageViewTipoSiniestro"
             android:layout_width="131dp"
             android:layout_height="103dp"
@@ -36,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtTipoSiniestro"
+            android:layout_marginTop="-1dp"
             android:text="@string/NumSiniestro" />
 
         <TextView

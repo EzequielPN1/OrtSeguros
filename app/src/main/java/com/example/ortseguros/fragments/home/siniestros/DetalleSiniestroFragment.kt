@@ -19,7 +19,7 @@ class DetalleSiniestroFragment : Fragment() {
     private lateinit var txtMensajeDetalleSiniestro: TextView
     private lateinit var txtNomEmpladoEmpresa: TextView
     private lateinit var imagePerfil: ImageView
-
+    private lateinit var txtVerMensajeAnterior:TextView
 
 
     override fun onCreateView(
@@ -32,6 +32,7 @@ class DetalleSiniestroFragment : Fragment() {
         txtMensajeDetalleSiniestro = v.findViewById(R.id.txtMensajeDetalleSiniestro)
         txtNomEmpladoEmpresa = v.findViewById(R.id.txtNomEmpladoEmpresa)
         imagePerfil = v.findViewById(R.id.imagePerfil)
+
         return v
     }
 
@@ -41,25 +42,26 @@ class DetalleSiniestroFragment : Fragment() {
 
         val siniestro = DetalleSiniestroFragmentArgs.fromBundle(requireArguments()).siniestro
 
-        viewModelDetalleSiniestro.mostrarTituloMesnaje() { mensajeEncontrado, mensaje ->
+        viewModelDetalleSiniestro.mostrarTituloMensaje() { mensajeEncontrado, mensaje ->
             if (mensajeEncontrado) {
                 txtTituloMensaje.text = mensaje
             }
         }
 
-        viewModelDetalleSiniestro.mostrarMensaje(siniestro) { mensajeEncontrado, mensaje ,nombreEmpleado, imagenURL ->
+        viewModelDetalleSiniestro.mostrarMensajeActual(siniestro) { mensajeEncontrado, mensaje ,nombreEmpleado, imagenURL ->
             if (mensajeEncontrado) {
 
-                txtMensajeDetalleSiniestro.text = mensaje
                 txtNomEmpladoEmpresa.text = nombreEmpleado
-
-
+                txtMensajeDetalleSiniestro.text = mensaje
 
                 if (imagenURL.isNotEmpty()) {
                     Glide.with(this)
                         .load(imagenURL)
                         .into(imagePerfil)
                 }
+
+
+
             }
         }
 
