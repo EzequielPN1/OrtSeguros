@@ -59,69 +59,88 @@ class DetalleSiniestroFragment : Fragment() {
         }
 
 
-
-        viewModelDetalleSiniestro.mostrarMensajeActual(siniestro) { mensajeEncontrado, mensaje ,nombreEmpleado, imagenURL ->
+        viewModelDetalleSiniestro.mostrarMensajeActual(siniestro) { mensajeEncontrado, mensaje ->
             if (mensajeEncontrado) {
+                        txtNomEmpladoEmpresa.text = "Asesor: ${mensaje.usuarioEmpresa}"
+                        txtMensajeDetalleSiniestro.text = mensaje.notificacion
+                        val imagenUrl = mensaje.imagenURL
 
-                txtNomEmpladoEmpresa.text = nombreEmpleado
-                txtMensajeDetalleSiniestro.text = mensaje
+                        if (imagenUrl.isNotEmpty()) {
+                            Glide.with(this)
+                                .load(imagenUrl)
+                                .into(imagePerfil)
+                        }
+                        txtAnterior.visibility = if (mensajeActualIndex == 0) View.GONE else View.VISIBLE
+                        txtPosterior.visibility = if (mensajeActualIndex == siniestro.mensajes.size - 1) View.GONE else View.VISIBLE
 
-                if (imagenURL.isNotEmpty()) {
-                    Glide.with(this)
-                        .load(imagenURL)
-                        .into(imagePerfil)
-                }
             }
         }
 
 
 
-
-
-            txtAnterior.setOnClickListener {
-                if (mensajeActualIndex > 0) {
-                    mensajeActualIndex--
-                    mostrarMensaje(siniestro, mensajeActualIndex)
-
-                } else {
-                    Toast.makeText(requireContext(), "No hay mensajes anteriores", Toast.LENGTH_SHORT).show()
-                }
+        txtAnterior.setOnClickListener {
+            if (mensajeActualIndex > 0) {
+                mensajeActualIndex--
+                mostrarMensaje(siniestro, mensajeActualIndex)
+            } else {
+                Toast.makeText(requireContext(), "No hay mensajes anteriores", Toast.LENGTH_SHORT).show()
             }
+        }
 
-            txtPosterior.setOnClickListener {
-                if (mensajeActualIndex < siniestro.mensajes.size - 1) {
-                    mensajeActualIndex++
-                    mostrarMensaje(siniestro, mensajeActualIndex)
-
-                } else {
-                    Toast.makeText(requireContext(), "No hay mensajes posteriores", Toast.LENGTH_SHORT).show()
-                }
+        txtPosterior.setOnClickListener {
+            if (mensajeActualIndex < siniestro.mensajes.size - 1) {
+                mensajeActualIndex++
+                mostrarMensaje(siniestro, mensajeActualIndex)
+            } else {
+                Toast.makeText(requireContext(), "No hay mensajes posteriores", Toast.LENGTH_SHORT).show()
             }
-
+        }
 
 
     }
+
+
 
 
     private fun mostrarMensaje(siniestro: Siniestro, index: Int) {
-        if (index >= 0 && index < siniestro.mensajes.size) {
-            val mensajeActual = siniestro.mensajes[index]
+        viewModelDetalleSiniestro.obtenerMensajePorIndice(siniestro, index) { mensajeActual ->
+            if (mensajeActual != null) {
 
-            txtNomEmpladoEmpresa.text = mensajeActual.usuarioEmpresa
-            txtMensajeDetalleSiniestro.text = mensajeActual.notificacion
+                txtNomEmpladoEmpresa.text = mensajeActual.usuarioEmpresa
+                txtMensajeDetalleSiniestro.text = mensajeActual.notificacion
 
-            if (mensajeActual.imagenURL.isNotEmpty()) {
-                Glide.with(this)
-                    .load(mensajeActual.imagenURL)
-                    .into(imagePerfil)
+                if (mensajeActual.imagenURL.isNotEmpty()) {
+                    Glide.with(this)
+                        .load(mensajeActual.imagenURL)
+                        .into(imagePerfil)
+                }
+
+                txtAnterior.visibility = if (index == 0) View.GONE else View.VISIBLE
+                txtPosterior.visibility = if (index == siniestro.mensajes.size - 1) View.GONE else View.VISIBLE
+
+            } else {
+                Toast.makeText(requireContext(), "Índice de mensaje fuera de rango", Toast.LENGTH_SHORT).show()
             }
 
-
         }
-
     }
+
+
 
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

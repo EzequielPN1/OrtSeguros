@@ -47,33 +47,26 @@ class DetalleSiniestroViewModel : ViewModel() {
 
 
 
+    fun mostrarMensajeActual(siniestro: Siniestro, callback: (Boolean, Mensaje) -> Unit) {
+        val mensajesNoLeidos = siniestro.mensajes.filter { !it.estado }
 
-
-
-    fun mostrarMensajeActual(siniestro: Siniestro, callback: (Boolean, String, String, String) -> Unit) {
-        if (siniestro.mensajes.isNotEmpty()) {
-            // Filtra los mensajes con estado false
-            val mensajesNoLeidos = siniestro.mensajes.filter { !it.estado }
-
-            if (mensajesNoLeidos.isNotEmpty()) {
-
-                val mensajeNoLeido = mensajesNoLeidos.minByOrNull { it.numero }
-
-                if (mensajeNoLeido != null) {
-                    // Actualiza el estado en Firebase
-                    actualizarEstadoMensajeEnFirebase(siniestro, mensajeNoLeido)
-
-                    // Se encontró un mensaje no leído
-                    callback(true, mensajeNoLeido.notificacion , "Asesor: ${mensajeNoLeido.usuarioEmpresa}",mensajeNoLeido.imagenURL)
-                    return
-                }
+        if (mensajesNoLeidos.isNotEmpty()) {
+            // Si hay mensajes no leídos, muestra el mensaje con el número más bajo
+            val mensajeNoLeido = mensajesNoLeidos.minByOrNull { it.numero }
+            if (mensajeNoLeido != null) {
+                actualizarEstadoMensajeEnFirebase(siniestro,mensajeNoLeido)
+                callback(true, mensajeNoLeido)
+            } else {
+                callback(false, Mensaje()) // Maneja el caso en que no se encontró un mensaje
             }
-        }
-
-        // Si no hay mensajes no leídos o no se encontraron, devuelve el último mensaje (el mayor número en cadena)
-        val mensajeUltimo = siniestro.mensajes.maxByOrNull { it.numero }
-        if (mensajeUltimo != null) {
-            callback(true, mensajeUltimo.notificacion, mensajeUltimo.usuarioEmpresa, mensajeUltimo.imagenURL)
+        } else {
+            // Si no hay mensajes no leídos, muestra el último mensaje
+            val mensajeUltimo = siniestro.mensajes.maxByOrNull { it.numero }
+            if (mensajeUltimo != null) {
+                callback(true, mensajeUltimo)
+            } else {
+                callback(false, Mensaje()) // Maneja el caso en que no se encontró un mensaje
+            }
         }
     }
 
@@ -91,6 +84,24 @@ class DetalleSiniestroViewModel : ViewModel() {
                 .addOnFailureListener { e ->
                     Log.e("FirebaseError", "Error al actualizar el estado: $e")
                 }
+        }
+    }
+
+
+    fun obtenerMensajePorIndice(siniestro: Siniestro, indice: Int, callback: (Mensaje?) -> Unit) {
+        val siniestroRef = db.collection("siniestros").document(siniestro.id)
+
+        siniestroRef.get().addOnSuccessListener { siniestroSnapshot ->
+            if (siniestroSnapshot.exists()) {
+                val mensajesArray = siniestroSnapshot.toObject(Siniestro::class.java)?.mensajes
+
+                if (mensajesArray != null && indice >= 0 && indice < mensajesArray.size) {
+                    val mensaje = mensajesArray[indice]
+                    callback(mensaje)
+                }
+            }
+        }.addOnFailureListener {
+            callback(null)
         }
     }
 
