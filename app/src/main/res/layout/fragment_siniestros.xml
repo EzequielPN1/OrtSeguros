@@ -10,19 +10,18 @@
     <Spinner
         android:id="@+id/spinnerEstadoSiniestro"
         android:layout_width="189dp"
-        android:layout_height="27dp"
+        android:layout_height="48dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/recSiniestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerPatentesSiniestros"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPatentesSiniestros" />
 
     <Spinner
         android:id="@+id/spinnerPatentesSiniestros"
         android:layout_width="189dp"
-        android:layout_height="27dp"
+        android:layout_height="48dp"
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

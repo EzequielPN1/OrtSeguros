@@ -85,5 +85,8 @@
     <string name="NuevaPoliza">Nueva poliza</string>
     <string name="Anterior">Anterior</string>
     <string name="Posterior">Posterior</string>
-
+    <string name="FechaAltaVehiculo">FechaAltaVehiculo</string>
+    <string name="Patente">Patente</string>
+    <string name="ProgressText">Generando nueva póliza…</string>
+    <string name="Guardar">Guardar</string>
 </resources>

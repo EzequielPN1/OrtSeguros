@@ -15,23 +15,22 @@
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="5dp"
+        android:autofillHints="name"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/icon_cuenta"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/Nombre"
-        android:autofillHints="name"
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/inputApellido"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-
-        android:drawableStart="@drawable/icon_cuenta"
-        android:background="@drawable/custom_input"
-        />
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputApellido"
@@ -39,10 +38,12 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:autofillHints="familyName"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/icon_cuenta"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/Apellido"
-
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -51,9 +52,7 @@
         app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputNombre"
-        android:autofillHints="familyName"
-        android:drawableStart="@drawable/icon_cuenta"
-        android:background="@drawable/custom_input"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputFechaNac"
@@ -61,7 +60,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:autofillHints="date"
+        android:background="@drawable/custom_input"
         android:clickable="false"
+        android:drawableStart="@drawable/icon_calendar"
         android:drawablePadding="12dp"
         android:ems="10"
         android:focusable="false"
@@ -74,10 +76,7 @@
         app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputApellido"
-
-        android:drawableStart="@drawable/icon_calendar"
-        android:background="@drawable/custom_input"
-        android:autofillHints="date"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputDni"
@@ -85,6 +84,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:autofillHints="identification"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/icon_cuenta"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/Dni"
@@ -96,10 +98,7 @@
         app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputFechaNac"
-
-        android:drawableStart="@drawable/icon_cuenta"
-        android:background="@drawable/custom_input"
-        android:autofillHints="identification"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputDomicilio"
@@ -107,6 +106,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:autofillHints="streetAddress"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/icon_place"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/Domicilio"
@@ -118,10 +120,7 @@
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputDni"
-
-        android:drawableStart="@drawable/icon_place"
-        android:background="@drawable/custom_input"
-        android:autofillHints="streetAddress"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputEmailRegister"
@@ -129,6 +128,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/icon_email"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/Email"
@@ -140,10 +142,7 @@
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputDomicilio"
-
-        android:drawableStart="@drawable/icon_email"
-        android:background="@drawable/custom_input"
-        android:autofillHints="emailAddress"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputTelefono"
@@ -151,6 +150,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="32dp"
+        android:autofillHints="phoneNumber"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/icon_phone"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/Telefono"
@@ -162,10 +164,7 @@
         app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputEmailRegister"
-
-        android:drawableStart="@drawable/icon_phone"
-        android:background="@drawable/custom_input"
-        android:autofillHints="phoneNumber"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputContrasenia"
@@ -173,6 +172,8 @@
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="5dp"
+        android:autofillHints="newPassword"
+        android:background="@drawable/custom_input"
         android:drawableStart="@drawable/icon_lock"
         android:drawablePadding="12dp"
         android:ems="10"
@@ -184,10 +185,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toBottomOf="@+id/inputTelefono"
-        android:background="@drawable/custom_input"
-        android:autofillHints="newPassword"/>
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputConfirmarContrasenia"
@@ -195,6 +194,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="24dp"
+        android:autofillHints="newPassword"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/icon_lock"
         android:drawablePadding="12dp"
@@ -206,10 +206,9 @@
         app:layout_constraintBottom_toTopOf="@+id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.568"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputContrasenia"
-        android:autofillHints="newPassword"/>
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/btnRegister"

@@ -22,34 +22,40 @@
             android:id="@+id/imagePosterior"
             android:layout_width="62dp"
             android:layout_height="59dp"
+            android:importantForAccessibility="no"
             android:longClickable="true"
             android:src="@drawable/car_posterior"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageLatDer"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageLatDer"/>
+            tools:ignore="ImageContrastCheck" />
 
         <ImageView
             android:id="@+id/imageLatDer"
             android:layout_width="62dp"
             android:layout_height="59dp"
+            android:importantForAccessibility="no"
             android:longClickable="true"
             android:src="@drawable/car_lat_der"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imagePosterior"
+            app:layout_constraintStart_toEndOf="@id/imageLatIzq"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageLatIzq"/>
+            tools:ignore="ImageContrastCheck" />
 
         <ImageView
             android:id="@+id/imageLatIzq"
             android:layout_width="62dp"
             android:layout_height="59dp"
+            android:importantForAccessibility="no"
             android:longClickable="true"
             android:src="@drawable/car_lat_izq"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageLatDer"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageFrente"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck" />
 
         <ImageView
             android:id="@+id/imageFrente"
@@ -61,7 +67,8 @@
             app:layout_constraintEnd_toStartOf="@+id/imageLatIzq"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:importantForAccessibility="no" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,29 +93,30 @@
 
         <EditText
             android:id="@+id/inputPatente"
-            android:layout_margin="8dp"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_margin="8dp"
             android:autofillHints="name"
             android:background="@drawable/custom_input"
             android:clickable="false"
             android:drawableStart="@drawable/icon_text"
             android:drawablePadding="12dp"
             android:ems="10"
-            android:hint="Patente"
+            android:hint="@string/Patente"
             android:inputType="text"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputFechaAltaVehiculo"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:ignore="TextContrastCheck" />
 
         <EditText
             android:id="@+id/inputFechaAltaVehiculo"
-            android:layout_margin="8dp"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_margin="8dp"
             android:autofillHints="date"
             android:background="@drawable/custom_input"
             android:clickable="false"
@@ -116,14 +124,15 @@
             android:drawablePadding="12dp"
             android:ems="10"
             android:focusable="false"
-            android:hint="FechaAltaVehiculo"
+            android:hint="@string/FechaAltaVehiculo"
             android:inputType="date"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             app:layout_constraintBottom_toTopOf="@id/inputPatente"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_marcaModelo" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_marcaModelo"
+            tools:ignore="TextContrastCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -142,59 +151,69 @@
             style="@style/switchStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:text="@string/respCivil2"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/swc_danioTotal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/groupedLayout" />
+            app:layout_constraintTop_toTopOf="@+id/groupedLayout"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Switch
             android:id="@+id/swc_danioTotal"
             style="@style/switchStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:text="@string/daniototal2"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/swc_granizo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/swc_respCivil" />
+            app:layout_constraintTop_toBottomOf="@+id/swc_respCivil"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Switch
             android:id="@+id/swc_granizo"
             style="@style/switchStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:text="@string/granizo2"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/swc_roboParcial"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/swc_danioTotal" />
+            app:layout_constraintTop_toBottomOf="@+id/swc_danioTotal"
+            tools:ignore="UseSwitchCompatOrMaterialXml,VisualLintButtonSize" />
 
         <Switch
             android:id="@+id/swc_roboParcial"
             style="@style/switchStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:text="@string/roboparcial2"
             app:layout_constraintBottom_toTopOf="@id/swc_roboTotal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/swc_granizo" />
+            app:layout_constraintTop_toBottomOf="@+id/swc_granizo"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <Switch
             android:id="@+id/swc_roboTotal"
             style="@style/switchStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:text="@string/robototal2"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@id/groupedLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/swc_roboParcial" />
+            app:layout_constraintTop_toBottomOf="@+id/swc_roboParcial"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -224,16 +243,15 @@
 
     <TextView
         android:id="@+id/progressText"
+        style="@style/switchStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/ProgressText"
         android:visibility="invisible"
-        android:text="Generando nueva póliza..."
-        style="@style/switchStyle"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btnNuevaPoliza"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
 
 
