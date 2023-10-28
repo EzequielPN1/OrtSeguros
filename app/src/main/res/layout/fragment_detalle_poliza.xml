@@ -28,13 +28,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginEnd="150dp"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/CoberturasContratadas"
+        android:textColor="@color/bordo"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintVertical_bias="0.052" />
 
     <ImageView
         android:id="@+id/imageDanioTotal"
@@ -96,6 +99,7 @@
         android:layout_marginEnd="150dp"
         android:clickable="true"
         android:text="@string/BajaPoliza"
+        android:fontFamily="sans-serif-medium"
         android:textColor="@color/bordo"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -170,17 +174,33 @@
 
     <Button
         android:id="@+id/btnPagos"
-        android:layout_width="188dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:backgroundTint="@color/bordo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        style="@style/btnStyle"
         android:text="@string/Pagos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.812" />
+        app:layout_constraintVertical_bias="0.811" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="244dp"
+        android:layout_marginEnd="303dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/DatosPoliza"
+        android:textColor="@color/bordo"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

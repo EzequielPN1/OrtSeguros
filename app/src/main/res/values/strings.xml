@@ -8,26 +8,26 @@
 
     <string name="app_name">OrtSeguros</string>
     <string name="stringCrear_Cuenta"><u>Crear Cuenta</u></string>
-    <string name="stringOlvidar"><u>Olvido su Contraseña?</u></string>
+    <string name="stringOlvidar"><u>¿Olvidó su Contraseña?</u></string>
 
-    <string name="title_home">Mis polizas</string>
+    <string name="title_home">Mis pólizas</string>
     <string name="Cuenta">Cuenta</string>
     <string name="Siniestros">Siniestros</string>
     <string name="Siniestro">Siniestro</string>
     <string name="Fecha">Fecha</string>
     <string name="Hora">Hora</string>
-    <string name="Ubicacion">Ubicacion</string>
-    <string name="Descripcion">Descripcion</string>
-    <string name="MisPolizas">Mis Polizas</string>
-    <string name="CrearPoliza">Crear poliza</string>
+    <string name="Ubicacion">Ubicación</string>
+    <string name="Descripcion">Descripción</string>
+    <string name="MisPolizas">Mis pólizas</string>
+    <string name="CrearPoliza">Crear póliza</string>
 
-    <string name="Login"><B>Log In</B></string>
+    <string name="Login"><b>Iniciar Sesión</b></string>
     <string name="Entrar">Entrar</string>
     <string name="EresUsuarioNuevo">¿Eres Usuario Nuevo?</string>
 
-    <string name="CerrarSession">Cerrar Sesion</string>
+    <string name="CerrarSesion">Cerrar Sesión</string>
 
-    <string name="EnvioMailNuevaPass">Envio de email para nueva contraseña</string>
+    <string name="EnvíoMailNuevaContraseña">Envío de email para nueva contraseña</string>
     <string name="Enviar">Enviar</string>
 
     <string name="NuevoSiniestro">Nuevo siniestro</string>
@@ -39,7 +39,7 @@
     <string name="Dni">Dni</string>
     <string name="Domicilio">Domicilio</string>
     <string name="Email">Email</string>
-    <string name="Telefono">Telefono</string>
+    <string name="Telefono">Teléfono</string>
     <string name="Contraseña">Contraseña</string>
     <string name="ConfirmarContraseña">Confirmar contraseña</string>
 
@@ -68,25 +68,28 @@
 
     <string name="ImagenMensaje">Ingresar fotos del Vehiculo: frontal, lat izquierdo, lat derecho y posterior</string>
 
-    <string name="BajaPoliza">Baja de poliza</string>
+    <string name="BajaPoliza">Baja de póliza</string>
 
 
     <string name="numeroDeTarjeta">Nro de tarjeta</string>
     <string name="fechaCaducidad">Fecha de caducidad</string>
     <string name="titular">Titular</string>
-    <string name="codigoSeguridad">Codigo de seguridad</string>
+    <string name="codigoSeguridad">Código de seguridad</string>
 
 
     <string name="TipoSiniestro">Tipo siniestro</string>
     <string name="NumSiniestro">Nro de siniestro</string>
     <string name="CoberturasContratadas">Coberturas contratadas</string>
-    <string name="numPoliza">Nro de poliza</string>
+    <string name="numPoliza">Nro de póliza</string>
     <string name="mensaje">mensaje</string>
-    <string name="NuevaPoliza">Nueva poliza</string>
+    <string name="NuevaPoliza">Nueva póliza</string>
     <string name="Anterior">Anterior</string>
     <string name="Posterior">Posterior</string>
-    <string name="FechaAltaVehiculo">FechaAltaVehiculo</string>
+    <string name="FechaAltaVehiculo">Fecha de alta del vehículo</string>
     <string name="Patente">Patente</string>
     <string name="ProgressText">Generando nueva póliza…</string>
     <string name="Guardar">Guardar</string>
+    <string name="DatosPoliza">Datos de la póliza:</string>
+
+
 </resources>

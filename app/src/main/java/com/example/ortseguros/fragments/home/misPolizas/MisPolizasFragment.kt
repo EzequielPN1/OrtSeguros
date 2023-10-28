@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +18,7 @@ class MisPolizasFragment : Fragment() {
 
     private lateinit var viewModelPolizas: MisPolizasViewModel
     private lateinit var v: View
-    private lateinit var btnAgregarPoliza: Button
+    private lateinit var btnAgregarPoliza: ImageView
 
 
     private lateinit var recyclerPoliza: RecyclerView

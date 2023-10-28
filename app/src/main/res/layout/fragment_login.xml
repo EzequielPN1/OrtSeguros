@@ -92,15 +92,15 @@
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/Entrar"
         android:backgroundTint="@color/bordo"
+        android:text="@string/Entrar"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/groupedLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/groupedLayout"
-        app:layout_constraintBottom_toTopOf="@id/groupedLayout2" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/groupedLayout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/groupedLayout2"

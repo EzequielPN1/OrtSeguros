@@ -1,6 +1,6 @@
 package com.example.ortseguros.adapters
 
-import android.net.Uri
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -85,11 +85,10 @@ class PolizaAdapter(
             // Cargar la imagen con Glide
             Glide.with(holder.itemView.context)
                 .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL) // Opcional: puedes ajustar la estrategia de caché según tus necesidades
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imagePoliza)
             Log.e("MiApp", "Ok")
         }.addOnFailureListener { exception ->
-            // Maneja cualquier error que ocurra al obtener la URL de descarga
             Log.e("MiApp", "Error al obtener la URL de descarga de la imagen: $exception")
         }
 

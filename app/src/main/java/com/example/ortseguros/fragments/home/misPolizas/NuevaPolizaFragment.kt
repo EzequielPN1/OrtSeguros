@@ -11,16 +11,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Spinner
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.SwitchCompat
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 import com.example.ortseguros.utils.DatePickerFragment
@@ -34,12 +33,12 @@ class NuevaPolizaFragment : Fragment() {
     private lateinit var spinnerMarcaModelo: Spinner
     private lateinit var inputFechaAltaVehiculo: EditText
     private lateinit var inputPatente: EditText
-    private lateinit var swcRespCivil: Switch
-    private lateinit var swcDanioTotal: Switch
-    private lateinit var swcGranizo: Switch
-    private lateinit var swcRoboParcial: Switch
-    private lateinit var swcRoboTotal: Switch
-    private lateinit var btnNuevaPoliza: Button
+    private lateinit var swcRespCivil: SwitchCompat
+    private lateinit var swcDanioTotal: SwitchCompat
+    private lateinit var swcGranizo: SwitchCompat
+    private lateinit var swcRoboParcial: SwitchCompat
+    private lateinit var swcRoboTotal: SwitchCompat
+    private lateinit var btnNuevaPoliza: TextView
     private lateinit var imageFrente: ImageView
     private lateinit var imageLatIzq: ImageView
     private lateinit var imageLatDer: ImageView
@@ -49,7 +48,7 @@ class NuevaPolizaFragment : Fragment() {
     private var uriLatDer: Uri? = null
     private var uriPosterior: Uri? = null
     private lateinit var progresBar : ProgressBar
-    private lateinit var progressText: TextView
+
 
 
     private val pickMediaFrente = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -101,7 +100,7 @@ class NuevaPolizaFragment : Fragment() {
         imageLatDer = v.findViewById(R.id.imageLatDer)
         imagePosterior = v.findViewById(R.id.imagePosterior)
         progresBar = v.findViewById(R.id.progressBar)
-        progressText = v.findViewById(R.id.progressText)
+
 
         viewModelNuevaPoliza.selectedDateLiveData.observe(
             viewLifecycleOwner
@@ -185,7 +184,7 @@ class NuevaPolizaFragment : Fragment() {
                 if (camposValidos) {
 
                     progresBar.visibility = View.VISIBLE
-                    progressText.visibility = View.VISIBLE
+
 
                     viewModelNuevaPoliza.guardarNuevaPoliza(
                         marcaModelo,
@@ -203,7 +202,7 @@ class NuevaPolizaFragment : Fragment() {
                     ) { exito ->
 
                         progresBar.visibility = View.INVISIBLE
-                        progressText.visibility = View.INVISIBLE
+
 
                         if (exito) {
                             findNavController().navigateUp()

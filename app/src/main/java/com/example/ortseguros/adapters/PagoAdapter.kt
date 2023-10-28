@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ortseguros.R
 import com.example.ortseguros.entities.Pago
@@ -35,10 +34,10 @@ class PagoAdapter (private var pagoList: MutableList<Pago>,
         fun setFechaPago(fechaPago: String, abonado: Boolean) {
             val txtFechaPago: TextView = view.findViewById(R.id.txtFechaPagoCardView)
             val mensaje = if (abonado) {
-                txtFechaPago.visibility = View.VISIBLE // Mostrar la fecha de pago
+                txtFechaPago.visibility = View.VISIBLE
                 "Fecha de pago: $fechaPago"
             } else {
-                txtFechaPago.visibility = View.GONE // Ocultar la fecha de pago
+                txtFechaPago.visibility = View.GONE
                 ""
             }
             txtFechaPago.text = mensaje
