@@ -1,7 +1,7 @@
 package com.example.ortseguros.fragments.home.siniestros
 
 
-import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,13 +18,6 @@ class SiniestrosViewModel : ViewModel() {
 
     private val _siniestrosLiveData = MutableLiveData<List<Siniestro>>()
     val siniestrosLiveData: LiveData<List<Siniestro>> = _siniestrosLiveData
-
-
-
-
-
-
-
 
 
 

@@ -45,6 +45,16 @@ class PolizaAdapter(
         }
 
 
+        fun setNotificacion(actualizada:Boolean) {
+            val notificacionImageView: ImageView = view.findViewById(R.id.imageUpdate)
+
+            if (actualizada) {
+                notificacionImageView.visibility = View.VISIBLE
+            } else {
+                notificacionImageView.visibility = View.GONE
+            }
+        }
+
 
 
         fun getCard(): CardView {
@@ -93,6 +103,7 @@ class PolizaAdapter(
         }
 
         holder.setNroPoliza(poliza.numPoliza)
+        holder.setNotificacion(poliza.actualizada)
 
         holder.getCard().setOnClickListener {
             onClick(position)

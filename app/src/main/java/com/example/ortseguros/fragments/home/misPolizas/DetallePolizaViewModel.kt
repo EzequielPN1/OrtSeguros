@@ -1,17 +1,14 @@
 package com.example.ortseguros.fragments.home.misPolizas
 
-import android.util.Log
+
 import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.ortseguros.R
 import com.example.ortseguros.entities.Poliza
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 
 class DetallePolizaViewModel : ViewModel() {
 
@@ -64,6 +61,17 @@ class DetallePolizaViewModel : ViewModel() {
                 imageViews[cobertura]?.setImageResource(imagenId)
             }
         }
+    }
+
+
+    fun cambiarEstado(poliza: Poliza) {
+        val polizaRef = db.collection("polizas").document(poliza.id)
+
+        polizaRef.update("actualizada", false)
+            .addOnSuccessListener {
+            }
+            .addOnFailureListener { e ->
+            }
     }
 
 

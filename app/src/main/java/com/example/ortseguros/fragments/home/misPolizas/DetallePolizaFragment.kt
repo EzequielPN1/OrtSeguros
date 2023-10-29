@@ -2,7 +2,6 @@ package com.example.ortseguros.fragments.home.misPolizas
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +12,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.ortseguros.R
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+
 
 
 class DetallePolizaFragment : Fragment() {
@@ -76,6 +72,8 @@ class DetallePolizaFragment : Fragment() {
         super.onStart()
 
         val poliza = DetallePolizaFragmentArgs.fromBundle(requireArguments()).Poliza
+
+        viewModelDetallePoliza.cambiarEstado(poliza)
 
         inputMarcaModelo.text = "Marca: ${poliza.marcaModelo}"
         inputPatentePoliza.text = "Patente: ${poliza.patente}"
