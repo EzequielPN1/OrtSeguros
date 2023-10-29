@@ -15,11 +15,11 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Spinner
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.SwitchCompat
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 import com.example.ortseguros.utils.DatePickerFragment
@@ -33,11 +33,11 @@ class NuevaPolizaFragment : Fragment() {
     private lateinit var spinnerMarcaModelo: Spinner
     private lateinit var inputFechaAltaVehiculo: EditText
     private lateinit var inputPatente: EditText
-    private lateinit var swcRespCivil: SwitchCompat
-    private lateinit var swcDanioTotal: SwitchCompat
-    private lateinit var swcGranizo: SwitchCompat
-    private lateinit var swcRoboParcial: SwitchCompat
-    private lateinit var swcRoboTotal: SwitchCompat
+    private lateinit var swcRespCivil: Switch
+    private lateinit var swcDanioTotal: Switch
+    private lateinit var swcGranizo: Switch
+    private lateinit var swcRoboParcial: Switch
+    private lateinit var swcRoboTotal: Switch
     private lateinit var btnNuevaPoliza: TextView
     private lateinit var imageFrente: ImageView
     private lateinit var imageLatIzq: ImageView
