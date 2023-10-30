@@ -10,7 +10,6 @@
     <style name="Theme.OrtSeguros" parent="Base.Theme.OrtSeguros" />
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/file</item>
         <item name="windowSplashScreenAnimationDuration">100</item>
