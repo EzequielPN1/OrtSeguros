@@ -24,14 +24,22 @@ class PolizaAdapter(
 
     class PolizaHolder(v: View) : RecyclerView.ViewHolder(v) {
         private var view: View = v
-        var imagePoliza: ImageView = v.findViewById(R.id.ImagePoliza)
+        private var imagePoliza: ImageView = v.findViewById(R.id.ImagePoliza)
+        private var imageMarca: ImageView = v.findViewById(R.id.imageMarca)
+        var imageCambio:ImageView =v.findViewById(R.id.imageCambio)
 
 
         fun setMarca(marca: String) {
-
-            val txtMarca : TextView = view.findViewById(R.id.txtMarcaModeloCardView)
+            val txtMarca: TextView = view.findViewById(R.id.txtMarcaModeloCardView)
             txtMarca.text = marca
+
+            if (marca.contains("volkswagen", ignoreCase = true)) {
+                imageMarca.setImageResource(R.drawable.logo_marca_vw)
+            } else if (marca.contains("fiat", ignoreCase = true)) {
+                imageMarca.setImageResource(R.drawable.logo_marca_fiat)
+            }
         }
+
 
         fun setPatente(patente: String) {
 
@@ -56,6 +64,24 @@ class PolizaAdapter(
         }
 
 
+        fun loadPolizaImage(pathToImage: String) {
+            val storage = Firebase.storage
+            val storageRef = storage.reference
+            val imageRef = storageRef.child(pathToImage)
+
+            imageRef.downloadUrl.addOnSuccessListener { uri ->
+                val imageUrl = uri.toString()
+
+                Glide.with(itemView.context)
+                    .load(imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imagePoliza)
+                Log.e("MiApp", "Ok")
+            }.addOnFailureListener { exception ->
+                Log.e("MiApp", "Error al obtener la URL de descarga de la imagen: $exception")
+            }
+        }
+
 
         fun getCard(): CardView {
             return view.findViewById(R.id.idCardViewPoliza)
@@ -73,37 +99,31 @@ class PolizaAdapter(
     override fun onBindViewHolder(holder: PolizaHolder, position: Int) {
         val poliza = polizaList[position]
 
+
         holder.setMarca(poliza.marcaModelo)
         holder.setPatente(poliza.patente)
-
-        // Reemplaza esta línea con la ubicación correcta de tu imagen en Firebase Storage
-        val pathToImage = "${poliza.uriImageFrente}"
-
-        Log.e("MiApp", pathToImage)
-
-        val storage = Firebase.storage
-        val storageRef = storage.reference
-
-        // Obtén una referencia a la imagen en Firebase Storage
-        val imageRef = storageRef.child(pathToImage)
-
-        // Obtén la URL de descarga de la imagen
-        imageRef.downloadUrl.addOnSuccessListener { uri ->
-            // La URI contiene la URL de descarga de la imagen
-            val imageUrl = uri.toString()
-
-            // Cargar la imagen con Glide
-            Glide.with(holder.itemView.context)
-                .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.imagePoliza)
-            Log.e("MiApp", "Ok")
-        }.addOnFailureListener { exception ->
-            Log.e("MiApp", "Error al obtener la URL de descarga de la imagen: $exception")
-        }
-
         holder.setNroPoliza(poliza.numPoliza)
         holder.setNotificacion(poliza.actualizada)
+        holder.loadPolizaImage(poliza.uriImageFrente)
+
+
+        val imageCambio = holder.imageCambio // Obtener la referencia de ImageView desde el ViewHolder
+
+
+        var imageCounter = 0
+
+        imageCambio.setOnClickListener {
+
+            when (imageCounter) {
+                0 -> holder.loadPolizaImage(poliza.uriImageLatIzq)
+                1 -> holder.loadPolizaImage(poliza.uriImageLatDer)
+                2 -> holder.loadPolizaImage(poliza.uriImagePosterior)
+                3 -> holder.loadPolizaImage(poliza.uriImageFrente)
+            }
+
+            imageCounter = (imageCounter + 1) % 4
+        }
+
 
         holder.getCard().setOnClickListener {
             onClick(position)

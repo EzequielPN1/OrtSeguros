@@ -6,26 +6,29 @@
     android:id="@+id/frameLayout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.cuenta.ConfiguracionFragment" >
+    tools:context=".fragments.home.cuenta.ConfiguracionFragment"
+    android:layout_margin="16dp">
 
     <TextView
         android:id="@+id/txtConfigTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
         android:text="@string/btnConfig"
-        app:layout_constraintTop_toTopOf="parent"
+        style="@style/switchStyle"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditarCuenta"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnEditarCuenta"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/txtEditarCuenta"
         android:backgroundTint="@color/bordo"
+        android:text="@string/txtEditarCuenta"
+        app:layout_constraintBottom_toTopOf="@+id/btnPreguntasFrecuentes"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtConfigTitle" />
 
@@ -33,9 +36,9 @@
         android:id="@+id/btnPreguntasFrecuentes"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/txtPreguntasFrecuentes"
         android:backgroundTint="@color/bordo"
+        android:text="@string/txtPreguntasFrecuentes"
+        app:layout_constraintBottom_toTopOf="@+id/btnAsisMecanica"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,9 +48,9 @@
         android:id="@+id/btnAsisMecanica"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="44dp"
-        android:text="@string/txtAsisMecanica"
         android:backgroundTint="@color/bordo"
+        android:text="@string/txtAsisMecanica"
+        app:layout_constraintBottom_toTopOf="@+id/btnContacto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +60,9 @@
         android:id="@+id/btnContacto"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/txtContacto"
         android:backgroundTint="@color/bordo"
+        android:text="@string/txtContacto"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
