@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.ortseguros.R
 import com.example.ortseguros.entities.Poliza
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -82,6 +83,20 @@ class PolizaAdapter(
             }
         }
 
+        fun actualizarUriImagePredeterminadaEnFirestore(poliza: Poliza, nuevaUriImagePredeterminada: String) {
+            val db = Firebase.firestore
+            db.collection("polizas").document(poliza.id)
+                .update("uriImagePredeterminada", nuevaUriImagePredeterminada)
+                .addOnSuccessListener {
+                    poliza.uriImagePredeterminada = nuevaUriImagePredeterminada
+                }
+                .addOnFailureListener { exception ->
+                    Log.e("MiApp", "Error al actualizar la URI de imagen predeterminada: ${exception.message}")
+                }
+        }
+
+
+
 
         fun getCard(): CardView {
             return view.findViewById(R.id.idCardViewPoliza)
@@ -104,25 +119,39 @@ class PolizaAdapter(
         holder.setPatente(poliza.patente)
         holder.setNroPoliza(poliza.numPoliza)
         holder.setNotificacion(poliza.actualizada)
-        holder.loadPolizaImage(poliza.uriImageFrente)
+        holder.loadPolizaImage(poliza.uriImagePredeterminada)
 
 
-        val imageCambio = holder.imageCambio // Obtener la referencia de ImageView desde el ViewHolder
+        val imageCambio = holder.imageCambio
+
 
 
         var imageCounter = 0
 
         imageCambio.setOnClickListener {
-
             when (imageCounter) {
-                0 -> holder.loadPolizaImage(poliza.uriImageLatIzq)
-                1 -> holder.loadPolizaImage(poliza.uriImageLatDer)
-                2 -> holder.loadPolizaImage(poliza.uriImagePosterior)
-                3 -> holder.loadPolizaImage(poliza.uriImageFrente)
+                0 -> {
+                    holder.actualizarUriImagePredeterminadaEnFirestore(poliza, poliza.uriImageLatIzq)
+                    holder.loadPolizaImage(poliza.uriImageLatIzq)
+                }
+                1 -> {
+                    holder.actualizarUriImagePredeterminadaEnFirestore(poliza, poliza.uriImageLatDer)
+                    holder.loadPolizaImage(poliza.uriImageLatDer)
+                }
+                2 -> {
+                    holder.actualizarUriImagePredeterminadaEnFirestore(poliza, poliza.uriImagePosterior)
+                    holder.loadPolizaImage(poliza.uriImagePosterior)
+                }
+                3 -> {
+                    holder.actualizarUriImagePredeterminadaEnFirestore(poliza, poliza.uriImageFrente)
+                    holder.loadPolizaImage(poliza.uriImageFrente)
+                }
             }
 
             imageCounter = (imageCounter + 1) % 4
         }
+
+
 
 
         holder.getCard().setOnClickListener {

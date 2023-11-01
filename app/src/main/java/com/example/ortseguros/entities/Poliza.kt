@@ -21,6 +21,7 @@ data class Poliza (
     var roboParcial: Boolean = false,
     var roboTotal: Boolean = false,
     var pagos: List<Pago> = mutableListOf(),
+    var uriImagePredeterminada:String = "",
     var uriImageFrente:String = "",
     var uriImageLatDer:String = "",
     var uriImageLatIzq:String = "",

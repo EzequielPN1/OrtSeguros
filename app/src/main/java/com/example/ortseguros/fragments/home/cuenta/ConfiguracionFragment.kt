@@ -13,29 +13,31 @@ import android.widget.Button
 import android.Manifest
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.ortseguros.R
 
 
 class ConfiguracionFragment : Fragment() {
 
-
-    lateinit var v: View
+    private lateinit var viewModelConfiguracion: ConfiguracionViewModel
+    private lateinit var v: View
     private lateinit var btnEditarCuenta: Button
     private lateinit var btnPreguntasFrecuentes: Button
     private lateinit var btnAsistenciaMecanica: Button
     private lateinit var btnContacto: Button
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModelConfiguracion =  ViewModelProvider(this)[ConfiguracionViewModel::class.java]
         v = inflater.inflate(R.layout.fragment_configuracion, container, false)
         btnEditarCuenta = v.findViewById(R.id.btnEditarCuenta)
         btnPreguntasFrecuentes = v.findViewById(R.id.btnPreguntasFrecuentes)
         btnAsistenciaMecanica = v.findViewById(R.id.btnAsisMecanica)
         btnContacto = v.findViewById(R.id.btnContacto)
         return v
-
     }
 
     override fun onStart() {
@@ -52,13 +54,24 @@ class ConfiguracionFragment : Fragment() {
                 ConfiguracionFragmentDirections.actionConfiguracionFragmentToPreguntasFrecuentesFragment()
             findNavController().navigate(action)
         }
+
         btnAsistenciaMecanica.setOnClickListener {
-            makePhoneCall("1122334455")
+            viewModelConfiguracion.obtenerTelefonoAsistenciaMecanica { telefono ->
+                if (telefono != null) {
+                    makePhoneCall(telefono)
+                }
+            }
         }
+
         btnContacto.setOnClickListener {
-            makePhoneCall("1166778899")
+            viewModelConfiguracion.obtenerTelefonoContacto { telefono ->
+                if (telefono != null) {
+                    makePhoneCall(telefono)
+                }
+            }
         }
     }
+
 
     private fun makePhoneCall(number: String) {
 

@@ -136,6 +136,7 @@ class NuevaPolizaViewModel : ViewModel() {
                                                             db.collection("polizas")
                                                                 .document(idGenerado)
                                                                 .update(
+                                                                    "uriImagePredeterminada", uriImageFrente,
                                                                     "uriImageFrente", uriImageFrente,
                                                                     "uriImageLatDer", uriImageLatDer,
                                                                     "uriImageLatIzq", uriImageLatIzq,
