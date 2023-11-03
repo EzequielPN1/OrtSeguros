@@ -5,14 +5,13 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.siniestros.NuevoSiniestroFragment" >
+    tools:context=".fragments.home.siniestros.NuevoSiniestroFragment"
+    android:layout_margin="16dp">
 
     <Spinner
         android:id="@+id/spinnerSiniestros"
         android:layout_width="189dp"
         android:layout_height="48dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/inputFechaSiniestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,19 +21,19 @@
         android:id="@+id/inputDescripcionNuevoSiniestro"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:autofillHints="name"
+
         android:background="@drawable/custom_input"
-
         android:clickable="false"
-        android:drawableStart="@drawable/icon_text"
 
+        android:drawableStart="@drawable/icon_text"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/Descripcion"
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnGuardarNuevoSniestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,18 +44,18 @@
         android:id="@+id/inputUbicacionNuevoSiniestro"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:autofillHints="name"
         android:background="@drawable/custom_input"
         android:clickable="false"
         android:drawableStart="@drawable/icon_place"
-        android:drawablePadding="12dp"
 
+        android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/Ubicacion"
         android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputDescripcionNuevoSiniestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +66,6 @@
         android:id="@+id/inputHoraSiniestro"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
         android:autofillHints="name"
         android:background="@drawable/custom_input"
         android:clickable="false"
@@ -75,12 +73,13 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:focusable="false"
+
         android:hint="@string/Hora"
-
         android:inputType="text"
-        android:paddingStart="12dp"
 
+        android:paddingStart="12dp"
         android:paddingEnd="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputUbicacionNuevoSiniestro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,8 +90,6 @@
         android:id="@+id/inputFechaSiniestro"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:autofillHints="date"
         android:background="@drawable/custom_input"
         android:clickable="false"
@@ -116,10 +113,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="170dp"
-        android:layout_marginBottom="32dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/NuevoSiniestro"
         android:textSize="30sp"
@@ -134,23 +127,21 @@
         android:id="@+id/spinner"
         android:layout_width="189dp"
         android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerSiniestros"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/btnGuardarNuevoSniestro"
+        style="@style/btnStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="60dp"
-        style="@style/btnStyle"
         android:text="@string/Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.528"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputDescripcionNuevoSiniestro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

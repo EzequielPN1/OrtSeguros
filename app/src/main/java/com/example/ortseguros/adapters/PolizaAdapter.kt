@@ -43,15 +43,18 @@ class PolizaAdapter(
 
 
         fun setPatente(patente: String) {
-
-            val txtPatente : TextView = view.findViewById(R.id.txtPatente)
-            txtPatente.text = "Patente: $patente"
+            val txtPatente: TextView = view.findViewById(R.id.txtPatente)
+            val patenteText = view.context.getString(R.string.patente_text, patente)
+            txtPatente.text = patenteText
         }
 
-        fun setNroPoliza(nroPoliza: String){
-            val txtNroPoliza : TextView = view.findViewById(R.id.txtNumPoliza)
-            txtNroPoliza.text = "Nro de poliza: $nroPoliza"
+
+        fun setNroPoliza(nroPoliza: String) {
+            val txtNroPoliza: TextView = view.findViewById(R.id.txtNumPoliza)
+            val nroPolizaText = view.context.getString(R.string.nro_poliza_text, nroPoliza)
+            txtNroPoliza.text = nroPolizaText
         }
+
 
 
         fun setNotificacion(actualizada:Boolean) {

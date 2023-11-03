@@ -5,13 +5,13 @@
     android:id="@+id/frameLayout10"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.misPolizas.RealizarPagoFragment">
+    tools:context=".fragments.home.misPolizas.RealizarPagoFragment"
+    android:layout_margin="16dp">
 
     <EditText
         android:id="@+id/inputCodigoDeSeguridad"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="20dp"
         android:autofillHints="name"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/icon_cuenta"
@@ -19,21 +19,21 @@
         android:ems="10"
         android:hint="@string/codigoSeguridad"
         android:inputType="text"
+
+
         android:paddingStart="12dp"
-
-
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/txtPrecioRealizarPago"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputDniRealizarPago"
         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputDniRealizarPago"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
         android:autofillHints="name"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/icon_cuenta"
@@ -41,21 +41,21 @@
         android:ems="10"
         android:hint="@string/Dni"
         android:inputType="text"
+
+
         android:paddingStart="12dp"
-
-
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/inputCodigoDeSeguridad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputTitular"
         tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputTitular"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
         android:autofillHints="name"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/icon_cuenta"
@@ -63,22 +63,22 @@
         android:ems="10"
         android:hint="@string/titular"
         android:inputType="text"
+
+
         android:paddingStart="12dp"
 
-
         android:paddingEnd="12dp"
-
         app:layout_constraintBottom_toTopOf="@+id/inputDniRealizarPago"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputFechaDeCaducidad"
         tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputFechaDeCaducidad"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
         android:autofillHints="name"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/icon_cuenta"
@@ -90,45 +90,44 @@
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/inputTitular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputNumeroDeTarjeta"
         tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputNumeroDeTarjeta"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
         android:autofillHints="name"
         android:background="@drawable/custom_input"
         android:drawableStart="@drawable/icon_cuenta"
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/numeroDeTarjeta"
+
+
         android:inputType="text"
-
-
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/inputFechaDeCaducidad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/btnRealizarPago"
+        style="@style/btnStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="50dp"
-        style="@style/btnStyle"
         android:text="@string/RealizarPago"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCodigoDeSeguridad"
+        tools:ignore="VisualLintButtonSize" />
 
     <TextView
         android:id="@+id/txtPrecioRealizarPago"
@@ -145,13 +144,11 @@
         android:id="@+id/imageView"
         android:layout_width="223dp"
         android:layout_height="116dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginEnd="94dp"
-        android:layout_marginBottom="10dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/tarjeta"
         app:layout_constraintBottom_toTopOf="@+id/inputNumeroDeTarjeta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/tarjeta"
-        android:importantForAccessibility="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,28 +20,32 @@ class PagoAdapter (private var pagoList: MutableList<Pago>,
 
 
         fun setNumeroPago(numPago: String) {
-            val txtNumPago : TextView = view.findViewById(R.id.txtNumPago)
-            val mensaje="Numero de pago: "
-            txtNumPago.text = "$mensaje $numPago"
+            val txtNumPago: TextView = view.findViewById(R.id.txtNumPago)
+            val mensaje = view.context.getString(R.string.numero_pago_text, numPago)
+            txtNumPago.text = mensaje
         }
 
+
         fun setFechaVencimiento(fechaVencimiento: String) {
-                val txtFechaVencimiento : TextView = view.findViewById(R.id.txtFechaVencimientoCardView)
-                val mensaje="Fecha de vencimiento: "
-                txtFechaVencimiento.text = "$mensaje $fechaVencimiento"
+            val txtFechaVencimiento: TextView = view.findViewById(R.id.txtFechaVencimientoCardView)
+            val mensaje = view.context.getString(R.string.fecha_vencimiento_text, fechaVencimiento)
+            txtFechaVencimiento.text = mensaje
         }
+
 
         fun setFechaPago(fechaPago: String, abonado: Boolean) {
             val txtFechaPago: TextView = view.findViewById(R.id.txtFechaPagoCardView)
-            val mensaje = if (abonado) {
+
+            if (abonado) {
+                val mensaje = view.context.getString(R.string.fecha_pago_text, fechaPago)
+                txtFechaPago.text = mensaje
                 txtFechaPago.visibility = View.VISIBLE
-                "Fecha de pago: $fechaPago"
             } else {
                 txtFechaPago.visibility = View.GONE
-                ""
+                txtFechaPago.text = ""
             }
-            txtFechaPago.text = mensaje
         }
+
 
 
         fun setAbonado(abonado: Boolean) {

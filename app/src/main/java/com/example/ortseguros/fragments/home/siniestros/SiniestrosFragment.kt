@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -23,7 +23,7 @@ class SiniestrosFragment : Fragment() {
 
     private lateinit var siniestroViewModel: SiniestrosViewModel
     lateinit var v: View
-    private lateinit var btnNuevoSiniestro: Button
+    private lateinit var btnNuevoSiniestro: ImageView
     private lateinit var recyclerSiniestro: RecyclerView
     private lateinit var siniestroAdapter: SiniestroAdapter
     private lateinit var spinnerPatentesSiniestros: Spinner

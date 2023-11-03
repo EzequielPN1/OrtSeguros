@@ -36,7 +36,6 @@
             android:layout_width="0dp"
             android:layout_height="45sp"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
             android:autofillHints="emailAddress"
             android:background="@drawable/custom_input"
             android:drawableStart="@drawable/custom_email_icon"
@@ -59,7 +58,6 @@
             android:layout_height="45sp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="16dp"
-            android:layout_marginBottom="16dp"
             android:autofillHints="emailAddress"
             android:background="@drawable/custom_input"
             android:drawableStart="@drawable/custom_lock_icon"
@@ -84,6 +82,7 @@
             android:textColor="@color/bordo"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/textPassword"
             app:layout_constraintTop_toBottomOf="@id/textPassword"
             tools:ignore="TouchTargetSizeCheck" />
@@ -112,15 +111,16 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
 
-    <TextView
-        android:id="@+id/txtUserNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/EresUsuarioNuevo"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnTxtCrearCuenta"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <TextView
+            android:id="@+id/txtUserNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EresUsuarioNuevo"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnTxtCrearCuenta"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/btnTxtCrearCuenta"
@@ -133,6 +133,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/txtUserNew"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="TouchTargetSizeCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

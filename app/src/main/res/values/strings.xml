@@ -1,38 +1,18 @@
 <resources>
 
-    <string name="daniototal2">daño total</string>
-    <string name="respCivil2">responsabilidad civil</string>
-    <string name="granizo2">granizo</string>
-    <string name="roboparcial2">robo parcial</string>
-    <string name="robototal2">robo total</string>
-
     <string name="app_name">OrtSeguros</string>
-    <string name="stringCrear_Cuenta"><u>Crear Cuenta</u></string>
-    <string name="stringOlvidar"><u>¿Olvidó su Contraseña?</u></string>
-
     <string name="title_home">Mis pólizas</string>
     <string name="Cuenta">Cuenta</string>
-    <string name="Siniestros">Siniestros</string>
-    <string name="Siniestro">Siniestro</string>
-    <string name="Fecha">Fecha</string>
-    <string name="Hora">Hora</string>
-    <string name="Ubicacion">Ubicación</string>
-    <string name="Descripcion">Descripción</string>
-    <string name="MisPolizas">Mis pólizas</string>
-    <string name="CrearPoliza">Crear póliza</string>
 
+    <!-- Autentificacion -->
     <string name="Login"><b>Iniciar Sesión</b></string>
     <string name="Entrar">Entrar</string>
     <string name="EresUsuarioNuevo">¿Eres Usuario Nuevo?</string>
-
     <string name="CerrarSesion">Cerrar Sesión</string>
-
     <string name="EnvíoMailNuevaContraseña">Envío de email para nueva contraseña</string>
+    <string name="stringCrear_Cuenta"><u>Crear Cuenta</u></string>
+    <string name="stringOlvidar"><u>¿Olvidó su Contraseña?</u></string>
     <string name="Enviar">Enviar</string>
-
-    <string name="NuevoSiniestro">Nuevo siniestro</string>
-
-
     <string name="Nombre">Nombre</string>
     <string name="Apellido">Apellido</string>
     <string name="FechaNac">Fecha de nacimiento</string>
@@ -42,17 +22,18 @@
     <string name="Telefono">Teléfono</string>
     <string name="Contraseña">Contraseña</string>
     <string name="ConfirmarContraseña">Confirmar contraseña</string>
-
     <string name="CrearCuenta">Crear cuenta</string>
-
     <string name="btnConfig">Configuración</string>
-
     <string name="txtEditarCuenta">Editar cuenta</string>
     <string name="txtPreguntasFrecuentes">Preguntas Frecuentes</string>
     <string name="txtAsisMecanica">Asistencia mecánica </string>
     <string name="txtContacto">Contacto</string>
     <string name="btnAplicarCambios">Aplicar cambios</string>
 
+    <!--  Polizas -->
+    <string name="MisPolizas">Mis pólizas</string>
+    <string name="CrearPoliza">Crear póliza</string>
+    <string name="NuevaPoliza">Nueva póliza</string>
     <string name="marcaModelo">Marca modelo:</string>
     <string name="danioTotal">Daño total</string>
     <string name="fechaInicioPoliza">Fecha inicio</string>
@@ -65,24 +46,26 @@
     <string name="ValorCuota">Valor de cuota:</string>
     <string name="Pagos">Ver pagos</string>
     <string name="RealizarPago">Realizar pago</string>
-
     <string name="ImagenMensaje">Ingresar fotos del Vehiculo: frontal, lat izquierdo, lat derecho y posterior</string>
-
     <string name="BajaPoliza">Baja de póliza</string>
+    <string name="daniototal2">daño total</string>
+    <string name="respCivil2">responsabilidad civil</string>
+    <string name="granizo2">granizo</string>
+    <string name="roboparcial2">robo parcial</string>
+    <string name="robototal2">robo total</string>
 
-
+    <!-- Tareta de credito -->
     <string name="numeroDeTarjeta">Nro de tarjeta</string>
     <string name="fechaCaducidad">Fecha de caducidad</string>
     <string name="titular">Titular</string>
     <string name="codigoSeguridad">Código de seguridad</string>
 
-
+    <!-- Siniestro -->
     <string name="TipoSiniestro">Tipo siniestro</string>
     <string name="NumSiniestro">Nro de siniestro</string>
     <string name="CoberturasContratadas">Coberturas contratadas</string>
     <string name="numPoliza">Nro de póliza</string>
     <string name="mensaje">mensaje</string>
-    <string name="NuevaPoliza">Nueva póliza</string>
     <string name="Anterior">Anterior</string>
     <string name="Posterior">Posterior</string>
     <string name="FechaAltaVehiculo">Fecha de alta del vehículo</string>
@@ -90,6 +73,34 @@
     <string name="ProgressText">Generando nueva póliza…</string>
     <string name="Guardar">Guardar</string>
     <string name="DatosPoliza">Datos de la póliza:</string>
+    <string name="NuevoSiniestro">Nuevo siniestro</string>
+    <string name="Siniestros">Siniestros</string>
+    <string name="Siniestro">Siniestro</string>
+    <string name="Fecha">Fecha</string>
+    <string name="Hora">Hora</string>
+    <string name="Ubicacion">Ubicación</string>
+    <string name="Descripcion">Descripción</string>
+
+
+    <!-- Adapter poliza -->
+    <string name="patente_text">Patente: %1$s</string>
+    <string name="nro_poliza_text">Nro de póliza: %1$s</string>
+
+    <!-- Adapter Pago -->
+    <string name="numero_pago_text">Número de pago: %1$s</string>
+    <string name="fecha_vencimiento_text">Fecha de vencimiento: %1$s</string>
+    <string name="fecha_pago_text">Fecha de pago: %1$s</string>
+
+    <!-- Adapter Siniestro -->
+    <string name="numero_text">Número: %1$s</string>
+    <string name="fecha_text">Fecha: %1$s</string>
+    <string name="patente_textSiniestro">Patente: %1$s</string>
+
+    <string name="tipo_granizo">Tipo: Granizo</string>
+    <string name="tipo_danio_total">Tipo: Daño total</string>
+    <string name="tipo_resp_civil">Tipo: Responsabilidad civil</string>
+    <string name="tipo_robo_parcial">Tipo: Robo parcial</string>
+
 
 
 

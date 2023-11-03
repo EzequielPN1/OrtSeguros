@@ -6,7 +6,8 @@
     android:id="@+id/frameEditarCuenta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.cuenta.EditarCuentaFragment">
+    tools:context=".fragments.home.cuenta.EditarCuentaFragment"
+    android:layout_margin="16dp">
 
     <!-- Nombre -->
 
@@ -158,11 +159,9 @@
 
     <Button
         android:id="@+id/btnAplicarCambios"
+        style="@style/btnStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        style="@style/btnStyle"
         android:text="@string/btnAplicarCambios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

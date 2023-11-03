@@ -24,15 +24,17 @@ class SiniestroAdapter(
             val txtTipoSiniestro: TextView = view.findViewById(R.id.txtTipoSiniestro)
 
             val textoMostrado = when (tipoSiniestro) {
-                "granizo" -> "Tipo: Granizo"
-                "danioTotal" -> "Tipo: Daño total"
-                "respCivil" -> "Tipo: Responsabilidad civil"
-                "roboParcial" -> "Tipo: Robo parcial"
-                "danioTotal" -> "Tipo: Daño total"
+                "granizo" -> view.context.getString(R.string.tipo_granizo)
+                "danioTotal" -> view.context.getString(R.string.tipo_danio_total)
+                "respCivil" -> view.context.getString(R.string.tipo_resp_civil)
+                "roboParcial" -> view.context.getString(R.string.tipo_robo_parcial)
+
                 else -> tipoSiniestro
             }
+
             txtTipoSiniestro.text = textoMostrado
         }
+
 
 
         fun setImageTipoSiniestro(tipoSiniestro: String) {
@@ -51,21 +53,27 @@ class SiniestroAdapter(
         }
 
 
-        fun setNumSiniestro(numSiniestro:String){
+        fun setNumSiniestro(numSiniestro: String) {
             val txtNumSiniestro: TextView = view.findViewById(R.id.txtNumSiniestro)
-            txtNumSiniestro.text = "Número: $numSiniestro"
+            val mensaje = view.context.getString(R.string.numero_text, numSiniestro)
+            txtNumSiniestro.text = mensaje
         }
 
-       fun setFecha(fecha:String){
-           val txtFecha: TextView = view.findViewById(R.id.txtFechaVencimientoCardView)
-           txtFecha.text = "Fecha: $fecha"
-       }
+
+        fun setFecha(fecha: String) {
+            val txtFecha: TextView = view.findViewById(R.id.txtFechaVencimientoCardView)
+            val mensaje = view.context.getString(R.string.fecha_text, fecha)
+            txtFecha.text = mensaje
+        }
 
 
-        fun setPatente(patente:String){
+
+        fun setPatente(patente: String) {
             val txtPatente: TextView = view.findViewById(R.id.txtAbonadoCardView)
-            txtPatente.text = "Patente: $patente"
+            val mensaje = view.context.getString(R.string.patente_textSiniestro, patente)
+            txtPatente.text = mensaje
         }
+
 
         fun setNotificacion(mensajes: List<Mensaje>) {
             val notificacionImageView: ImageView = view.findViewById(R.id.imageViewMensaje)
