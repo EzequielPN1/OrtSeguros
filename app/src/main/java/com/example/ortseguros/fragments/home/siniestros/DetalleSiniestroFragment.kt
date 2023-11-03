@@ -61,7 +61,7 @@ class DetalleSiniestroFragment : Fragment() {
 
         viewModelDetalleSiniestro.mostrarMensajeActual(siniestro) { mensajeEncontrado, mensaje ->
             if (mensajeEncontrado) {
-                        txtNomEmpladoEmpresa.text = "Asesor: ${mensaje.usuarioEmpresa}"
+                        txtNomEmpladoEmpresa.text = mensaje.usuarioEmpresa
                         txtMensajeDetalleSiniestro.text = mensaje.notificacion
                         val imagenUrl = mensaje.imagenURL
 

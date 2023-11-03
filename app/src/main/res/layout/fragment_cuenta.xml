@@ -6,7 +6,8 @@
     android:id="@+id/frameCuenta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.home.cuenta.CuentaFragment">
+    tools:context=".fragments.home.cuenta.CuentaFragment"
+    android:layout_margin="16dp">
 
     <TextView
         android:id="@+id/textView4"
@@ -173,16 +174,16 @@
     <!-- Botón Configuración -->
     <Button
         android:id="@+id/btnConfig"
+        style="@style/btnStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        style="@style/btnStyle"
         android:text="@string/btnConfig"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnTxtCerrarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTelefono" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTelefono"
+        tools:ignore="VisualLintButtonSize" />
 
     <!-- Botón Cerrar Sesión -->
     <TextView
@@ -190,12 +191,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:minHeight="48dp"
+
         android:text="@string/CerrarSesion"
-        android:textColor="#0A62A8"
-        android:textSize="20sp"
+        android:textColor="@color/bordo"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnConfig" />
+        app:layout_constraintTop_toBottomOf="@+id/btnConfig"
+        tools:ignore="TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

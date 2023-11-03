@@ -101,8 +101,9 @@
     <string name="tipo_resp_civil">Tipo: Responsabilidad civil</string>
     <string name="tipo_robo_parcial">Tipo: Robo parcial</string>
 
-
-
-
+    <!-- Item Pago -->
+    <string name="Item_pago_num_pago">Numero de pago</string>
+    <string name="Item_pago_fecha_vencimiento">Fecha de vencimiento</string>
+    <string name="Item_pago_fecha_de_pago">Fecha de pago</string>
 
 </resources>
