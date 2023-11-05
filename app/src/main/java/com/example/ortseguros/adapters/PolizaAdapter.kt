@@ -38,6 +38,8 @@ class PolizaAdapter(
                 imageMarca.setImageResource(R.drawable.logo_marca_vw)
             } else if (marca.contains("fiat", ignoreCase = true)) {
                 imageMarca.setImageResource(R.drawable.logo_marca_fiat)
+            }else if (marca.contains("ford", ignoreCase = true)) {
+                imageMarca.setImageResource(R.drawable.logo_marca_ford)
             }
         }
 

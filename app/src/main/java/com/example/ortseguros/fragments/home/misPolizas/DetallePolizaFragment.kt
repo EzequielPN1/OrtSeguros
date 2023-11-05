@@ -75,23 +75,27 @@ class DetallePolizaFragment : Fragment() {
 
         viewModelDetallePoliza.cambiarEstado(poliza)
 
-        inputMarcaModelo.text = "Marca: ${poliza.marcaModelo}"
-        inputPatentePoliza.text = "Patente: ${poliza.patente}"
-        inputFechaInicio.text = "Inicio de la poliza: ${poliza.fechaInicioPoliza}"
+        inputMarcaModelo.text = v.context.getString(R.string.marca_text_detalle_poliza, poliza.marcaModelo)
+        inputPatentePoliza.text = v.context.getString(R.string.patente_text_detalle_poliza, poliza.patente)
+        inputFechaInicio.text = v.context.getString(R.string.inicio_poliza_text_detalle_poliza, poliza.fechaInicioPoliza)
+
 
         val imageViews = mapOf(
-            "danioTotal" to imageDanioTotal,
-            "respCivil" to imageRespCivil,
-            "granizo" to imageGranizo,
-            "roboParcial" to imageRoboParcial,
-            "roboTotal" to imageRoboTotal
+            v.context.getString(R.string.danio_total_mapeo_detalle_poliza) to imageDanioTotal,
+            v.context.getString(R.string.resp_civil_mapeo_detalle_poliza) to imageRespCivil,
+            v.context.getString(R.string.granizo_mapeo_detalle_poliza) to imageGranizo,
+            v.context.getString(R.string.robo_parcial_mapeo_detalle_poliza) to imageRoboParcial,
+            v.context.getString(R.string.robo_total_mapeo_detalle_poliza) to imageRoboTotal
         )
+
 
         viewModelDetallePoliza.determinarImagenesDeCobertura(poliza, imageViews)
 
 
-        inputSumaAsegurada.text = "Suma asegurada: ${poliza.sumaAsegurada} pesos"
-        inputValorCuota.text = "Valor de cuota: ${poliza.valorCuota} pesos"
+        val sumaAsegurada = poliza.sumaAsegurada.toBigDecimal().toPlainString()
+        inputSumaAsegurada.text = v.context.getString(R.string.suma_asegurada_text_detalle_poliza, sumaAsegurada)
+        inputValorCuota.text = v.context.getString(R.string.valor_cuota_text_detalle_poliza, poliza.valorCuota)
+
 
 
         btnPagos.setOnClickListener{
@@ -103,11 +107,10 @@ class DetallePolizaFragment : Fragment() {
 
         btnBajaPoliza.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
-            builder.setTitle("Confirmación")
-            builder.setMessage("¿Está seguro de que desea dar de baja esta póliza?")
+            builder.setTitle(v.context.getString(R.string.confirmacion_titulo_bajaPoliza))
+            builder.setMessage(v.context.getString(R.string.confirmacion_mensaje_bajaPoliza))
 
-            builder.setPositiveButton("Sí") { dialog, _ ->
-                // Si el usuario hace clic en "Sí", entonces se da de baja la póliza
+            builder.setPositiveButton(v.context.getString(R.string.boton_si_bajaPoliza)) { dialog, _ ->
                 viewModelDetallePoliza.darBajaPoliza(poliza) { exito ->
                     if (exito) {
                         findNavController().navigateUp()
@@ -115,12 +118,13 @@ class DetallePolizaFragment : Fragment() {
                 }
                 dialog.dismiss()
             }
-            builder.setNegativeButton("No") { dialog, _ ->
+            builder.setNegativeButton(v.context.getString(R.string.boton_no_bajaPoliza)) { dialog, _ ->
                 dialog.dismiss()
             }
             val alertDialog = builder.create()
             alertDialog.show()
         }
+
 
 
 

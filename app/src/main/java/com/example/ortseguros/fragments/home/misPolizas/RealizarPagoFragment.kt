@@ -59,12 +59,12 @@ class RealizarPagoFragment : Fragment() {
 
         val pago = RealizarPagoFragmentArgs.fromBundle(requireArguments()).Pago
         val poliza = RealizarPagoFragmentArgs.fromBundle(requireArguments()).poliza
-        txtPrecioRealizarPago.text = "El monto a abonar es de: ${pago.precio}"
+        txtPrecioRealizarPago.text = v.context.getString(R.string.monto_abonar_text, pago.precio)
 
-        // Obtener los datos de la tarjeta de crédito del ViewModel
+
         viewModelRealizarPago.obtenerTarjetaDeCreditoUsuario { tarjetaDeCredito ->
             if (tarjetaDeCredito != null) {
-                // Si se encontró la tarjeta de crédito, establecer los datos en los EditText
+
                 inputNumeroDeTarjeta.setText(tarjetaDeCredito.numeroDeTarjeta)
                 inputFechaDeCaducidad.setText(tarjetaDeCredito.fechaCaducidad)
                 inputTitular.setText(tarjetaDeCredito.titular)

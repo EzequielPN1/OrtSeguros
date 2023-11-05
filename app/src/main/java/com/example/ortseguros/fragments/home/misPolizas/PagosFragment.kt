@@ -18,8 +18,6 @@ class PagosFragment : Fragment() {
 
     private lateinit var viewModelPagos: PagosViewModel
     private lateinit var v: View
-
-
     private lateinit var recyclerPago: RecyclerView
     private lateinit var pagoAdapter : PagoAdapter
 
@@ -60,7 +58,7 @@ class PagosFragment : Fragment() {
                     )
                     findNavController().navigate(action)
                 }else{
-                    Toast.makeText(requireContext(), "pago ya realizado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), v.context.getString(R.string.pago_ya_realizado), Toast.LENGTH_SHORT).show()
                 }
 
                 }

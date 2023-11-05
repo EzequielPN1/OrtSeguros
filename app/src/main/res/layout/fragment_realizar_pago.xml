@@ -126,19 +126,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputCodigoDeSeguridad"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrecioRealizarPago"
         tools:ignore="VisualLintButtonSize" />
 
     <TextView
         android:id="@+id/txtPrecioRealizarPago"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="189dp"
-        android:layout_marginEnd="190dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="19dp"
         app:layout_constraintBottom_toTopOf="@+id/btnRealizarPago"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCodigoDeSeguridad" />
 
     <ImageView
         android:id="@+id/imageView"

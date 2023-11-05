@@ -28,7 +28,6 @@ class DetallePolizaViewModel : ViewModel() {
 
         polizaRef.update("activa", false)
             .addOnSuccessListener {
-                // La póliza se ha dado de baja con éxito
                 _toastMessage.value = "Póliza dada de baja con éxito"
                  callback(true)
             }
@@ -70,7 +69,7 @@ class DetallePolizaViewModel : ViewModel() {
         polizaRef.update("actualizada", false)
             .addOnSuccessListener {
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener {
             }
     }
 

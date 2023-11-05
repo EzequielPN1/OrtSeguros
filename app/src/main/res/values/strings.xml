@@ -4,6 +4,7 @@
     <string name="title_home">Mis pólizas</string>
     <string name="Cuenta">Cuenta</string>
 
+
     <!-- Autentificacion -->
     <string name="Login"><b>Iniciar Sesión</b></string>
     <string name="Entrar">Entrar</string>
@@ -105,5 +106,33 @@
     <string name="Item_pago_num_pago">Numero de pago</string>
     <string name="Item_pago_fecha_vencimiento">Fecha de vencimiento</string>
     <string name="Item_pago_fecha_de_pago">Fecha de pago</string>
+
+    <!-- Detalle poliza -->
+    <string name="marca_text_detalle_poliza">Marca:  %1$s</string>
+    <string name="patente_text_detalle_poliza">Patente:  %1$s</string>
+    <string name="inicio_poliza_text_detalle_poliza">Inicio de la póliza:  %1$s</string>
+    <string name="suma_asegurada_text_detalle_poliza">Suma asegurada: $ %1$s pesos</string>
+    <string name="valor_cuota_text_detalle_poliza">Valor de cuota: $ %1$s pesos</string>
+
+    <!-- Mensaje baja poliza -->
+    <string name="confirmacion_titulo_bajaPoliza">Confirmación</string>
+    <string name="confirmacion_mensaje_bajaPoliza">¿Está seguro de que desea dar de baja esta póliza?</string>
+    <string name="boton_si_bajaPoliza">Sí</string>
+    <string name="boton_no_bajaPoliza">No</string>
+
+
+    <!-- Mapeo detalle polizas iconos -->
+    <string name="danio_total_mapeo_detalle_poliza">danioTotal</string>
+    <string name="resp_civil_mapeo_detalle_poliza">respCivil</string>
+    <string name="granizo_mapeo_detalle_poliza">granizo</string>
+    <string name="robo_parcial_mapeo_detalle_poliza">roboParcial</string>
+    <string name="robo_total_mapeo_detalle_poliza">roboTotal</string>
+
+    <!-- Realizar pago  -->
+    <string name="monto_abonar_text">El monto a abonar es de: $ %1$s pesos</string>
+
+    <!-- Pago fragment   -->
+    <string name="pago_ya_realizado">Pago ya realizado</string>
+
 
 </resources>
