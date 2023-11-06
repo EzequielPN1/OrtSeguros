@@ -34,11 +34,11 @@ class PolizaAdapter(
             val txtMarca: TextView = view.findViewById(R.id.txtMarcaModeloCardView)
             txtMarca.text = marca
 
-            if (marca.contains("volkswagen", ignoreCase = true)) {
+            if (marca.contains(view.context.getString(R.string.volkswagen), ignoreCase = true)) {
                 imageMarca.setImageResource(R.drawable.logo_marca_vw)
-            } else if (marca.contains("fiat", ignoreCase = true)) {
+            } else if (marca.contains(view.context.getString(R.string.fiat), ignoreCase = true)) {
                 imageMarca.setImageResource(R.drawable.logo_marca_fiat)
-            }else if (marca.contains("ford", ignoreCase = true)) {
+            }else if (marca.contains(view.context.getString(R.string.ford), ignoreCase = true)) {
                 imageMarca.setImageResource(R.drawable.logo_marca_ford)
             }
         }
@@ -82,7 +82,6 @@ class PolizaAdapter(
                     .load(imageUrl)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imagePoliza)
-                Log.e("MiApp", "Ok")
             }.addOnFailureListener { exception ->
                 Log.e("MiApp", "Error al obtener la URL de descarga de la imagen: $exception")
             }

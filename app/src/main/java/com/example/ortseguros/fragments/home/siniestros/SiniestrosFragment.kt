@@ -62,8 +62,8 @@ class SiniestrosFragment : Fragment() {
 
         spinnerPatentesSiniestros.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val patenteSeleccionada = spinnerPatentesSiniestros?.selectedItem?.toString()
-                val estadoSeleccionado = spinnerEstadoSiniestro?.selectedItem?.toString()
+                val patenteSeleccionada = spinnerPatentesSiniestros.selectedItem?.toString()
+                val estadoSeleccionado = spinnerEstadoSiniestro.selectedItem?.toString()
                 if (!patenteSeleccionada.isNullOrEmpty()) {
                     siniestroViewModel.obtenerSiniestrosFiltrados(patenteSeleccionada, estadoSeleccionado)
 
@@ -79,8 +79,8 @@ class SiniestrosFragment : Fragment() {
 
         spinnerEstadoSiniestro.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val patenteSeleccionada = spinnerPatentesSiniestros?.selectedItem?.toString()
-                val estadoSeleccionado = spinnerEstadoSiniestro?.selectedItem?.toString()
+                val patenteSeleccionada = spinnerPatentesSiniestros.selectedItem?.toString()
+                val estadoSeleccionado = spinnerEstadoSiniestro.selectedItem?.toString()
                 if (!patenteSeleccionada.isNullOrEmpty() ) {
                     siniestroViewModel.obtenerSiniestrosFiltrados(patenteSeleccionada, estadoSeleccionado)
                 }
@@ -127,8 +127,8 @@ class SiniestrosFragment : Fragment() {
 
 
         // Obtener las opciones seleccionadas actualmente en los spinners
-        val patenteSeleccionada = spinnerPatentesSiniestros?.selectedItem?.toString()
-        val estadoSeleccionado = spinnerEstadoSiniestro?.selectedItem?.toString()
+        val patenteSeleccionada = spinnerPatentesSiniestros.selectedItem?.toString()
+        val estadoSeleccionado = spinnerEstadoSiniestro.selectedItem?.toString()
 
         // Actualizar los siniestros con las opciones seleccionadas
         if (!patenteSeleccionada.isNullOrEmpty()) {

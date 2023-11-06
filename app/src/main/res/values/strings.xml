@@ -86,6 +86,9 @@
     <!-- Adapter poliza -->
     <string name="patente_text">Patente: %1$s</string>
     <string name="nro_poliza_text">Nro de póliza: %1$s</string>
+    <string name="volkswagen">volkswagen</string>
+    <string name="fiat">fiat</string>
+    <string name="ford">ford</string>
 
     <!-- Adapter Pago -->
     <string name="numero_pago_text">Número de pago: %1$s</string>
@@ -101,6 +104,14 @@
     <string name="tipo_danio_total">Tipo: Daño total</string>
     <string name="tipo_resp_civil">Tipo: Responsabilidad civil</string>
     <string name="tipo_robo_parcial">Tipo: Robo parcial</string>
+    <string name="tipo_robo_total">Tipo: Robo total</string>
+
+    <string name="granizo_siniestro_adapter">granizo</string>
+    <string name="danioTotal_siniestro_adapter">danioTotal</string>
+    <string name="respCivil_siniestro_adapter">respCivil</string>
+    <string name="roboParcial_siniestro_adapter">roboParcial</string>
+    <string name="roboTotal_siniestro_adapter">roboTotal</string>
+
 
     <!-- Item Pago -->
     <string name="Item_pago_num_pago">Numero de pago</string>

@@ -24,11 +24,11 @@ class SiniestroAdapter(
             val txtTipoSiniestro: TextView = view.findViewById(R.id.txtTipoSiniestro)
 
             val textoMostrado = when (tipoSiniestro) {
-                "granizo" -> view.context.getString(R.string.tipo_granizo)
-                "danioTotal" -> view.context.getString(R.string.tipo_danio_total)
-                "respCivil" -> view.context.getString(R.string.tipo_resp_civil)
-                "roboParcial" -> view.context.getString(R.string.tipo_robo_parcial)
-
+                view.context.getString(R.string.granizo_siniestro_adapter) -> view.context.getString(R.string.tipo_granizo)
+                view.context.getString(R.string.danioTotal_siniestro_adapter) -> view.context.getString(R.string.tipo_danio_total)
+                view.context.getString(R.string.respCivil_siniestro_adapter) -> view.context.getString(R.string.tipo_resp_civil)
+                view.context.getString(R.string.roboParcial_siniestro_adapter) -> view.context.getString(R.string.tipo_robo_parcial)
+                view.context.getString(R.string.roboTotal_siniestro_adapter)-> view.context.getString(R.string.tipo_robo_total)
                 else -> tipoSiniestro
             }
 
@@ -41,11 +41,11 @@ class SiniestroAdapter(
             val imageViewTipoSiniestro: ImageView = view.findViewById(R.id.imageViewTipoSiniestro)
 
             val imagenId = when (tipoSiniestro) {
-                "granizo" -> R.drawable.icon_granizo
-                "danioTotal" -> R.drawable.icon_danio_total
-                "respCivil" -> R.drawable.icon_resp_civil
-                "roboParcial" -> R.drawable.icon_robo_parcial
-                "roboTotal"-> R.drawable.icon_robo_total
+                view.context.getString(R.string.granizo_siniestro_adapter) -> R.drawable.icon_granizo
+                view.context.getString(R.string.danioTotal_siniestro_adapter) -> R.drawable.icon_danio_total
+                view.context.getString(R.string.respCivil_siniestro_adapter)  -> R.drawable.icon_resp_civil
+                view.context.getString(R.string.roboParcial_siniestro_adapter) -> R.drawable.icon_robo_parcial
+                view.context.getString(R.string.roboTotal_siniestro_adapter)-> R.drawable.icon_robo_total
                 else -> R.drawable.car_frontal
             }
 

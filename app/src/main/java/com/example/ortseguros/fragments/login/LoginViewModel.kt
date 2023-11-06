@@ -50,7 +50,7 @@ class LoginViewModel : ViewModel() {
 
                                 } else {
 
-                                    val verifica = user?.isEmailVerified
+                                    val verifica = user.isEmailVerified
                                     if (verifica == true) {
                                         val sharedPrefs = activity.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
                                         sharedPrefs.edit().putBoolean("isLoggedIn", true).apply()

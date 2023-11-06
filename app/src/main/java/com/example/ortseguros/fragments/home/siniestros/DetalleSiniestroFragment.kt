@@ -52,7 +52,7 @@ class DetalleSiniestroFragment : Fragment() {
 
 
 
-        viewModelDetalleSiniestro.mostrarTituloMensaje() { mensajeEncontrado, mensaje ->
+        viewModelDetalleSiniestro.mostrarTituloMensaje { mensajeEncontrado, mensaje ->
             if (mensajeEncontrado) {
                 txtTituloMensaje.text = mensaje
             }

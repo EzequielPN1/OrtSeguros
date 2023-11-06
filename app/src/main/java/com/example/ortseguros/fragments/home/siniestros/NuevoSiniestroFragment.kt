@@ -83,7 +83,7 @@ class NuevoSiniestroFragment : Fragment() {
         }
 
 
-        viewModelNuevoSiniestro.obtenerCoberturasFirestore() { coberturas, error ->
+        viewModelNuevoSiniestro.obtenerCoberturasFirestore { coberturas, error ->
             if (error == null && coberturas != null) {
                 val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, coberturas.map { it.second })
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
