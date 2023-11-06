@@ -47,7 +47,6 @@ class SiniestrosFragment : Fragment() {
         estadosAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerEstadoSiniestro.adapter = estadosAdapter
 
-        //---
 
         siniestroViewModel.obtenerPatentesDesdeFirestore { patentes, error ->
             if (error == null && patentes != null) {

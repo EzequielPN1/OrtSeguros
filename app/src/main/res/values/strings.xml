@@ -134,5 +134,13 @@
     <!-- Pago fragment   -->
     <string name="pago_ya_realizado">Pago ya realizado</string>
 
+    <!-- Detalle siniestro fragment   -->
+    <string name="No_hay_mensajes_anteriores">No hay mensajes anteriores</string>
+    <string name="No_hay_mensajes_posteriores">No hay mensajes posteriores</string>
+
+    <!-- Nuevo siniestro fragment   -->
+    <string name="Siniestro_guardado_con_exito">"Siniestro guardado con éxito"</string>
+    <string name="error_guardar_siniestro">Error al guardar el siniestro: %1$s</string>
+
 
 </resources>

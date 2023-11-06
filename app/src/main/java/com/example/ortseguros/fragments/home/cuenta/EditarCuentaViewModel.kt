@@ -12,7 +12,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class EditarCuentaViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
 
     private val _usuarioData = MutableLiveData<Usuario>()
     private val db = Firebase.firestore
@@ -22,7 +22,7 @@ class EditarCuentaViewModel : ViewModel() {
         loadUserData()
     }
 
-    fun loadUserData() {
+    private fun loadUserData() {
         val userId = Firebase.auth.currentUser?.uid
         if (userId != null) {
             val docRef = db.collection("usuarios").document(userId)
@@ -51,7 +51,7 @@ class EditarCuentaViewModel : ViewModel() {
             _toastMessage.value = "No se pudo obtener el ID del usuario."
         }
     }
-    // LiveData para cada campo de usuario
+
     private val _nombre = MutableLiveData<String>()
     val nombre: LiveData<String> get() = _nombre
 

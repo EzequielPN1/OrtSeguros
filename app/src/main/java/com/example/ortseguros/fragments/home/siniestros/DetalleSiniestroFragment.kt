@@ -83,7 +83,7 @@ class DetalleSiniestroFragment : Fragment() {
                 mensajeActualIndex--
                 mostrarMensaje(siniestro, mensajeActualIndex)
             } else {
-                Toast.makeText(requireContext(), "No hay mensajes anteriores", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), v.context.getString(R.string.No_hay_mensajes_anteriores), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -92,7 +92,7 @@ class DetalleSiniestroFragment : Fragment() {
                 mensajeActualIndex++
                 mostrarMensaje(siniestro, mensajeActualIndex)
             } else {
-                Toast.makeText(requireContext(), "No hay mensajes posteriores", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), v.context.getString(R.string.No_hay_mensajes_posteriores), Toast.LENGTH_SHORT).show()
             }
         }
 

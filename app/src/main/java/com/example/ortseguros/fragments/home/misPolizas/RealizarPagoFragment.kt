@@ -21,7 +21,6 @@ class RealizarPagoFragment : Fragment() {
     private lateinit var v: View
     private lateinit var btnRealizarPago : Button
     private lateinit var txtPrecioRealizarPago:TextView
-
     private lateinit var inputNumeroDeTarjeta: EditText
     private lateinit var inputFechaDeCaducidad: EditText
     private lateinit var inputTitular: EditText
@@ -48,7 +47,6 @@ class RealizarPagoFragment : Fragment() {
 
             }
         }
-
 
         return v
     }

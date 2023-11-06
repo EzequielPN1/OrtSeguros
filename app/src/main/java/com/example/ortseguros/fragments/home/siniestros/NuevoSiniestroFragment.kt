@@ -29,7 +29,6 @@ class NuevoSiniestroFragment : Fragment() {
     private lateinit var inputUbicacion :EditText
     private lateinit var inputDescripcion : EditText
     private lateinit var btnNuevoSniestro : Button
-
     private var nombreCobertura: String? = null
 
 
@@ -96,7 +95,7 @@ class NuevoSiniestroFragment : Fragment() {
                         nombreCobertura = selectedCobertura.first
                     }
                     override fun onNothingSelected(parent: AdapterView<*>?) {
-                        // Manejar caso en el que no se selecciona ningún elemento
+                        // Hacer algo en el que no se selecciona ningún elemento
                     }
                 }
 
@@ -104,8 +103,6 @@ class NuevoSiniestroFragment : Fragment() {
                 Toast.makeText(requireContext(), error ?: "Error desconocido", Toast.LENGTH_SHORT).show()
             }
         }
-
-
 
 
         return v
@@ -161,14 +158,14 @@ class NuevoSiniestroFragment : Fragment() {
                             if (exito) {
                                 Toast.makeText(
                                     requireContext(),
-                                    "Siniestro guardado con éxito",
+                                    v.context.getString(R.string.Siniestro_guardado_con_exito),
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 findNavController().navigateUp()
                             } else {
                                 Toast.makeText(
                                     requireContext(),
-                                    "Error al guardar el siniestro: $mensajeError",
+                                    v.context.getString(R.string.error_guardar_siniestro, mensajeError),
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }

@@ -14,14 +14,14 @@ import com.example.ortseguros.R
 class EditarCuentaFragment : Fragment() {
 
 
-     lateinit var viewModelEditarCuenta : EditarCuentaViewModel
-     lateinit var v : View
-     lateinit var inputNombre : EditText
-     lateinit var inputApellido : EditText
-     lateinit var inputDni : EditText
-     lateinit var inputDomicilio : EditText
-     lateinit var inputTelefono : EditText
-     lateinit var btnAplicarCambios : Button
+     private lateinit var viewModelEditarCuenta : EditarCuentaViewModel
+     private lateinit var v : View
+     private lateinit var inputNombre : EditText
+     private lateinit var inputApellido : EditText
+     private lateinit var inputDni : EditText
+     private lateinit var inputDomicilio : EditText
+     private lateinit var inputTelefono : EditText
+     private lateinit var btnAplicarCambios : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +49,7 @@ class EditarCuentaFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         viewModelEditarCuenta.usuarioData.observe(viewLifecycleOwner) { usuario ->
-            // Actualizar los EditText con los datos del usuario
+
             inputNombre.setText(usuario.nombre)
             inputApellido.setText(usuario.apellido)
             inputDni.setText(usuario.dni)
@@ -59,14 +59,13 @@ class EditarCuentaFragment : Fragment() {
         btnAplicarCambios.setOnClickListener{
 
             if(viewModelEditarCuenta.validarCampos(inputNombre,inputApellido,inputDni,inputDomicilio,inputTelefono)){
-            // Actualizar los LiveData en el ViewModel con los valores de los EditText
             viewModelEditarCuenta.setNombre(inputNombre.text.toString())
             viewModelEditarCuenta.setApellido(inputApellido.text.toString())
             viewModelEditarCuenta.setDni(inputDni.text.toString())
             viewModelEditarCuenta.setDomicilio(inputDomicilio.text.toString())
             viewModelEditarCuenta.setTelefono(inputTelefono.text.toString())
 
-            // Aplicar los cambios en Firebase
+
             viewModelEditarCuenta.aplicarCambios()
             }
         }

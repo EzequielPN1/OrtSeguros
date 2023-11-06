@@ -19,12 +19,8 @@ class MisPolizasFragment : Fragment() {
     private lateinit var viewModelPolizas: MisPolizasViewModel
     private lateinit var v: View
     private lateinit var btnAgregarPoliza: ImageView
-
-
     private lateinit var recyclerPoliza: RecyclerView
     private lateinit var polizaAdapter : PolizaAdapter
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +34,6 @@ class MisPolizasFragment : Fragment() {
 
         return v
     }
-
-
 
 
 
