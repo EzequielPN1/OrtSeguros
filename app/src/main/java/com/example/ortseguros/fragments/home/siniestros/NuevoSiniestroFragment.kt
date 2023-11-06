@@ -50,8 +50,8 @@ class NuevoSiniestroFragment : Fragment() {
         viewModelNuevoSiniestro.selectedDateLiveData.observe(
             viewLifecycleOwner
         ) { fechaSiniestro ->
-            val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaSiniestro)
-            inputFecha.text = editableFechaNac
+            val editableFecha = Editable.Factory.getInstance().newEditable(fechaSiniestro)
+            inputFecha.text = editableFecha
         }
 
 

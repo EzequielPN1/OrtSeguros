@@ -105,8 +105,8 @@ class NuevaPolizaFragment : Fragment() {
         viewModelNuevaPoliza.selectedDateLiveData.observe(
             viewLifecycleOwner
         ) { fechaAltaVehiculo ->
-            val editableFechaNac = Editable.Factory.getInstance().newEditable(fechaAltaVehiculo)
-            inputFechaAltaVehiculo.text = editableFechaNac
+            val editableFecha = Editable.Factory.getInstance().newEditable(fechaAltaVehiculo)
+            inputFechaAltaVehiculo.text = editableFecha
         }
 
         viewModelNuevaPoliza.obtenerMarcasModelos { marcasModelos, error ->
